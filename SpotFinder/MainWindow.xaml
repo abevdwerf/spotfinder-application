@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
 
+    <Grid Background="#feea00">
+        <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Background="#ffffff">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+                        <TextBlock Margin="10,0">Inloggen</TextBlock>
+                        <StackPanel Margin="10,10">
+                            <TextBlock Text="Username"></TextBlock>
+                            <TextBox></TextBox>
+                        </StackPanel>
+                        <StackPanel Margin="10,10">
+                            <TextBlock Text="Password"></TextBlock>
+                            <TextBox></TextBox>
+                        </StackPanel>
+                        <Button Margin="15,15,15,0">Login</Button>
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="100" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Bottom">Registreer hier om een account te maken</TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" Background="#a200ff">
+
+                </Grid>
+            </Grid>
+        </Border>
+        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="10,461,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="269"/>
+        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Right" Height="315" Margin="0,350,-230,0" Fill="#a200ff"  VerticalAlignment="Top" Width="263"/>
+        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="1000,10,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="260"/>
     </Grid>
 </Window>
