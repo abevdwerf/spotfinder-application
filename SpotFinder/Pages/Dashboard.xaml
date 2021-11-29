@@ -18,13 +18,13 @@
                         <GradientStop Color="#FF350063" Offset="1"/>
                     </LinearGradientBrush>
                 </Menu.Background>
-                <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="156" Height="178" Click="MenuItem_Click" Margin="25,0,25,0"/>
+                <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="156" Height="178" Margin="25,0,25,0"/>
                 <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="97" Margin="25,0,25,0">
                 </MenuItem>
                 <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="25,0,25,0">
                 </MenuItem>
             <Image/>
-            <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="161" Click="MenuItem_Click">
+            <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="161">
             </MenuItem>
         </Menu>
             <!--<StackPanel></StackPanel>-->

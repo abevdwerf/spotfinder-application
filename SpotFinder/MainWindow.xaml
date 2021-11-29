@@ -14,7 +14,7 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Background="#ffffff">
+                <Border Grid.Column="0" Background="#ffffff" CornerRadius="10">
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
                         <TextBlock Margin="10,0">Inloggen</TextBlock>
                         <StackPanel Margin="10,10">
@@ -25,13 +25,13 @@
                             <TextBlock Text="Password"></TextBlock>
                             <TextBox></TextBox>
                         </StackPanel>
-                        <Button Margin="15,15,15,0">Login</Button>
+                        <Button x:Name="btnLogin" Margin="15,15,15,0" Click="btnLogin_Click">Login</Button>
                         <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="100" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Bottom">Registreer hier om een account te maken</TextBlock>
                     </StackPanel>
-                </Grid>
-                <Grid Grid.Column="1" Background="#a200ff">
+                </Border>
+                <Border Grid.Column="1" Background="#a200ff" CornerRadius="0,10,10,0">
 
-                </Grid>
+                </Border>
             </Grid>
         </Border>
         <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="10,461,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="269"/>

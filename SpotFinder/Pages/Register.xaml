@@ -13,33 +13,45 @@
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0" Background="#ffffff">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="500">
-                        <TextBlock Margin="10,0">Inloggen</TextBlock>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"> 
-                            <StackPanel Margin="10,10">
-                                <TextBlock Text="Username"></TextBlock>
-                                <TextBox></TextBox>
-                            </StackPanel>
-                            <StackPanel Margin="10,10">
-                                <TextBlock Text="Username"></TextBlock>
-                                <TextBox></TextBox>
-                            </StackPanel>
+                <Border Background="White" CornerRadius="10,0,0,10">
+                    <Grid Margin="50">
+                        <StackPanel>
+                            <TextBlock Margin="10,0">Registreren</TextBlock>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Margin="10">
+                                    <StackPanel Margin="0,5,0,5">
+                                        <TextBlock Text="Username"></TextBlock>
+                                        <TextBox></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,5,0,5">
+                                        <TextBlock Text="Username"></TextBlock>
+                                        <TextBox></TextBox>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel  Grid.Column="1" Margin="10">
+                                    <StackPanel Margin="0,5,0,5">
+                                        <TextBlock Text="Username"></TextBlock>
+                                        <TextBox></TextBox>
+                                    </StackPanel>
+                                    <StackPanel Margin="0,5,0,5">
+                                        <TextBlock Text="Username"></TextBlock>
+                                        <TextBox></TextBox>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock HorizontalAlignment="Center">Let op: We zullen een verificatie-mail versturen naar uw e-mailadres.
+Hou dus goed je mailbox van je e-mailadres in de gaten.</TextBlock>
+                            <Button Margin="15,15,15,0">Create account</Button>
+                            <CheckBox Margin="10,10,0,5">Ik wil graag locatie-updates ontvangen.</CheckBox>
+                            <CheckBox Margin="10,0,0,0">Ik ga akkoord met de service-voorwaarden.</CheckBox>
+                            <TextBlock HorizontalAlignment="Center" Margin="0,50,0,0">Ik heb al een account</TextBlock>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <StackPanel Margin="10,10">
-                                <TextBlock Text="Password"></TextBlock>
-                                <TextBox></TextBox>
-                            </StackPanel>
-                            <StackPanel Margin="10,10">
-                                <TextBlock Text="Password"></TextBlock>
-                                <TextBox></TextBox>
-                            </StackPanel>
-                        </StackPanel>
-                        <Button Margin="15,15,15,0">Login</Button>
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="100" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Bottom">Registreer hier om een account te maken</TextBlock>
-                    </StackPanel>
-                </Grid>
+                    </Grid>
+                </Border>
                 <Grid Grid.Column="1" Background="#a200ff">
 
                 </Grid>

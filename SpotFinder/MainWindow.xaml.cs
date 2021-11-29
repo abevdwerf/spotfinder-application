@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotFinder.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace SpotFinder
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Register register = new Register();
+            register.Show();
         }
     }
 }
