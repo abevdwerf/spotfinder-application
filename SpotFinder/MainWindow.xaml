@@ -9,12 +9,15 @@
 
     <Grid Background="#feea00">
         <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
+            <Border.Effect >
+                <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
+            </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Background="#ffffff" CornerRadius="10">
+                <Border Grid.Column="0" Background="#ffffff" CornerRadius="10" >
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
                         <TextBlock Margin="10,0">Inloggen</TextBlock>
                         <StackPanel Margin="10,10">

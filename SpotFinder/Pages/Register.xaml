@@ -8,6 +8,9 @@
         Title="Register" Height="1080" Width="1920">
     <Grid Background="#feea00">
         <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
+                        <Border.Effect >
+                <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
+            </Border.Effect>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
@@ -52,9 +55,9 @@ Hou dus goed je mailbox van je e-mailadres in de gaten.</TextBlock>
                         </StackPanel>
                     </Grid>
                 </Border>
-                <Grid Grid.Column="1" Background="#a200ff">
+                <Border Grid.Column="1" Background="#a200ff" CornerRadius="0,10,10,0">
 
-                </Grid>
+                </Border>
             </Grid>
         </Border>
         <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="10,461,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="269"/>
