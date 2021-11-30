@@ -9,93 +9,139 @@
         Title="Dashboard" Height="1080" Width="1920">
     <Grid Background="#FFFBFBFB">
 
-        <!--<DockPanel>-->
-            <Menu DockPanel.Dock="Top" Height="200
-                  " Margin="0,-2,0,866">
-                <Menu.Background>
-                    <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
-                        <GradientStop Color="#FFA000FC"/>
-                        <GradientStop Color="#FF350063" Offset="1"/>
-                    </LinearGradientBrush>
-                </Menu.Background>
-                <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="156" Height="178" Margin="25,0,25,0"/>
-                <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="97" Margin="25,0,25,0">
-                </MenuItem>
-                <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="25,0,25,0">
-                </MenuItem>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="175"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Menu VerticalAlignment="Top" Height="200" Grid.Row="0" Grid.ColumnSpan="2">
+            <Menu.Background>
+                <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
+                    <GradientStop Color="#FFA000FC"/>
+                    <GradientStop Color="#FF350063" Offset="1"/>
+                </LinearGradientBrush>
+            </Menu.Background>
+            <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="156" Height="178" Margin="25,0,25,0"/>
+            <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="97" Margin="25,0,25,0">
+            </MenuItem>
+            <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="25,0,25,0">
+            </MenuItem>
             <Image/>
             <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="161">
             </MenuItem>
         </Menu>
-            <!--<StackPanel></StackPanel>-->
-        <!--</DockPanel>-->
 
-        <Label Content="Welkom back, Ruben" HorizontalAlignment="Left" Margin="58,203,0,0" VerticalAlignment="Top" FontWeight="bold" FontSize="32"/>
-        <Label Content="You are currently editing:" HorizontalAlignment="Left" Margin="58,247,0,0" VerticalAlignment="Top" Foreground="#ffb1b1b1" FontSize="20"/>
-        <Label Content="Fontys Rachelsmolen R10" HorizontalAlignment="Left" Margin="282,247,0,0" VerticalAlignment="Top" Foreground="#ff006dff" FontSize="20"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
 
-        <Rectangle x:Name="Rectangle2" Fill="White" RadiusX="10" RadiusY="14" Margin="66,320,534,342" >
-            <Rectangle.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="5" Opacity="0.15"/>
-            </Rectangle.Effect>
-        </Rectangle>
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="100, 61, 0, 0">
+            <Label Content="Welkom back, Ruben" FontWeight="bold" FontSize="32"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="You are currently editing:" Foreground="#ffb1b1b1" FontSize="20"/>
+                <Label Content="Fontys Rachelsmolen R10" Foreground="#ff006dff" FontSize="20"/>
+            </StackPanel>
+        </StackPanel>
 
-        <Label Content="Current stats" HorizontalAlignment="Left" Margin="104,358,0,0" VerticalAlignment="Top" FontWeight="bold" FontSize="20"/>
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Border Background="White" Height="403" Width="1320" CornerRadius="10">
+                <Border.Effect >
+                    <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
+                </Border.Effect>
+                <StackPanel Margin="50, 50, 0, 0" Orientation="Horizontal">
+                    <StackPanel Margin=" 0, 0, 70, 0">
+                        <Label Content="Current stats" FontWeight="bold" FontSize="25"/>
+                        <StackPanel Margin="0, 0, 0, 40">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Occupied workplaces:" FontSize="20" Foreground="#FFB1B1B1"/>
+                                <Label Content="105 spots" Foreground="#FFA200FF" FontWeight="Bold" FontSize="20"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Available places:" FontSize="20" Foreground="#FFB1B1B1"/>
+                                <Label Content="505 spots" FontWeight="Bold" FontSize="20"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <!--<StackPanel>
+                            <ed:Arc x:Name="ARC1"
+                                Fill="Purple"
+                                Stretch="None"
+                                ArcThickness="15"
+                                ArcThicknessUnit="Pixel"
+                                StartAngle="90"
+                                EndAngle="180"
+                                Height="100"
+                                  Width="100" />
 
-        <ed:Arc x:Name="ARC1"
-                Fill="Purple"
-                Stretch="None"
-                ArcThickness="15"
-                ArcThicknessUnit="Pixel"
-                StartAngle="90"
-                EndAngle="180" Margin="550,376,1238,555"/>
+                            <ed:Arc x:Name="ARC2"
+                                Fill="Gray"
+                                Stretch="None"
+                                ArcThickness="15"
+                                ArcThicknessUnit="Pixel"
+                                StartAngle="180"
+                                EndAngle="450" 
+                                Height="100"
+                                Width="100"/>
+                        </StackPanel>-->
 
-        <ed:Arc x:Name="ARC2"
-                Fill="Gray"
-                Stretch="None"
-                ArcThickness="15"
-                ArcThicknessUnit="Pixel"
-                StartAngle="180"
-                EndAngle="450" Margin="550,376,1238,555"/>
+                        <!--<Label Content="25,3%"/>
+                        <Label Content="Occupations"/>-->
 
-        <Separator Background="#FFC9BDBD" Margin="110,382,1437,364"/>
+                        <Separator Width="366" HorizontalAlignment="Left"/>
+                        <StackPanel Margin="0, 40, 0, 0">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Reservations today:" FontSize="20" Foreground="#FFB1B1B1"/>
+                                <Label Content="25 spots" Foreground="#FF56024D" FontWeight="Bold" FontSize="20"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Amount of logged in users:" FontSize="20" Foreground="#FFB1B1B1"/>
+                                <Label Content="5 Users" FontWeight="Bold" FontSize="20"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
 
-        <Label Content="Recent reservations" HorizontalAlignment="Left" Margin="1456,301,0,0" VerticalAlignment="Top" FontWeight="bold" FontSize="20"/>
-        <Rectangle Fill="White" RadiusX="10" RadiusY="14" Margin="1454,358,126,573" >
-            <Rectangle.Effect>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="5" Opacity="0.15"/>
-            </Rectangle.Effect>
-        </Rectangle>
-        <Separator Background="#FFC9BDBD" Margin="582,375,1029,371" RenderTransformOrigin="0.5,0.5">
-            <Separator.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-89.954"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Separator.RenderTransform>
-        </Separator>
-        <Label Content="25,3%" HorizontalAlignment="Left" Margin="595,425,0,0" VerticalAlignment="Top"/>
-        <Label Content="Label" HorizontalAlignment="Left" Margin="597,451,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.683,-0.448"/>
+                    <Separator Background="#FFC9BDBD" Width="266" RenderTransformOrigin="0.5,0.5" Height="1">
+                        <Separator.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Separator.RenderTransform>
+                    </Separator>
 
-        <Label Content="Occupied workplaces:" HorizontalAlignment="Left" Margin="137,438,0,0" VerticalAlignment="Top"/>
-        <Label Content="105 spots" HorizontalAlignment="Left" Margin="258,438,0,0" VerticalAlignment="Top" Foreground="#FF56024D" FontWeight="Bold"/>
-        <Label Content="Available places:" HorizontalAlignment="Left" Margin="138,464,0,0" VerticalAlignment="Top"/>
-        <Label Content="505 spots" HorizontalAlignment="Left" Margin="258,465,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <StackPanel Margin=" 70, 0, 0, 0">
+                        <Label Content="Location stats" FontWeight="bold" FontSize="25"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Floors:" FontSize="20"/>
+                            <Label Content="3" Foreground="#FF56024D" FontWeight="Bold" FontSize="20"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Amount of workplaces:" FontSize="20"/>
+                            <Label Content="25" FontWeight="Bold" FontSize="20"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Address:" FontSize="20"/>
+                            <StackPanel>
+                                <Label Content="Rachelsmolen 5612," FontWeight="Bold" FontSize="20"/>
+                                <Label Content="PE Eindhoven" FontWeight="Bold" FontSize="20"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
 
-        <Label Content="Reservations today:" HorizontalAlignment="Left" Margin="137,566,0,0" VerticalAlignment="Top"/>
-        <Label Content="25 spots" HorizontalAlignment="Left" Margin="262,566,0,0" VerticalAlignment="Top" Foreground="#FF56024D" FontWeight="Bold"/>
-        <Label Content="Amount of logged in users:" HorizontalAlignment="Left" Margin="138,597,0,0" VerticalAlignment="Top"/>
-        <Label Content="5 Users" HorizontalAlignment="Left" Margin="292,597,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+            <Label Content="Recent reservations" FontWeight="bold" FontSize="25"/>
+            <Border Background="White" Height="133" Width="340" CornerRadius="10" Margin="0, 30, 0, 0">
+                <Border.Effect >
+                    <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
+                </Border.Effect>
+            </Border>
 
-        <Label Content="Location stats" HorizontalAlignment="Left" Margin="764,358,0,0" VerticalAlignment="Top" FontWeight="bold" FontSize="20"/>
-        <Label Content="Floors:" HorizontalAlignment="Left" Margin="777,438,0,0" VerticalAlignment="Top"/>
-        <Label Content="3" HorizontalAlignment="Left" Margin="908,438,0,0" VerticalAlignment="Top" Foreground="#FF56024D" FontWeight="Bold"/>
-        <Label Content="Amount of workplaces:" HorizontalAlignment="Left" Margin="778,464,0,0" VerticalAlignment="Top"/>
-        <Label Content="25" HorizontalAlignment="Left" Margin="908,465,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Content="Address:" HorizontalAlignment="Left" Margin="778,489,0,0" VerticalAlignment="Top"/>
-        <Label Content="Rachelsmolen 5612," HorizontalAlignment="Left" Margin="908,490,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label Content="PE Eindhoven" HorizontalAlignment="Left" Margin="908,506,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        </StackPanel>
     </Grid>
 </Window>
