@@ -141,7 +141,6 @@
                     <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                 </Border.Effect>
             </Border>
-
         </StackPanel>
     </Grid>
 </Window>
