@@ -42,7 +42,7 @@
                 </Border.Effect>
                 <TextBlock Text="Dashboard" VerticalAlignment="Center" Margin="20,0,20,0"></TextBlock>
             </Border>
-            <Button HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Margin="25"></Button>
+            <Button HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Margin="25">Toevoegen</Button>
 
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
@@ -56,16 +56,49 @@
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                     <Border Background="White" Margin="80,20" Height="100">
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                     <Border Background="White" Margin="80,20" Height="100">
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
@@ -73,16 +106,49 @@
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                     <Border Background="White" Margin="80,20" Height="100">
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                     <Border Background="White" Margin="80,20" Height="100">
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                 </StackPanel>
                 <StackPanel Grid.Column="2">
@@ -90,16 +156,49 @@
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                     <Border Background="White" Margin="80,20" Height="100">
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                     <Border Background="White" Margin="80,20" Height="100">
                         <Border.Effect >
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
+                        <Grid>
+                            <DockPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0" FontWeight="Bold">0.10</TextBlock>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20">Ground Floor</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,20,20,0">Spots Left</TextBlock>
+                                <TextBlock DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,0,0">3/6</TextBlock>
+                            </DockPanel>
+                            <Border Height="30" Width=" 80" CornerRadius="10" Margin="20"  Background="#e3e3e3" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Silent Room</TextBlock>
+                            </Border>
+                        </Grid>
                     </Border>
                 </StackPanel>
             </Grid>
