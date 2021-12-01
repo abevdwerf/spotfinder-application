@@ -35,20 +35,20 @@
             <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="40,0,0,0"/>
         </Menu>
         
-            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="100, 0, 0 ,0">
-                <Border Background="#ffffff" CornerRadius="10" Margin="0, 60, 0, 0">
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" >
+                <Border Background="#ffffff" Height="60" VerticalAlignment="Center" CornerRadius="10" Margin="100, 0, 0, 0">
                     <Border.Effect >
                         <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                     </Border.Effect>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Label Content="Dashboard >" FontSize="20" Foreground="#FFB1B1B1"></Label>
-                    <Label Content="Reservations" FontSize="20" Foreground="#FFA200FF"></Label>
-                </StackPanel>
-            </Border>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label Content="Dashboard >" FontSize="20" Foreground="#FFB1B1B1"></Label>
+                        <Label Content="Reservations" FontSize="20" Foreground="#FFA200FF"></Label>
+                    </StackPanel>
+                </Border>
             </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0, 0, 100, 0">
-            <Border Background="#ffffff" CornerRadius="10" Width="429" Height="60" Margin="0, 0, 14, 0">
+            <Border Background="#ffffff" CornerRadius="10" Width="429" Height="60">
                 <Border.Effect >
                     <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                 </Border.Effect>
@@ -60,15 +60,15 @@
         <StackPanel Grid.Row="2" Margin="100, 0, 0, 0">
             <Label Content="Friday 29 November" FontSize="25" FontWeight="Bold"></Label>
 
-            <Border Background="White" HorizontalAlignment="Left" Height="230" Width="500" Margin="0, 29, 0, 0" CornerRadius="10">
+            <Border Background="White" Height="230" Margin="0, 30, 0, 0" CornerRadius="10">
                 <Border.Effect >
                     <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                 </Border.Effect>
-                <StackPanel Margin="30, 30, 0, 0">
-                    <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="30, 30, 30, 0">
+                    <DockPanel>
                         <Label Content="OIL 0.10" FontSize="25" FontWeight="Bold"></Label>
-                        <Label Content="Delete" VerticalAlignment="Center" Margin="270, 0, 0, 0" FontSize="18" Foreground="#FFFF5555"></Label>
-                    </StackPanel>
+                        <Label Content="Delete" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18" Foreground="#FFFF5555"></Label>
+                    </DockPanel>
                     <Border Background="#FFB1B1B1" CornerRadius="10" HorizontalAlignment="Left" Height="44" Width="164">
                         <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="Silent room" Foreground="White" FontSize="18"></Label>
                     </Border>

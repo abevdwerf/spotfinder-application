@@ -15,8 +15,8 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="440"/>
+            <ColumnDefinition Width="0.78*"/>
+            <ColumnDefinition Width="0.22*"/>
         </Grid.ColumnDefinitions>
         
         <Menu VerticalAlignment="Center" Height="200" Grid.Row="0" Grid.ColumnSpan="2">
@@ -29,7 +29,7 @@
             <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Height="178" Margin="100,0,40,0"/>
             <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="40,0,40,0"/>
             <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="40,0,0,0"/>
-                <Image Source="/Images/working-person-illustration.png" Margin="180,30,180,0"/>
+                <Image Source="/Images/working-person-illustration.png" Margin="180,0,180,0"/>
             <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="26"/>
         </Menu>
 
@@ -41,13 +41,13 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="0" Margin="100,0,435,0" Grid.ColumnSpan="2">
-            <Border Background="White" CornerRadius="10">
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <Border Background="White" Height="400" Margin="100, 0, 50, 0" CornerRadius="10">
                 <Border.Effect >
                     <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                 </Border.Effect>
                 <StackPanel Margin="50, 50, 0, 0" Orientation="Horizontal">
-                    <StackPanel Margin=" 0, 0, 70, 0">
+                    <StackPanel Margin=" 0, 0, 20, 0">
                         <Label Content="Current stats" FontWeight="bold" FontSize="25"/>
                         <StackPanel Margin="0, 0, 0, 40">
                             <StackPanel Orientation="Horizontal">
@@ -108,7 +108,7 @@
                         </Separator.RenderTransform>
                     </Separator>
 
-                    <StackPanel Margin=" 70, 0, 0, 0">
+                    <StackPanel>
                         <Label Content="Location stats" FontWeight="bold" FontSize="25"/>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Floors:" FontSize="20"/>
@@ -130,9 +130,9 @@
             </Border>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0, 0, 100, 0">
             <Label Content="Recent reservations" FontWeight="bold" FontSize="25"/>
-            <Border Background="White" Height="133" Width="340" CornerRadius="10" Margin="0, 30, 0, 0">
+            <Border Background="White" Height="133" CornerRadius="10" Margin="0, 30, 0, 0">
                 <Border.Effect >
                     <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                 </Border.Effect>
