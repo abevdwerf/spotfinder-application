@@ -59,31 +59,6 @@
                                 <Label Content="505 spots" FontWeight="Bold" FontSize="20"/>
                             </StackPanel>
                         </StackPanel>
-                        <!--<StackPanel>
-                            <ed:Arc x:Name="ARC1"
-                                Fill="Purple"
-                                Stretch="None"
-                                ArcThickness="15"
-                                ArcThicknessUnit="Pixel"
-                                StartAngle="90"
-                                EndAngle="180"
-                                Height="100"
-                                  Width="100" />
-
-                            <ed:Arc x:Name="ARC2"
-                                Fill="Gray"
-                                Stretch="None"
-                                ArcThickness="15"
-                                ArcThicknessUnit="Pixel"
-                                StartAngle="180"
-                                EndAngle="450" 
-                                Height="100"
-                                Width="100"/>
-                        </StackPanel>-->
-
-                        <!--<Label Content="25,3%"/>
-                        <Label Content="Occupations"/>-->
-
                         <Separator Width="366" HorizontalAlignment="Left"/>
                         <StackPanel Margin="0, 40, 0, 0">
                             <StackPanel Orientation="Horizontal">
