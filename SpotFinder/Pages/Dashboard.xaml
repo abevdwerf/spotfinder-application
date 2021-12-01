@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpotFinder.Pages"
         xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
         mc:Ignorable="d"
-        Title="Dashboard" Height="1080" Width="1920">
+        Title="Dashboard" Height="1080" Width="1920" WindowState="Maximized">
     <Grid Background="#FFFBFBFB">
 
         <Grid.RowDefinitions>
@@ -14,28 +14,24 @@
             <RowDefinition Height="175"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-
-        <Menu VerticalAlignment="Top" Height="200" Grid.Row="0" Grid.ColumnSpan="2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="440"/>
+        </Grid.ColumnDefinitions>
+        
+        <Menu VerticalAlignment="Center" Height="200" Grid.Row="0" Grid.ColumnSpan="2">
             <Menu.Background>
                 <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
                     <GradientStop Color="#FFA000FC"/>
                     <GradientStop Color="#FF350063" Offset="1"/>
                 </LinearGradientBrush>
             </Menu.Background>
-            <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="156" Height="178" Margin="25,0,25,0"/>
-            <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="97" Margin="25,0,25,0">
-            </MenuItem>
-            <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="25,0,25,0">
-            </MenuItem>
-            <Image/>
-            <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="26" Width="161">
-            </MenuItem>
+            <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Height="178" Margin="100,0,40,0"/>
+            <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="40,0,40,0"/>
+            <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="40,0,0,0"/>
+                <Image Source="/Images/working-person-illustration.png" Margin="180,30,180,0"/>
+            <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="26"/>
         </Menu>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="100, 61, 0, 0">
             <Label Content="Welkom back, Ruben" FontWeight="bold" FontSize="32"/>
@@ -45,8 +41,8 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="0">
-            <Border Background="White" Height="403" Width="1320" CornerRadius="10">
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="100,0,435,0" Grid.ColumnSpan="2">
+            <Border Background="White" CornerRadius="10">
                 <Border.Effect >
                     <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                 </Border.Effect>

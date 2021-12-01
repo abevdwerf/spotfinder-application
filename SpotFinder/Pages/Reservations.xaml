@@ -18,21 +18,25 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu Height="120" Margin="0,0,0,0" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="3">
+        <Menu VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3">
             <Menu.Background>
                 <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
                     <GradientStop Color="#FFA000FC"/>
                     <GradientStop Color="#FF350063" Offset="1"/>
                 </LinearGradientBrush>
             </Menu.Background>
-            <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="22" Width="156" Height="120" Margin="25,0,25,0"/>
-            <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="22" Width="97" Margin="25,0,25,0"/>
-            <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="25,0,25,0"/>
-            <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="22" Width="161"/>
+            <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="22" Height="120" Margin="100,0,40,0">
+                <MenuItem.Icon>
+                    <Image Source="/Icons/home white.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="40,0,40,0"/>
+            <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="40,0,40,0"/>
+            <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="40,0,0,0"/>
         </Menu>
         
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" Margin="100, 0, 0 ,0">
-                <Border Background="#ffffff" CornerRadius="10" Height="70" Width="406">
+                <Border Background="#ffffff" CornerRadius="10" Margin="0, 60, 0, 0">
                     <Border.Effect >
                         <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                     </Border.Effect>
@@ -50,7 +54,7 @@
                 </Border.Effect>
                 <Label Content="Search" VerticalAlignment="Center" FontSize="26" Foreground="#FF939393"></Label>
             </Border>
-            <Button Content="Filters" HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Click="Button_Click" Background="#FFA200FF" BorderBrush="#FFA200FF" Foreground="White" FontSize="22" ></Button>
+            <Button Content="Filters" HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Background="#FFA200FF" BorderBrush="#FFA200FF" Foreground="White" FontSize="22" ></Button>
         </StackPanel>
         
         <StackPanel Grid.Row="2" Margin="100, 0, 0, 0">
