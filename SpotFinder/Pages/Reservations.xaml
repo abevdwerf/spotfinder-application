@@ -50,7 +50,7 @@
                 </Border.Effect>
                 <Label Content="Search" VerticalAlignment="Center" FontSize="26" Foreground="#FF939393"></Label>
             </Border>
-            <Button Content="Filters" HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Click="Button_Click" Background="#FFA200FF" BorderBrush="#FFA200FF" Foreground="White" FontSize="22" ></Button>
+            <Button Content="Filters" HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Background="#FFA200FF" BorderBrush="#FFA200FF" Foreground="White" FontSize="22" ></Button>
         </StackPanel>
         
         <StackPanel Grid.Row="2" Margin="100, 0, 0, 0">
