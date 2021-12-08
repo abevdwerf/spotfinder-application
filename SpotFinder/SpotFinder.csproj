@@ -4,8 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <BaseOutputPath>C:\Users\abeva\source\repos\abevdwerf\spotfinder-application\SpotFinder\bin\Debug</BaseOutputPath>
-    <StartupObject>SpotFinder.App</StartupObject>
+
   </PropertyGroup>
 
   <ItemGroup>
