@@ -1,0 +1,35 @@
+﻿<Window x:Class="SpotFinder.Pages.Canvas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SpotFinder.Pages"
+        mc:Ignorable="d"
+        Title="Canvas" Height="1080" Width="1920" WindowState="Maximized" SizeChanged="Window_SizeChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.23*"/>
+            <ColumnDefinition Width="0.77*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1">
+            <Button Content="Upload" Click="UploadImage_Click"></Button>
+        </StackPanel>
+
+        <Canvas Name="MyCanvas" Grid.Row="1" Grid.Column="1" Background="#F0F0F0" SnapsToDevicePixels="True">
+            <Canvas.LayoutTransform>
+                <ScaleTransform x:Name="canvasZoom" ScaleX="1" ScaleY="1" />
+            </Canvas.LayoutTransform>
+        </Canvas>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Button Content="+" Width="100" Height="50" Click="ZoomIn_Click"/>
+            <Button Content="-" Width="100" Height="50" Click="ZoomOut_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
