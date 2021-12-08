@@ -24,12 +24,23 @@ namespace SpotFinder
         public MainWindow()
         {
             InitializeComponent();
+            Main.Content = new Dashboard();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
-            Register register = new Register();
-            register.Show();
+            Main.Content = new Dashboard();
         }
+
+        private void Reservation_click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Reservations();
+        }
+
+        private void Locations_click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new Reservations();
+        }
+
     }
 }

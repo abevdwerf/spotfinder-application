@@ -1,12 +1,13 @@
-﻿<Window x:Class="SpotFinder.Pages.AddRoom"
+﻿<Page x:Class="SpotFinder.Pages.AddRoom"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
-        Title="Spotfinder - Add floor" Height="1080" Width="1920" WindowState="Maximized" Topmost="False">
-    <Window.Resources>
+        d:DesignHeight="1080" d:DesignWidth="1920" 
+        Title="Spotfinder - Add floor">
+    <Page.Resources>
 
         <Style x:Key="nav__text" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
@@ -90,7 +91,7 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
 
-    </Window.Resources>
+    </Page.Resources>
 
     <ScrollViewer>
         <!-- Page -->
@@ -181,5 +182,5 @@
     </ScrollViewer>
 
 
-</Window>
+</Page>
 

@@ -1,11 +1,11 @@
-﻿<Window x:Class="SpotFinder.Pages.AddRoom"
+﻿<Window x:Class="SpotFinder.Pages.Old.AddFloor_old"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SpotFinder.Pages"
+        xmlns:local="clr-namespace:SpotFinder.Pages.Old"
         mc:Ignorable="d"
-        Title="AddRoom" Height="1080" Width="1920" WindowState="Maximized">
+    Title="AddFloor" Height="1080" Width="1920" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
@@ -30,7 +30,6 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="120"/>
-                <RowDefinition Height="160"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -44,31 +43,7 @@
                 <TextBlock Text="Dashboard" VerticalAlignment="Center" Margin="20,0,20,0"></TextBlock>
             </Border>
             <Button HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Margin="25">Verwijderen</Button>
-            <Grid Grid.Row="1" Grid.ColumnSpan="2">
-                <Border Background="#ffffff" Grid.Row="2"  Margin="40,20" CornerRadius="10">
-                    <Border.Effect >
-                        <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
-                    </Border.Effect>
-                    <DockPanel>
-                        <StackPanel Margin="20,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <TextBlock>Name</TextBlock>
-                            <TextBox></TextBox>
-                        </StackPanel>
-                        <StackPanel Margin="20,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <TextBlock>Verdieping</TextBlock>
-                            <TextBox></TextBox>
-                        </StackPanel>
-                        <StackPanel Margin="20,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <TextBlock>Type</TextBlock>
-                            <ComboBox></ComboBox>
-                        </StackPanel>
-                        <StackPanel Margin="20,0" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <TextBlock>Maximum persons</TextBlock>
-                            <TextBox></TextBox>
-                        </StackPanel>
-                    </DockPanel>
-                </Border>
-            </Grid>
+
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -76,53 +51,53 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                <StackPanel Margin="40,0">
-                    <TextBlock FontWeight="Bold" FontSize="22">Available Desks</TextBlock>
-                    <DockPanel Height="100">
-                        <Border DockPanel.Dock="Left" CornerRadius="8" Background="Blue" Width="80" HorizontalAlignment="Left" Height="25" ></Border>
-                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,10">
-                            <TextBlock FontWeight="Bold">Horizontale Tafel</TextBlock>
-                            <TextBlock Margin="0,10,0,0">Aantal plaatsen: 4</TextBlock>
-                            <TextBlock>Stopcontacten aanwezig</TextBlock>
-                        </StackPanel>
-                    </DockPanel>
-                    <Separator />
-                    <DockPanel Height="100">
-                        <Border DockPanel.Dock="Left" CornerRadius="8" Background="Blue" Width="80" HorizontalAlignment="Left" Height="25" ></Border>
-                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,10">
-                            <TextBlock FontWeight="Bold">Horizontale Tafel</TextBlock>
-                            <TextBlock Margin="0,10,0,0">Aantal plaatsen: 4</TextBlock>
-                            <TextBlock>Stopcontacten aanwezig</TextBlock>
-                        </StackPanel>
-                    </DockPanel>
-                    <Separator />
-                    <DockPanel Height="100">
-                        <Border DockPanel.Dock="Left" CornerRadius="8" Background="Blue" Width="80" HorizontalAlignment="Left" Height="25" ></Border>
-                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,10">
-                            <TextBlock FontWeight="Bold">Horizontale Tafel</TextBlock>
-                            <TextBlock Margin="0,10,0,0">Aantal plaatsen: 4</TextBlock>
-                            <TextBlock>Stopcontacten aanwezig</TextBlock>
-                        </StackPanel>
-                    </DockPanel>
-                </StackPanel>
+                    <StackPanel Margin="40,0">
+                        <TextBlock FontWeight="Bold" FontSize="22">Available Desks</TextBlock>
+                        <DockPanel Height="100">
+                            <Border DockPanel.Dock="Left" CornerRadius="8" Background="Blue" Width="80" HorizontalAlignment="Left" Height="25" ></Border>
+                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,10">
+                                <TextBlock FontWeight="Bold">Horizontale Tafel</TextBlock>
+                                <TextBlock Margin="0,10,0,0">Aantal plaatsen: 4</TextBlock>
+                                <TextBlock>Stopcontacten aanwezig</TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                        <Separator />
+                        <DockPanel Height="100">
+                            <Border DockPanel.Dock="Left" CornerRadius="8" Background="Blue" Width="80" HorizontalAlignment="Left" Height="25" ></Border>
+                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,10">
+                                <TextBlock FontWeight="Bold">Horizontale Tafel</TextBlock>
+                                <TextBlock Margin="0,10,0,0">Aantal plaatsen: 4</TextBlock>
+                                <TextBlock>Stopcontacten aanwezig</TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                        <Separator />
+                        <DockPanel Height="100">
+                            <Border DockPanel.Dock="Left" CornerRadius="8" Background="Blue" Width="80" HorizontalAlignment="Left" Height="25" ></Border>
+                            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,10,0,10">
+                                <TextBlock FontWeight="Bold">Horizontale Tafel</TextBlock>
+                                <TextBlock Margin="0,10,0,0">Aantal plaatsen: 4</TextBlock>
+                                <TextBlock>Stopcontacten aanwezig</TextBlock>
+                            </StackPanel>
+                        </DockPanel>
+                    </StackPanel>
                     <Button Width="100" Height="30" Margin="40,20" HorizontalAlignment="Left" VerticalAlignment="Bottom">Opslaan</Button>
                     <Button Width="100" Height="30" Margin="40,20" HorizontalAlignment="Right" VerticalAlignment="Bottom">Annuleren</Button>
                 </Grid>
                 <Grid Grid.Column="1">
-                <Border Grid.Column="1" Background="#FFFFFF" CornerRadius="10" Margin="0,0,0,20">
-                    <Border.Effect >
-                        <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
-                    </Border.Effect>
-                    <Canvas>
-                    </Canvas>
-                </Border>
+                    <Border Grid.Column="1" Background="#FFFFFF" CornerRadius="10" Margin="0,0,0,20">
+                        <Border.Effect >
+                            <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
+                        </Border.Effect>
+                        <Canvas>
+                        </Canvas>
+                    </Border>
                 </Grid>
                 <Grid Grid.Column="2">
                     <Border Background="#FFFFFF" Margin="40,0,40,20" CornerRadius="10">
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
                         </Border.Effect>
-                    <Grid>
+                        <Grid>
                             <StackPanel Margin="10">
                                 <TextBlock FontWeight="Bold">Horizontal table 1</TextBlock>
                                 <DockPanel Margin="0,10">

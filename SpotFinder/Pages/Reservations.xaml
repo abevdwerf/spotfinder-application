@@ -1,14 +1,14 @@
-﻿<Window x:Class="SpotFinder.Pages.Reservations"
+﻿<Page x:Class="SpotFinder.Pages.Reservations"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
-        Title="Reservations" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Grid>
+        d:DesignHeight="1080" d:DesignWidth="1920"
+        Title="Reservations">
+    <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="120"/>
             <RowDefinition Height="171"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -18,36 +18,19 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Menu VerticalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3">
-            <Menu.Background>
-                <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
-                    <GradientStop Color="#FFA000FC"/>
-                    <GradientStop Color="#FF350063" Offset="1"/>
-                </LinearGradientBrush>
-            </Menu.Background>
-            <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="22" Height="120" Margin="100,0,40,0">
-                <MenuItem.Icon>
-                    <Image Source="/Icons/home white.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="_Rooms" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="40,0,40,0"/>
-            <MenuItem Header="_Floors" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="40,0,40,0"/>
-            <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="22" Margin="40,0,0,0"/>
-        </Menu>
-        
-            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" >
-                <Border Background="#ffffff" Height="60" VerticalAlignment="Center" CornerRadius="10" Margin="100, 0, 0, 0">
-                    <Border.Effect >
-                        <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
-                    </Border.Effect>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Label Content="Dashboard >" FontSize="20" Foreground="#FFB1B1B1"></Label>
-                        <Label Content="Reservations" FontSize="20" Foreground="#FFA200FF"></Label>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" >
+            <Border Background="#ffffff" Height="60" VerticalAlignment="Center" CornerRadius="10" Margin="100, 0, 0, 0">
+                <Border.Effect >
+                    <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
+                </Border.Effect>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Label Content="Dashboard >" FontSize="20" Foreground="#FFB1B1B1"></Label>
+                    <Label Content="Reservations" FontSize="20" Foreground="#FFA200FF"></Label>
+                </StackPanel>
+            </Border>
+        </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0, 0, 100, 0">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0, 0, 100, 0">
             <Border Background="#ffffff" CornerRadius="10" Width="429" Height="60">
                 <Border.Effect >
                     <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
@@ -57,7 +40,7 @@
             <Button Content="Filters" HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Background="#FFA200FF" BorderBrush="#FFA200FF" Foreground="White" FontSize="22" ></Button>
         </StackPanel>
         
-        <StackPanel Grid.Row="2" Margin="100, 0, 0, 0">
+        <StackPanel Grid.Row="1" Margin="100, 0, 0, 0">
             <Label Content="Friday 29 November" FontSize="25" FontWeight="Bold"></Label>
 
             <Border Background="White" Height="230" Margin="0, 30, 0, 0" CornerRadius="10">
@@ -82,4 +65,4 @@
         </StackPanel>
             
     </Grid>
-</Window>
+</Page>

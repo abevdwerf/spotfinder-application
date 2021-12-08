@@ -15,7 +15,7 @@ namespace SpotFinder.Pages
     /// <summary>
     /// Interaction logic for Reservations.xaml
     /// </summary>
-    public partial class Reservations : Window
+    public partial class Reservations : Page
     {
         public Reservations()
         {
