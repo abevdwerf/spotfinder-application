@@ -13,11 +13,11 @@ using System.Windows.Shapes;
 namespace SpotFinder
 {
     /// <summary>
-    /// Interaction logic for AddRoom.xaml
+    /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class AddRoom : Window
+    public partial class Window1 : Window
     {
-        public AddRoom()
+        public Window1()
         {
             InitializeComponent();
         }
