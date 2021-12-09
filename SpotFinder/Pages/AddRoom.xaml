@@ -116,11 +116,11 @@
             <StackPanel Background="White" Grid.Row="2" Width="365">
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-1}" Margin="35 26 97 0">Add room</TextBlock>
-                    <Button HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10">Go Back</Button>
+                    <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10">Go Back</Button>
                 </DockPanel>
 
                 <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Name</TextBlock>
-                <TextBox Style="{StaticResource textbox--style-1}" Width="295"/>
+                <TextBox Name="tbName" Style="{StaticResource textbox--style-1}" Width="295"/>
 
                 <Separator Style="{StaticResource separator--style-1}"/>
 
@@ -170,12 +170,12 @@
 
                 <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Capacity</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
-                    <TextBox Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
+                    <TextBox Name="tbPeople" Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
                     <TextBlock VerticalAlignment="Center" Foreground="#7F7F7F" FontSize="14">People</TextBlock>
                 </StackPanel>
                 <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16"></ComboBox>
 
-                <Button Style="{StaticResource button--style-3}" Width="295">Save Room</Button>
+                <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295">Save Room</Button>
 
             </StackPanel>
         </Grid>

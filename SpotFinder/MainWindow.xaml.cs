@@ -37,7 +37,7 @@ namespace SpotFinder
             Main.Content = new Reservations();
         }
 
-        private void Locations_click(object sender, RoutedEventArgs e)
+        private void Locations_Click(object sender, RoutedEventArgs e)
         {
             Main.Content = new Reservations();
         }

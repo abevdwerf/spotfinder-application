@@ -134,17 +134,17 @@
 
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 97 0">First floor</TextBlock>
-                    <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15">Go Back</Button>
+                    <Button Name="btnBack" HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15">Go Back</Button>
                 </DockPanel>
 
-                <Button Style="{StaticResource button--style-4}">+ Add map</Button>
+                <Button Name="btnAddMap" Style="{StaticResource button--style-4}">+ Add map</Button>
 
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-3}" Margin="35 26 97 0">Rooms</TextBlock>
-                    <Button HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 23">Add room</Button>
+                    <Button Name="btnAddRoom" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 23">Add room</Button>
                 </DockPanel>
 
-                <Button Style="{StaticResource button--style-5}">
+                <Button Name="btnRoom" Style="{StaticResource button--style-5}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="275"/>
@@ -169,14 +169,14 @@
                             <TextBlock Style="{StaticResource bodyText--style-2}" Margin="7 0 0 0">100</TextBlock>
                         </StackPanel>
 
-                        <Image Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
+                        <Image Name="imgEdit" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
 
                     </Grid>
                 </Button>
 
                 <Separator Style="{StaticResource separator--style-1}"/>
 
-                <Button Style="{StaticResource button--style-5}">
+                <Button Name="btnRoom1" Style="{StaticResource button--style-5}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="275"/>
@@ -206,7 +206,7 @@
                     </Grid>
                 </Button>
 
-                <Button Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295">Save Floor</Button>
+                <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295">Save Floor</Button>
 
 
 

@@ -28,29 +28,29 @@
                                 <StackPanel Margin="10">
                                     <StackPanel Margin="0,5,0,5">
                                         <TextBlock Text="Username"></TextBlock>
-                                        <TextBox></TextBox>
+                                        <TextBox Name="tbUsername"></TextBox>
                                     </StackPanel>
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Username"></TextBlock>
-                                        <TextBox></TextBox>
+                                        <TextBlock Text="Password"></TextBlock>
+                                        <TextBox Name="Password"></TextBox>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel  Grid.Column="1" Margin="10">
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Username"></TextBlock>
-                                        <TextBox></TextBox>
+                                        <TextBlock Text="Email"></TextBlock>
+                                        <TextBox Name="tbEmail"></TextBox>
                                     </StackPanel>
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Username"></TextBlock>
-                                        <TextBox></TextBox>
+                                        <TextBlock Text="Confrim password"></TextBlock>
+                                        <TextBox Name="tbConfirmPassword"></TextBox>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
                             <TextBlock HorizontalAlignment="Center">Let op: We zullen een verificatie-mail versturen naar uw e-mailadres.
 Hou dus goed je mailbox van je e-mailadres in de gaten.</TextBlock>
-                            <Button Margin="15,15,15,0">Create account</Button>
-                            <CheckBox Margin="10,10,0,5">Ik wil graag locatie-updates ontvangen.</CheckBox>
-                            <CheckBox Margin="10,0,0,0">Ik ga akkoord met de service-voorwaarden.</CheckBox>
+                            <Button Name="btnCreateAccount" Margin="15,15,15,0">Create account</Button>
+                            <CheckBox Name="checkbLocationUpdates" Margin="10,10,0,5">Ik wil graag locatie-updates ontvangen.</CheckBox>
+                            <CheckBox Name="checkbServiceConditions" Margin="10,0,0,0">Ik ga akkoord met de service-voorwaarden.</CheckBox>
                             <TextBlock HorizontalAlignment="Center" Margin="0,50,0,0">Ik heb al een account</TextBlock>
                         </StackPanel>
                     </Grid>

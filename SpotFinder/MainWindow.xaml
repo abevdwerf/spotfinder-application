@@ -8,21 +8,22 @@
         Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" Topmost="False">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" >
-            <Menu Height="100">
+            <Menu Height="50">
                 <Menu.Background>
                     <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
                         <GradientStop Color="#FFA000FC"/>
                         <GradientStop Color="#FF350063" Offset="1"/>
                     </LinearGradientBrush>
                 </Menu.Background>
-                <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="100,0,40,0" Height="100" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
-                <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="26" Height="100" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
-                <MenuItem Header="_Locations" Foreground="White" FontWeight="SemiBold" FontSize="26" Margin="40,0,40,0" Height="100" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
+                <Image Height="25" Source="/Images/logo.png" Margin="50, 0, 0,0"/>
+                <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
+                <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
+                <MenuItem Header="_Locations" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
             </Menu>
         </StackPanel>
 

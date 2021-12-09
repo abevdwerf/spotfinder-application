@@ -21,5 +21,6 @@ namespace SpotFinder.Pages
         {
             InitializeComponent();
         }
+
     }
 }

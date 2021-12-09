@@ -22,11 +22,11 @@
                         <TextBlock Margin="10,0">Inloggen</TextBlock>
                         <StackPanel Margin="10,10">
                             <TextBlock Text="Username"></TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="tbUsername"></TextBox>
                         </StackPanel>
                         <StackPanel Margin="10,10">
                             <TextBlock Text="Password"></TextBlock>
-                            <TextBox></TextBox>
+                            <TextBox Name="tbPasssword"></TextBox>
                         </StackPanel>
                         <Button x:Name="btnLogin" Margin="15,15,15,0" Click="btnLogin_Click">Login</Button>
                         <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="100" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Bottom">Registreer hier om een account te maken</TextBlock>
