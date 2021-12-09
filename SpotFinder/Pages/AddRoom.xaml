@@ -1,12 +1,13 @@
-﻿<Window x:Class="SpotFinder.Pages.AddRoom"
+﻿<Page x:Class="SpotFinder.Pages.AddRoom"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
-        Title="Spotfinder - Add floor" Height="1080" Width="1920" WindowState="Maximized" Topmost="False">
-    <Window.Resources>
+        d:DesignHeight="1080" d:DesignWidth="1920" 
+        Title="Spotfinder - Add floor">
+    <Page.Resources>
 
         <Style x:Key="nav__text" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
@@ -90,7 +91,7 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
 
-    </Window.Resources>
+    </Page.Resources>
 
     <ScrollViewer>
         <!-- Page -->
@@ -115,11 +116,11 @@
             <StackPanel Background="White" Grid.Row="2" Width="365">
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-1}" Margin="35 26 97 0">Add room</TextBlock>
-                    <Button HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10">Go Back</Button>
+                    <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10">Go Back</Button>
                 </DockPanel>
 
                 <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Name</TextBlock>
-                <TextBox Style="{StaticResource textbox--style-1}" Width="295"/>
+                <TextBox Name="tbName" Style="{StaticResource textbox--style-1}" Width="295"/>
 
                 <Separator Style="{StaticResource separator--style-1}"/>
 
@@ -169,17 +170,17 @@
 
                 <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Capacity</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
-                    <TextBox Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
+                    <TextBox Name="tbPeople" Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
                     <TextBlock VerticalAlignment="Center" Foreground="#7F7F7F" FontSize="14">People</TextBlock>
                 </StackPanel>
                 <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16"></ComboBox>
 
-                <Button Style="{StaticResource button--style-3}" Width="295">Save Room</Button>
+                <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295">Save Room</Button>
 
             </StackPanel>
         </Grid>
     </ScrollViewer>
 
 
-</Window>
+</Page>
 

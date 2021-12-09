@@ -5,40 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized">
+        Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" Topmost="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-    <Grid Background="#feea00">
-        <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
-            <Border.Effect >
-                <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
-            </Border.Effect>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="4*"/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Background="#ffffff" CornerRadius="10" >
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
-                        <TextBlock Margin="10,0">Inloggen</TextBlock>
-                        <StackPanel Margin="10,10">
-                            <TextBlock Text="Username"></TextBlock>
-                            <TextBox></TextBox>
-                        </StackPanel>
-                        <StackPanel Margin="10,10">
-                            <TextBlock Text="Password"></TextBlock>
-                            <TextBox></TextBox>
-                        </StackPanel>
-                        <Button x:Name="btnLogin" Margin="15,15,15,0" Click="btnLogin_Click">Login</Button>
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="100" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Bottom">Registreer hier om een account te maken</TextBlock>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Column="1" Background="#a200ff" CornerRadius="0,10,10,0">
+        <StackPanel Grid.Row="0" >
+            <Menu Height="50">
+                <Menu.Background>
+                    <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
+                        <GradientStop Color="#FFA000FC"/>
+                        <GradientStop Color="#FF350063" Offset="1"/>
+                    </LinearGradientBrush>
+                </Menu.Background>
+                <Image Height="25" Source="/Images/logo.png" Margin="50, 0, 0,0"/>
+                <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
+                <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
+                <MenuItem Header="_Locations" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
+            </Menu>
+        </StackPanel>
 
-                </Border>
-            </Grid>
-        </Border>
-        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="10,461,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="269"/>
-        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Right" Height="315" Margin="0,350,-230,0" Fill="#a200ff"  VerticalAlignment="Top" Width="263"/>
-        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="1000,10,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="260"/>
+        <StackPanel Grid.Row="1">
+            <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -10,14 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace SpotFinder
+namespace SpotFinder.Pages
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for AddRoom.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class AddRoom : Page
     {
-        public Window1()
+        public AddRoom()
         {
             InitializeComponent();
         }

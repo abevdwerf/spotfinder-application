@@ -42,7 +42,7 @@
                 </Border.Effect>
                 <TextBlock Text="Dashboard" VerticalAlignment="Center" Margin="20,0,20,0"></TextBlock>
             </Border>
-            <Button HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Margin="25">Toevoegen</Button>
+            <Button Name="btnAddRoom" HorizontalAlignment="Right" Height="70" Width="200" Grid.Column="1" Margin="25">Toevoegen</Button>
 
             <Grid Grid.Row="1" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>

@@ -13,14 +13,19 @@ using System.Windows.Shapes;
 namespace SpotFinder.Pages
 {
     /// <summary>
-    /// Interaction logic for Floors.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class Floors : Window
+    public partial class Login : Window
     {
-        public Floors()
+        public Login()
         {
             InitializeComponent();
         }
 
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Register register = new Register();
+            register.Show();
+        }
     }
 }

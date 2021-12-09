@@ -1,20 +1,21 @@
-﻿<Window x:Class="SpotFinder.Pages.AddFloor"
+﻿<Page x:Class="SpotFinder.Pages.AddFloor"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
-        Title="Spotfinder - Add floor" Height="1080" Width="1920" WindowState="Maximized" Topmost="False">
-    <Window.Resources>
+        d:DesignHeight="1080" d:DesignWidth="1920"       
+        Title="Spotfinder - Add floor">
+    <Page.Resources>
 
-        <Style x:Key="nav__text" TargetType="TextBlock">
+        <!--<Style x:Key="nav__text" TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Opacity" Value=".75"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="50 0 0 0"/>
             <Setter Property="FontSize" Value="16"/>
-        </Style>
+        </Style>-->
 
         <Style x:Key="title--style-1" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#A100FE"/>
@@ -106,7 +107,7 @@
         </Style>
 
 
-    </Window.Resources>
+    </Page.Resources>
 
     <ScrollViewer>
         <!-- Page -->
@@ -115,34 +116,35 @@
                 <ColumnDefinition Width="365"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            </Grid.RowDefinitions>-->
 
+            <!--Navigations staat in mainview-->
             <!-- Navigation -->
-            <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#A200FF">
+            <!--<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#A200FF">
                 <TextBlock Style="{StaticResource nav__text}" Opacity="1">Dashboard</TextBlock>
                 <TextBlock Style="{StaticResource nav__text}">Indeling</TextBlock>
                 <TextBlock Style="{StaticResource nav__text}">Reserveringen</TextBlock>
-            </StackPanel>
+            </StackPanel>-->
 
             <!-- Side bar -->
-            <StackPanel Background="White" Grid.Row="2" Width="365">
+            <StackPanel Background="White" Width="365">
 
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 97 0">First floor</TextBlock>
-                    <Button HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15">Go Back</Button>
+                    <Button Name="btnBack" HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15">Go Back</Button>
                 </DockPanel>
 
-                <Button Style="{StaticResource button--style-4}">+ Add map</Button>
+                <Button Name="btnAddMap" Style="{StaticResource button--style-4}">+ Add map</Button>
 
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-3}" Margin="35 26 97 0">Rooms</TextBlock>
-                    <Button HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 23">Add room</Button>
+                    <Button Name="btnAddRoom" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 23">Add room</Button>
                 </DockPanel>
 
-                <Button Style="{StaticResource button--style-5}">
+                <Button Name="btnRoom" Style="{StaticResource button--style-5}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="275"/>
@@ -167,14 +169,14 @@
                             <TextBlock Style="{StaticResource bodyText--style-2}" Margin="7 0 0 0">100</TextBlock>
                         </StackPanel>
 
-                        <Image Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
+                        <Image Name="imgEdit" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
 
                     </Grid>
                 </Button>
 
                 <Separator Style="{StaticResource separator--style-1}"/>
 
-                <Button Style="{StaticResource button--style-5}">
+                <Button Name="btnRoom1" Style="{StaticResource button--style-5}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="275"/>
@@ -204,7 +206,7 @@
                     </Grid>
                 </Button>
 
-                <Button Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295">Save Floor</Button>
+                <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295">Save Floor</Button>
 
 
 
@@ -213,4 +215,4 @@
     </ScrollViewer>
 
 
-</Window>
+</Page>
