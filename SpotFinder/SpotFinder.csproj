@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Images\graph.png" />
+    <None Remove="Images\logo.png" />
     <None Remove="logo.png" />
     <None Remove="Pages\working-person-illustration.svg" />
   </ItemGroup>
@@ -16,6 +17,9 @@
   <ItemGroup>
     <Resource Include="Images\graph.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="logo.png" />
   </ItemGroup>
