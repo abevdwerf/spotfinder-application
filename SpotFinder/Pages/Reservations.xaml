@@ -232,7 +232,7 @@
                             <StackPanel Grid.Column="1" Grid.Row="1">
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
+                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim for 3 people</TextBlock>
                             </StackPanel>
                         </Grid>
                     </Border>
