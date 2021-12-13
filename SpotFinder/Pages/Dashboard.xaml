@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SpotFinder.Pages"
+        xmlns:local="clr-namespace:SpotFinder.UserControls"
         mc:Ignorable="d"
         d:DesignHeight="1080" d:DesignWidth="1920"      
         Title="Dashboard"
@@ -382,7 +382,7 @@
                 </Border>
             </WrapPanel>
             <StackPanel Margin="100 0 100 0">
-                <TextBlock Margin="0 0 0 20" Grid.Column="1" Grid.Row="1" Style="{StaticResource bodyText--style-6}">Available work spots</TextBlock>
+                <TextBlock Margin="0 0 0 20" Grid.Column="1" Grid.Row="1" Style="{StaticResource bodyText--style-6}">New reservations</TextBlock>
                 <WrapPanel>
                     <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
                         <Grid Background="White">
@@ -484,9 +484,10 @@
                             </StackPanel>
                         </Grid>
                     </Border>
+                    <local:BlockReservation/>
                 </WrapPanel>
             </StackPanel>
+            <local:BlockReservation Building="Test" Room="OIL 0.21" RoomType="Bathroom" Time="14:00 - 16:00" User="OldMoneyJim for 3 pleople"/>
         </StackPanel>
     </ScrollViewer>
-
 </Page>

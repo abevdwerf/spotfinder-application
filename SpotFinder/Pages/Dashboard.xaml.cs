@@ -21,5 +21,10 @@ namespace SpotFinder.Pages
         {
             InitializeComponent();
         }
+
+        private void BlockReservation_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
