@@ -151,7 +151,7 @@
     </Page.Resources>
 
     <ScrollViewer>
-        <StackPanel>
+        <StackPanel Background="#FBFBFB">
             <DockPanel Margin="0 0 0 50" Background="#FFFFFF" Height="86">
                 <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
