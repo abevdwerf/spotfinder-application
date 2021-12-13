@@ -15,7 +15,7 @@ namespace SpotFinder.Pages
     /// <summary>
     /// Interaction logic for AddFloor.xaml
     /// </summary>
-    public partial class AddFloor : Window
+    public partial class AddFloor : Page
     {
         public AddFloor()
         {

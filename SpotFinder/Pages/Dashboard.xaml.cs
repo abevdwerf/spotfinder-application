@@ -15,7 +15,7 @@ namespace SpotFinder.Pages
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class Dashboard : Page
     {
         public Dashboard()
         {

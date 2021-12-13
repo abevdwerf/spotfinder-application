@@ -15,7 +15,7 @@ namespace SpotFinder.Pages
     /// <summary>
     /// Interaction logic for AddRoom.xaml
     /// </summary>
-    public partial class AddRoom : Window
+    public partial class AddRoom : Page
     {
         public AddRoom()
         {

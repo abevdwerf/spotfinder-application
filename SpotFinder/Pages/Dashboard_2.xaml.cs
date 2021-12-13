@@ -8,19 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SpotFinder.Pages
 {
     /// <summary>
-    /// Interaction logic for Floors.xaml
+    /// Interaction logic for Dashboard_2.xaml
     /// </summary>
-    public partial class Floors : Window
+    public partial class Dashboard_2 : Page
     {
-        public Floors()
+        public Dashboard_2()
         {
             InitializeComponent();
         }
-
     }
 }
