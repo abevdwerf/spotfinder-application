@@ -192,47 +192,50 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
-                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
-                        <Grid Background="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
-                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
-                        <Grid Background="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
                                 <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim for 3 people</TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
+                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
+                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -254,6 +257,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
                                 <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
@@ -273,6 +277,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
                                 <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
@@ -292,6 +297,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
                                 <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
@@ -316,6 +322,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
                                 <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
@@ -335,6 +342,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
                                 <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
@@ -354,6 +362,7 @@
                                 <RowDefinition Height="30"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Column="1" Grid.Row="1">
+                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                                 <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
                                 <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
                                 <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
