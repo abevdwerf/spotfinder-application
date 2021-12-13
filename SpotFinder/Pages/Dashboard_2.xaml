@@ -139,107 +139,95 @@
     </Page.Resources>
 
     <StackPanel>
-        <DockPanel Margin="0 0 0 50" Background="#FFFFFF" Height="86">
+        <DockPanel Background="#FFFFFF" Height="86">
             <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
                 <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Locatie</TextBlock>
                 <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Height="39"></ComboBox>
             </StackPanel>
         </DockPanel>
-        <TextBlock Margin="100 0 0 0" Style="{StaticResource bodyText--style-3}">Goodmorning Jim</TextBlock>
+        <TextBlock Margin="100 0 0 5" Style="{StaticResource bodyText--style-3}">Goodmorning Jim</TextBlock>
         <TextBlock Margin="100 0 0 25" Style="{StaticResource title--style-5}">Today's overview</TextBlock>
-        <StackPanel Orientation="Horizontal">
-            <Border Margin="100 0 0 0" BorderBrush="#ECECEC" BorderThickness="1">
-                <Grid Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="50"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Margin="0 0 0 20" Grid.Column="1" Grid.Row="1" Style="{StaticResource bodyText--style-6}">Available work spots</TextBlock>
-                    <StackPanel Grid.Column="1" Grid.Row="2">
-                        <!-- Block -->
-                        <StackPanel Margin="0 0 0 15">
-                            <StackPanel Orientation="Horizontal">
-                                <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#556080"
-                                    RadiusX="2" RadiusY="2"/>
-                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                            </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="318"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="318"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Background="White">
+                <StackPanel HorizontalAlignment="Left" Width="376">
+                    <TextBlock Style="{StaticResource bodyText--style-6}" Margin="50 50 0 20">Available work spots</TextBlock>
+                    <!-- Block -->
+                    <StackPanel Margin="50 0 0 30">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="10"
+                                Height="10"
+                                Fill="#556080"
+                                RadiusX="2" RadiusY="2"/>
+                            <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
                         </StackPanel>
-                        <!-- Block -->
-                        <StackPanel Margin="0 0 0 15">
-                            <StackPanel Orientation="Horizontal">
-                                <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#71C285"
-                                    RadiusX="2" RadiusY="2"/>
-                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R9</TextBlock>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                            </StackPanel>
-                        </StackPanel>
-                        <!-- Block -->
-                        <StackPanel Margin="0 0 0 15">
-                            <StackPanel Orientation="Horizontal">
-                                <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0C419"
-                                    RadiusX="2" RadiusY="2"/>
-                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R10</TextBlock>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                            </StackPanel>
-                        </StackPanel>
-                        <!-- Block -->
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0785A"
-                                    RadiusX="2" RadiusY="2"/>
-                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R11</TextBlock>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                            </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
                         </StackPanel>
                     </StackPanel>
-                    <!-- Separator -->
-                    <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Orientation="Horizontal">
-                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    <!-- Block -->
+                    <StackPanel Margin="50 0 0 30">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="10"
+                                Height="10"
+                                Fill="#71C285"
+                                RadiusX="2" RadiusY="2"/>
+                            <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R9</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
+                        </StackPanel>
                     </StackPanel>
-
-                    <!-- Graph block -->
-                    <StackPanel Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
-                        <Image Margin="0 0 0 15" Width="150" Source="/Images/graph.png"/>
-                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-4}">Totaal</TextBlock>
-                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-5}">324/545</TextBlock>
+                    <!-- Block -->
+                    <StackPanel Margin="50 0 0 30">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="10"
+                                Height="10"
+                                Fill="#F0C419"
+                                RadiusX="2" RadiusY="2"/>
+                            <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R10</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
+                        </StackPanel>
                     </StackPanel>
-                </Grid>
-            </Border>
-        </StackPanel>
+                    <!-- Block -->
+                    <StackPanel Margin="50 0 0 30">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="10"
+                                Height="10"
+                                Fill="#F0785A"
+                                RadiusX="2" RadiusY="2"/>
+                            <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R11</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <!-- Separator -->
+                <StackPanel Orientation="Horizontal">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                </StackPanel>
+                <StackPanel Margin="75 50 0 50" Orientation="Vertical">
+                    <Image Margin="0 50 0 15" Width="250" Source="/Images/graph.png"/>
+                    <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-4}">Totaal</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-5}">324/545</TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </StackPanel>
-    
 </Page>
