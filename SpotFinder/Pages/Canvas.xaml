@@ -21,7 +21,7 @@
             <Button Content="Upload" Click="UploadImage_Click"></Button>
         </StackPanel>
 
-        <Canvas Name="MyCanvas" Grid.Row="1" Grid.Column="1" Background="#F0F0F0" SnapsToDevicePixels="True">
+        <Canvas Name="MyCanvas" Grid.Row="1" Grid.Column="1" Background="#F0F0F0" SnapsToDevicePixels="True" PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove">
             <Canvas.LayoutTransform>
                 <ScaleTransform x:Name="canvasZoom" ScaleX="1" ScaleY="1" />
             </Canvas.LayoutTransform>
