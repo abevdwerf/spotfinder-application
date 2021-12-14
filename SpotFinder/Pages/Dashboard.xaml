@@ -484,10 +484,7 @@
                             </StackPanel>
                         </Grid>
                     </Border>
-                    <local:BlockReservation/>
                 </WrapPanel>
             </StackPanel>
-            <local:BlockReservation Building="Test" Room="OIL 0.21" RoomType="Bathroom" Time="14:00 - 16:00" User="OldMoneyJim for 3 pleople"/>
-        </StackPanel>
     </ScrollViewer>
 </Page>

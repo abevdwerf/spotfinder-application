@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SpotFinder.Pages"
+      xmlns:local="clr-namespace:SpotFinder.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="Locations">
@@ -203,6 +203,7 @@
                     <TextBlock VerticalAlignment="Center" Margin="8 0 35 0" Style="{StaticResource bodyText--style-6}">Rachelsmolen R8 - Third floor</TextBlock>
                 </StackPanel>
             </Border>
+            <local:Floor Color="green" Building="building" Level="First floor"/>
         </WrapPanel>
     </StackPanel>
 </Page>
