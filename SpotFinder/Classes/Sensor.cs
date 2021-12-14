@@ -6,11 +6,11 @@ namespace SpotFinder.Classes
 {
     public class Sensor
     {
-        public string SensorName { get; set; }
-
         public Sensor()
         {
 
         }
+        
+        public string SensorName { get; set; }
     }
 }
