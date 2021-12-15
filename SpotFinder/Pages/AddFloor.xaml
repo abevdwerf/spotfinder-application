@@ -116,10 +116,9 @@
                 <ColumnDefinition Width="365"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--<Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+            <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>-->
+            </Grid.RowDefinitions>
 
             <!--Navigations staat in mainview-->
             <!-- Navigation -->
@@ -130,7 +129,7 @@
             </StackPanel>-->
 
             <!-- Side bar -->
-            <StackPanel Background="White" Width="365">
+            <StackPanel Background="White" Grid.Row="0" Width="365">
 
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 97 0">First floor</TextBlock>
@@ -206,7 +205,7 @@
                     </Grid>
                 </Button>
 
-                <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295">Save Floor</Button>
+                <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295" Click="btnSaveFloor_Click">Save Floor</Button>
 
 
 
