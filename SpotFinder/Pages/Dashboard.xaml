@@ -486,5 +486,6 @@
                     </Border>
                 </WrapPanel>
             </StackPanel>
+        </StackPanel>
     </ScrollViewer>
 </Page>
