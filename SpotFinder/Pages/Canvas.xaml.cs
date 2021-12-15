@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using Newtonsoft.Json;
+using SpotFinder.Classes;
 
 namespace SpotFinder.Pages
 {
@@ -18,23 +20,23 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Canvas : Window
     {
-        private int heightCanvas = 60;
-        private int widthCanvas = 100;
+        private double heightCanvas;
+        private double widthCanvas;
         private Point startPoint;
         private Point pointWhereMouseIs;
 
         // private Canvas startPoint;
         Rectangle selectionRectangle = new Rectangle();
 
-        private const int size = 20;
+        private const int size = 12;
         //private const int space = 0;
 
-        private List<double> clickedBtn;
+        private List<ButtonLocation> lstButtons = new List<ButtonLocation>();
 
         public Canvas()
         {
             InitializeComponent();
-            DrawButtons(MyCanvas);
+            //DrawButtons();
         }
 
         //change color of button
@@ -48,16 +50,32 @@ namespace SpotFinder.Pages
 
             //MyCanvas.Children.Remove(10);
             //MyCanvas.Children.Insert(10, button2);
-
+            MessageBox.Show(lstButtons.Count.ToString());
             if (btn.Background == Brushes.Purple)
-                btn.Background = null;
+            {
+                btn.Background = Brushes.Transparent;
+
+                foreach (ButtonLocation btnLocation in lstButtons.ToArray())
+                {
+                    if (btnLocation.Left == System.Windows.Controls.Canvas.GetLeft(btn) && btnLocation.Top == System.Windows.Controls.Canvas.GetTop(btn))
+                    {
+                        lstButtons.Remove(btnLocation);
+                    }
+                }
+            }
             else
             {
                 btn.Background = Brushes.Purple;
+
+
+                ButtonLocation btnLocation = new ButtonLocation();
+                btnLocation.Top = System.Windows.Controls.Canvas.GetTop(btn);
+                btnLocation.Left = System.Windows.Controls.Canvas.GetLeft(btn);
+                lstButtons.Add(btnLocation);
             }
         }
 
-        public void DrawButtons(System.Windows.Controls.Canvas MyCanvas)
+        public void DrawButtons()
         {
             for (int j = 0; j < heightCanvas; j++)
             {
@@ -112,6 +130,10 @@ namespace SpotFinder.Pages
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            heightCanvas = MyCanvas.ActualHeight / size;
+            widthCanvas = MyCanvas.ActualWidth / size;
+            DrawButtons();
+            //txtbl.Text = MyCanvas.Width.ToString() + "  ActualHeight: " + MyCanvas.ActualHeight.ToString() + "  ActualWidth: " + MyCanvas.ActualWidth.ToString();
             //change button size with windows size...
 
             //if (ActualWidth < 400)
@@ -161,8 +183,6 @@ namespace SpotFinder.Pages
             }
 
             Rectangle selectionRectangle = new Rectangle();
-            double top;
-            double left;
 
             //  show the rectangle again
             System.Windows.Controls.Canvas.SetLeft(selectionRectangle, Math.Min(startPoint.X, pointWhereMouseIs.X));
@@ -177,12 +197,17 @@ namespace SpotFinder.Pages
                 if (rectBounds.IntersectsWith(SelectedRect))
                 {
                     btn.Background = Brushes.LightGreen;
-                    top = System.Windows.Controls.Canvas.GetTop(btn);
-                    left = System.Windows.Controls.Canvas.GetLeft(btn);
+
+                    //double test1 = System.Windows.Controls.Canvas.GetTop(btn);
+                    //double test2 = System.Windows.Controls.Canvas.GetTop(btn);
+                    //lstTest.Add(test1);
                 }
                 else
                 {
-                    //ThisChkBox.Background = Brushes.Transparent;
+                    if (btn.Background != Brushes.Purple)
+                    {
+                        btn.Background = Brushes.Transparent;
+                    }
                 }
             }
         }
@@ -215,11 +240,21 @@ namespace SpotFinder.Pages
                     else
                     {
                         btn.Background = Brushes.Purple;
+
+                        ButtonLocation btnLocation = new ButtonLocation();
+                        btnLocation.Top = System.Windows.Controls.Canvas.GetTop(btn);
+                        btnLocation.Left = System.Windows.Controls.Canvas.GetLeft(btn);
+                        lstButtons.Add(btnLocation);
                     }
                 }
                 //btn.Background = Brushes.Transparent;
             }
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string json = JsonConvert.SerializeObject(lstButtons);
+            //MessageBox.Show(json);
+        }
     }
 }
