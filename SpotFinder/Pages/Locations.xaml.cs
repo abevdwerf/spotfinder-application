@@ -10,6 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpotFinder.Classes;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace SpotFinder.Pages
 {
