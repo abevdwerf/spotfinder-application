@@ -48,7 +48,7 @@ namespace SpotFinder.Pages
 
             foreach (Floor floor in floors)
             {
-                MessageBox.Show(floor.floor_name);
+                MessageBox.Show(floor.FloorName);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace SpotFinder.Classes
 {
@@ -11,6 +12,12 @@ namespace SpotFinder.Classes
 
         }
 
+        public Location(string locationName)
+        {
+            LocationName = locationName;
+        }
+
+        [JsonProperty("location_name")]
         public string LocationName { get; set; }
     }
 }
