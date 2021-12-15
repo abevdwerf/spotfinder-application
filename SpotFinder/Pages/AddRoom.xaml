@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
-        d:DesignHeight="1080" d:DesignWidth="1920" 
+        d:DesignHeight="1080" d:DesignWidth="1920"  
         Title="Spotfinder - Add floor">
     <Page.Resources>
 
@@ -101,19 +101,18 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Navigation -->
-            <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#A200FF">
+            <!--<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#A200FF">
                 <TextBlock Style="{StaticResource nav__text}" Opacity="1">Dashboard</TextBlock>
                 <TextBlock Style="{StaticResource nav__text}">Indeling</TextBlock>
                 <TextBlock Style="{StaticResource nav__text}">Reserveringen</TextBlock>
-            </StackPanel>
+            </StackPanel>-->
 
             <!-- Side bar -->
-            <StackPanel Background="White" Grid.Row="2" Width="365">
+            <StackPanel Background="White" Grid.Row="0" Width="365">
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-1}" Margin="35 26 97 0">Add room</TextBlock>
                     <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10">Go Back</Button>

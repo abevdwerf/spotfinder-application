@@ -6,13 +6,13 @@ namespace SpotFinder.Classes
 {
     public class Room
     {
-        public string RoomName { get; set; }
-        public int RoomFloor { get; set; }
-        public int MaxPersons { get; set; }
-
         public Room()
         {
 
         }
+        
+        public string RoomName { get; set; }
+        public int RoomFloor { get; set; }
+        public int MaxPersons { get; set; }
     }
 }

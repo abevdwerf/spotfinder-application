@@ -11,13 +11,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SpotFinder.Pages
+namespace SpotFinder.UserControls
 {
     /// <summary>
     /// Interaction logic for Reservations.xaml
     /// </summary>
-    public partial class Reservations : Page
+    public partial class Reservations : UserControl
     {
+        public Brush Color
+        {
+            set { color.Fill = value; }
+        }
+        public string Building
+        {
+            set { building.Text = value; }
+        }
+
+        public string Quantity
+        {
+            set { quantity.Text = value; }
+        }
+
         public Reservations()
         {
             InitializeComponent();

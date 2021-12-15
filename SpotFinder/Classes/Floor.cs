@@ -6,12 +6,19 @@ namespace SpotFinder.Classes
 {
     public class Floor
     {
-        public string floorName { get; set; }
-        public int floorLevel { get; set; }
-
         public Floor()
         {
 
         }
+
+        public Floor(string floorName, int floorLevel)
+        {
+            floor_name = floorName;
+            FloorLevel = floorLevel;
+
+        }
+
+        public string floor_name { get; set; }//is gelijk aan de response parameter
+        public int FloorLevel { get; set; }
     }
 }

@@ -1,0 +1,209 @@
+﻿<Page x:Class="SpotFinder.Pages.Locations"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:SpotFinder.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="Locations">
+    
+    <Page.Resources>
+
+        <!-- Titles -->
+        <Style x:Key="title--style-1" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#A100FE"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style x:Key="title--style-2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#B1B1B1"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="title--style-3" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="title--style-4" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="title--style-5" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <!-- Button -->
+        <Style x:Key="button--style-1" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="18 5 18 5"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="button--style-2" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Width" Value="295"/>
+            <Setter Property="Padding" Value="0 10 0 10"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="button--style-3" TargetType="Button">
+            <Setter Property="Background" Value="#A200FF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="0 10 0 10"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="button--style-4" TargetType="Button">
+            <Setter Property="Background" Value="#F8F8F8"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="35 16 0 16"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="button--style-5" TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+
+        <Style x:Key="button--style-6" TargetType="Button">
+            <Setter Property="Background" Value="#A200FF"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="#A200FF"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15 10 15 10"/>
+        </Style>
+
+        <!-- Textbox -->
+        <Style x:Key="textbox--style-1" TargetType="TextBox">
+            <Setter Property="Background" Value="#F6F6F6"/>
+            <Setter Property="BorderBrush" Value="#E7E7E7"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="15 10 0 10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="35 0 0 0"/>
+        </Style>
+
+        <Style x:Key="separator--style-1" TargetType="Separator">
+            <Setter Property="Width" Value="295"/>
+            <Setter Property="Background" Value="#E7E7E7"/>
+            <Setter Property="Margin" Value="0 16 0 16"/>
+        </Style>
+
+        <!-- Body Text -->
+        <Style x:Key="bodyText--style-1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="295"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+        </Style>
+
+        <Style x:Key="bodyText--style-2" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#7F7F7F"/>
+        </Style>
+
+        <Style x:Key="bodyText--style-3" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style x:Key="bodyText--style-4" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#929292"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="bodyText--style-5" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="bodyText--style-6" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="body--style-7" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <Style x:Key="bodyText--style-8" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#A200FF"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- Combobox -->
+        <Style x:Key="combobox--style-1" TargetType="ComboBox">
+            <Setter Property="Background" Value="#F6F6F6"/>
+            <Setter Property="BorderBrush" Value="#E7E7E7"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="15 10 0 10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+    </Page.Resources>
+
+    <StackPanel Background="#FBFBFB">
+        <DockPanel Margin="0 0 0 25" Background="#FFFFFF" Height="86">
+            <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
+                <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Locatie</TextBlock>
+                <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Height="39"></ComboBox>
+            </StackPanel>
+        </DockPanel>
+        <TextBlock Margin="100 0 0 15">Select a location to edit</TextBlock>
+        <WrapPanel Margin="100 0 100 0">
+            <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="White">
+                    <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#556080"
+                                    RadiusX="2" RadiusY="2"
+                                    Margin="35 25 15 25"/>
+                    <TextBlock VerticalAlignment="Center" Margin="8 0 35 0" Style="{StaticResource bodyText--style-6}">Rachelsmolen R8 - First floor</TextBlock>
+                </StackPanel>
+            </Border>
+            <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="White">
+                    <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#556080"
+                                    RadiusX="2" RadiusY="2"
+                                    Margin="35 25 15 25"/>
+                    <TextBlock VerticalAlignment="Center" Margin="8 0 35 0" Style="{StaticResource bodyText--style-6}">Rachelsmolen R8 - Second floor</TextBlock>
+                </StackPanel>
+            </Border>
+            <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="White">
+                    <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#556080"
+                                    RadiusX="2" RadiusY="2"
+                                    Margin="35 25 15 25"/>
+                    <TextBlock VerticalAlignment="Center" Margin="8 0 35 0" Style="{StaticResource bodyText--style-6}">Rachelsmolen R8 - Third floor</TextBlock>
+                </StackPanel>
+            </Border>
+            <local:Floor Color="green" Building="building" Level="First floor"/>
+        </WrapPanel>
+    </StackPanel>
+</Page>

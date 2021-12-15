@@ -8,23 +8,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpotFinder.Classes;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace SpotFinder.Pages
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for Locations.xaml
     /// </summary>
-    public partial class Dashboard : Page
+    public partial class Locations : Page
     {
-        public Dashboard()
+        public Locations()
         {
             InitializeComponent();
-        }
-
-        private void BlockReservation_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

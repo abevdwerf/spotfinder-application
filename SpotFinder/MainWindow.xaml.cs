@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpotFinder.Classes;
 
 namespace SpotFinder
 {
@@ -25,6 +26,7 @@ namespace SpotFinder
         {
             InitializeComponent();
             Main.Content = new Dashboard();
+            ApiHelper.InitializeClient();
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
@@ -39,7 +41,7 @@ namespace SpotFinder
 
         private void Locations_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Reservations();
+            Main.Content = new Locations();
         }
 
     }
