@@ -17,6 +17,8 @@ namespace SpotFinder.Classes
             LocationName = locationName;
         }
 
+        [JsonProperty("id")]
+        public int Id { get; set; }
         [JsonProperty("location_name")]
         public string LocationName { get; set; }
     }

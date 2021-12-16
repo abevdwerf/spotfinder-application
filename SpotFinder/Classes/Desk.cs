@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace SpotFinder.Classes
 {
@@ -35,5 +37,6 @@ namespace SpotFinder.Classes
         public int Y { get; set; }
         [JsonProperty("room_id")]
         public int RoomId { get; set; }
+
     }
 }

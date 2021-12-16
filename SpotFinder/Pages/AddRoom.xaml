@@ -115,7 +115,7 @@
             <StackPanel Background="White" Grid.Row="0" Width="365">
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-1}" Margin="35 26 97 0">Add room</TextBlock>
-                    <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10">Go Back</Button>
+                    <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10" Click="btnBack_Click" Cursor="Hand">Go Back</Button>
                 </DockPanel>
 
                 <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Name</TextBlock>
