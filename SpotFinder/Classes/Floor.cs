@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace SpotFinder.Classes
 {
@@ -13,12 +16,16 @@ namespace SpotFinder.Classes
 
         public Floor(string floorName, int floorLevel)
         {
-            floor_name = floorName;
+            FloorName = floorName;
             FloorLevel = floorLevel;
-
         }
 
-        public string floor_name { get; set; }//is gelijk aan de response parameter
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("location_id")]
+        public int LocationId { get; set; }
+        [JsonProperty("floor_name")]
+        public string FloorName { get; set; }
         public int FloorLevel { get; set; }
     }
 }

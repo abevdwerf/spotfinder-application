@@ -21,5 +21,10 @@ namespace SpotFinder.Pages
         {
             InitializeComponent();
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddFloor());
+        }
     }
 }

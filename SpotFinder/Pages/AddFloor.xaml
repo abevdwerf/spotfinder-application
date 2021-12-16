@@ -8,26 +8,13 @@
         d:DesignHeight="1080" d:DesignWidth="1920"       
         Title="Spotfinder - Add floor">
     <Page.Resources>
-
-        <!--<Style x:Key="nav__text" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Opacity" Value=".75"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="50 0 0 0"/>
-            <Setter Property="FontSize" Value="16"/>
-        </Style>-->
-
+        
         <Style x:Key="title--style-1" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#A100FE"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
-
-        <Style x:Key="title--style-2" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#B1B1B1"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
+        
         <Style x:Key="title--style-3" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="16"/>
@@ -39,50 +26,7 @@
             <Setter Property="Padding" Value="18 5 18 5"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
-
-        <Style x:Key="button--style-2" TargetType="Button">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Width" Value="295"/>
-            <Setter Property="Padding" Value="0 10 0 10"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <Style x:Key="textbox--style-1" TargetType="TextBox">
-            <Setter Property="Background" Value="#F6F6F6"/>
-            <Setter Property="BorderBrush" Value="#E7E7E7"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="15 10 0 10"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="35 0 0 0"/>
-        </Style>
-
-        <Style x:Key="separator--style-1" TargetType="Separator">
-            <Setter Property="Width" Value="295"/>
-            <Setter Property="Background" Value="#E7E7E7"/>
-            <Setter Property="Margin" Value="0 16 0 16"/>
-        </Style>
-
-        <Style x:Key="bodyText--style-1" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Width" Value="295"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
-        </Style>
-
-        <Style x:Key="bodyText--style-2" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#7F7F7F"/>
-        </Style>
-
-        <Style x:Key="combobox--style-1" TargetType="ComboBox">
-            <Setter Property="Background" Value="#F6F6F6"/>
-            <Setter Property="BorderBrush" Value="#E7E7E7"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Padding" Value="15 10 0 10"/>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-        </Style>
-
+        
         <Style x:Key="button--style-3" TargetType="Button">
             <Setter Property="Background" Value="#A200FF"/>
             <Setter Property="Foreground" Value="White"/>
@@ -100,12 +44,6 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
-        <Style x:Key="button--style-5" TargetType="Button">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Padding" Value="0"/>
-        </Style>
-
 
     </Page.Resources>
 
@@ -120,98 +58,28 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!--Navigations staat in mainview-->
-            <!-- Navigation -->
-            <!--<StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="#A200FF">
-                <TextBlock Style="{StaticResource nav__text}" Opacity="1">Dashboard</TextBlock>
-                <TextBlock Style="{StaticResource nav__text}">Indeling</TextBlock>
-                <TextBlock Style="{StaticResource nav__text}">Reserveringen</TextBlock>
-            </StackPanel>-->
-
             <!-- Side bar -->
             <StackPanel Background="White" Grid.Row="0" Width="365">
 
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 97 0">First floor</TextBlock>
-                    <Button Name="btnBack" HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15">Go Back</Button>
+                    <Button Name="btnBack" HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15" Click="btnBack_Click" Cursor="Hand">Go Back</Button>
                 </DockPanel>
 
                 <Button Name="btnAddMap" Style="{StaticResource button--style-4}">+ Add map</Button>
 
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-3}" Margin="35 26 97 0">Rooms</TextBlock>
-                    <Button Name="btnAddRoom" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 23">Add room</Button>
+                    <Button Name="btnAddRoom" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 23" Cursor="Hand" Click="btnAddRoom_Click">Add room</Button>
                 </DockPanel>
+                
+                <!--All rooms-->
+                <StackPanel Name="spRoomContent">
 
-                <Button Name="btnRoom" Style="{StaticResource button--style-5}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="275"/>
-                            <ColumnDefinition Width="15"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="22"/>
-                            <RowDefinition Height="20"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="22" Margin="0 0 10 0" Source="/Images/room.png"/>
-                            <TextBlock Style="{StaticResource title--style-3}" LineHeight="20" VerticalAlignment="Center">Meeting room 0.19</TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 15 0">Silence Room</TextBlock>
-                            <StackPanel Orientation="Horizontal" Margin="0 0 15 0">
-                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                            </StackPanel>
-                            <Image Width="15" Source="/Images/person.png"/>
-                            <TextBlock Style="{StaticResource bodyText--style-2}" Margin="7 0 0 0">100</TextBlock>
-                        </StackPanel>
-
-                        <Image Name="imgEdit" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
-
-                    </Grid>
-                </Button>
-
-                <Separator Style="{StaticResource separator--style-1}"/>
-
-                <Button Name="btnRoom1" Style="{StaticResource button--style-5}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="275"/>
-                            <ColumnDefinition Width="15"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="22"/>
-                            <RowDefinition Height="20"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Image Width="22" Margin="0 0 10 0" Source="/Images/room.png"/>
-                            <TextBlock Style="{StaticResource title--style-3}" LineHeight="20" VerticalAlignment="Center">Meeting room 0.19</TextBlock>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="2" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 15 0">Silence Room</TextBlock>
-                            <StackPanel Orientation="Horizontal" Margin="0 0 15 0">
-                                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                            </StackPanel>
-                            <Image Width="15" Source="/Images/person.png"/>
-                            <TextBlock Style="{StaticResource bodyText--style-2}" Margin="7 0 0 0">100</TextBlock>
-                        </StackPanel>
-
-                        <Image Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
-
-                    </Grid>
-                </Button>
-
-                <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295" Click="btnSaveFloor_Click">Save Floor</Button>
-
-
-
+                </StackPanel>
+                
+                <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295" Click="btnSaveFloor_Click" Cursor="Hand">Save Floor</Button>
             </StackPanel>
         </Grid>
     </ScrollViewer>
-
-
 </Page>

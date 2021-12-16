@@ -22,9 +22,7 @@ namespace SpotFinder.Classes
         //create - Post
         public static async Task<HttpResponseMessage> Post(string path, HttpContent content)
         {
-            string apiUrl = Client.BaseAddress + path;
-            Client.BaseAddress = new Uri(apiUrl);
-            HttpResponseMessage response = await Client.PostAsync(apiUrl, content);
+            HttpResponseMessage response = await Client.PostAsync(path, content);
 
             return response;
         }
@@ -32,9 +30,7 @@ namespace SpotFinder.Classes
         //read - Get
         public static async Task<HttpResponseMessage> Get(string path)
         {
-            string apiUrl = Client.BaseAddress + path;
-            Client.BaseAddress = new Uri(apiUrl);
-            HttpResponseMessage response = await Client.GetAsync(apiUrl);
+            HttpResponseMessage response = await Client.GetAsync(path);
 
             return response;
         }
@@ -42,9 +38,7 @@ namespace SpotFinder.Classes
         //update - Put
         public static async Task<HttpResponseMessage> Put(string path, HttpContent content)
         {
-            string apiUrl = Client.BaseAddress + path;
-            Client.BaseAddress = new Uri(apiUrl);
-            HttpResponseMessage response = await Client.PutAsync(apiUrl, content);
+            HttpResponseMessage response = await Client.PutAsync(path, content);
 
             return response;
         }
@@ -52,9 +46,7 @@ namespace SpotFinder.Classes
         //delete - Delete
         public static async Task<HttpResponseMessage> Delete(string path)
         {
-            string apiUrl = Client.BaseAddress + path;
-            Client.BaseAddress = new Uri(apiUrl);
-            HttpResponseMessage response = await Client.DeleteAsync(apiUrl);
+            HttpResponseMessage response = await Client.DeleteAsync(path);
 
             return response;
         }
