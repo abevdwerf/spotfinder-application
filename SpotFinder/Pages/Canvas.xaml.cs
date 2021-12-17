@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SpotFinder.Classes;
 
 namespace SpotFinder.Pages
@@ -38,6 +41,7 @@ namespace SpotFinder.Pages
         public Canvas()
         {
             InitializeComponent();
+            ApiHelper.InitializeClient();
             //DrawButtons();
         }
 
@@ -253,14 +257,33 @@ namespace SpotFinder.Pages
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
+
             string json = JsonConvert.SerializeObject(lstButtons);
+
+            dynamic jsonObject = new JObject();
+            jsonObject.grid_location = json;
+
+            //txtbl.Text = jsonObject.ToString().Replace(@"\", "");
+            //MessageBox.Show(json);
+
+            string testjson = JsonConvert.SerializeObject(jsonObject);
+            txtbl.Text = testjson;
+
+            await PutButtonGrid(testjson);
 
             //var arrayOfObjects = JsonConvert.SerializeObject(
             //    new[] { JsonConvert.DeserializeObject(json1), JsonConvert.DeserializeObject(json2) }
             //)
-            //MessageBox.Show(json);
+        }
+
+        public async Task<string> PutButtonGrid(string jsonObject)
+        {
+            StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
+
+            return response.ToString();
         }
     }
 }

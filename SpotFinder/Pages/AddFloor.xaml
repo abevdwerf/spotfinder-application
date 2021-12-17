@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
         d:DesignHeight="1080" d:DesignWidth="1920"       
-        Title="Spotfinder - Add floor">
+        Title="Spotfinder - Add floor" SizeChanged="Window_SizeChanged">
     <Page.Resources>
         
         <Style x:Key="title--style-1" TargetType="TextBlock">
@@ -80,6 +80,12 @@
                 
                 <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 0" Width="295" Click="btnSaveFloor_Click" Cursor="Hand">Save Floor</Button>
             </StackPanel>
+            <Canvas Name="MyCanvas" Grid.Column="1" Grid.Row="0"
+                    Width="{Binding ElementName=gd, Path=ActualWidth}"
+                    Height="{Binding ElementName=gd, Path=ActualHeight}"
+                    Background="#F0F0F0" SnapsToDevicePixels="True" PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove">
+            </Canvas>
+
         </Grid>
     </ScrollViewer>
 </Page>
