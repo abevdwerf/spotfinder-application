@@ -10,6 +10,9 @@
   <ItemGroup>
     <None Remove="Images\graph.png" />
     <None Remove="Images\logo.png" />
+    <None Remove="Images\pen.png" />
+    <None Remove="Images\person.png" />
+    <None Remove="Images\room.png" />
     <None Remove="Pages\working-person-illustration.svg" />
   </ItemGroup>
 
@@ -23,6 +26,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\pen.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\person.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\room.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

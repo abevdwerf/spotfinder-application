@@ -25,24 +25,28 @@ namespace SpotFinder
         public MainWindow()
         {
             InitializeComponent();
-            Main.Content = new Dashboard();
+            ChangeMenuContent(new Dashboard());
             ApiHelper.InitializeClient();
+        }
+
+        public void ChangeMenuContent(Page page)
+        {
+            Main.Content = page;
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Dashboard();
+            ChangeMenuContent(new Dashboard());
         }
 
         private void Reservation_click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Reservations();
+            ChangeMenuContent(new Reservations());
         }
 
         private void Locations_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Locations();
+            ChangeMenuContent(new Locations());
         }
-
     }
 }

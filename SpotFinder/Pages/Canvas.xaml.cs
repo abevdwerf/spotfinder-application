@@ -10,6 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using Newtonsoft.Json;
+using SpotFinder.Classes;
 
 namespace SpotFinder.Pages
 {
@@ -18,16 +20,23 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Canvas : Window
     {
-        private int heightCanvas = 60;
-        private int widthCanvas = 100;
+        private double heightCanvas;
+        private double widthCanvas;
+        private Point startPoint;
+        private Point pointWhereMouseIs;
 
-        private const int size = 20;
+        // private Canvas startPoint;
+        Rectangle selectionRectangle = new Rectangle();
+
+        private const int size = 12;
         //private const int space = 0;
+
+        private List<ButtonLocation> lstButtons = new List<ButtonLocation>();
 
         public Canvas()
         {
             InitializeComponent();
-            DrawButtons(MyCanvas);
+            //DrawButtons();
         }
 
         //change color of button
@@ -41,16 +50,32 @@ namespace SpotFinder.Pages
 
             //MyCanvas.Children.Remove(10);
             //MyCanvas.Children.Insert(10, button2);
-
+            MessageBox.Show(lstButtons.Count.ToString());
             if (btn.Background == Brushes.Purple)
-                btn.Background = null;
+            {
+                btn.Background = Brushes.Transparent;
+
+                foreach (ButtonLocation btnLocation in lstButtons.ToArray())
+                {
+                    if (btnLocation.Left == System.Windows.Controls.Canvas.GetLeft(btn) && btnLocation.Top == System.Windows.Controls.Canvas.GetTop(btn))
+                    {
+                        lstButtons.Remove(btnLocation);
+                    }
+                }
+            }
             else
             {
                 btn.Background = Brushes.Purple;
+
+
+                ButtonLocation btnLocation = new ButtonLocation();
+                btnLocation.Top = System.Windows.Controls.Canvas.GetTop(btn);
+                btnLocation.Left = System.Windows.Controls.Canvas.GetLeft(btn);
+                lstButtons.Add(btnLocation);
             }
         }
 
-        public void DrawButtons(System.Windows.Controls.Canvas MyCanvas)
+        public void DrawButtons()
         {
             for (int j = 0; j < heightCanvas; j++)
             {
@@ -105,6 +130,10 @@ namespace SpotFinder.Pages
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            heightCanvas = MyCanvas.ActualHeight / size;
+            widthCanvas = MyCanvas.ActualWidth / size;
+            DrawButtons();
+            //txtbl.Text = MyCanvas.Width.ToString() + "  ActualHeight: " + MyCanvas.ActualHeight.ToString() + "  ActualWidth: " + MyCanvas.ActualWidth.ToString();
             //change button size with windows size...
 
             //if (ActualWidth < 400)
@@ -127,5 +156,105 @@ namespace SpotFinder.Pages
         //    //index has to be integer
         //    return Convert.ToInt32(index);
         //}
+
+        // '' <summary>
+        // '' When Left Mouse button is pressed, remember where the mouse move start
+        // '' </summary>
+        private void EditedItems_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition((IInputElement)sender);
+        }
+
+        // '' <summary>
+        // '' When mouse move, update the highlight of the selected items.
+        // '' </summary>
+        private void EditedItems_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (startPoint == default(Point))
+            {
+                return;
+            }
+            pointWhereMouseIs = e.GetPosition((IInputElement)sender);
+            Rect SelectedRect = new Rect(startPoint, pointWhereMouseIs);
+            if ((SelectedRect.Width < 20)
+                        && (SelectedRect.Height < 20))
+            {
+                return;
+            }
+
+            Rectangle selectionRectangle = new Rectangle();
+
+            //  show the rectangle again
+            System.Windows.Controls.Canvas.SetLeft(selectionRectangle, Math.Min(startPoint.X, pointWhereMouseIs.X));
+            System.Windows.Controls.Canvas.SetTop(selectionRectangle, Math.Min(startPoint.Y, pointWhereMouseIs.Y));
+            selectionRectangle.Width = Math.Abs(pointWhereMouseIs.X - startPoint.X);
+            selectionRectangle.Height = Math.Abs(pointWhereMouseIs.Y - startPoint.Y);
+            foreach (Button btn in MyCanvas.Children)
+            {
+                Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
+                Vector vector = VisualTreeHelper.GetOffset(btn);
+                rectBounds.Offset(vector);
+                if (rectBounds.IntersectsWith(SelectedRect))
+                {
+                    btn.Background = Brushes.LightGreen;
+
+                    //double test1 = System.Windows.Controls.Canvas.GetTop(btn);
+                    //double test2 = System.Windows.Controls.Canvas.GetTop(btn);
+                    //lstTest.Add(test1);
+                }
+                else
+                {
+                    if (btn.Background != Brushes.Purple)
+                    {
+                        btn.Background = Brushes.Transparent;
+                    }
+                }
+            }
+        }
+
+        // '' <summary>
+        // '' When Left Mouse button is released, change all CheckBoxes values. (Or do nothing if it is a small move -->
+        // '' click will be handled in a standard way.)
+        // '' </summary>
+        private void EditedItems_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            pointWhereMouseIs = e.GetPosition((IInputElement)sender);
+            Rect SelectedRect = new Rect(startPoint, pointWhereMouseIs);
+            startPoint = default(Point);
+            selectionRectangle.Opacity = 0;
+            //  hide the rectangle again
+            if (((SelectedRect.Width < 20)
+                        && (SelectedRect.Height < 20)))
+            {
+                return;
+            }
+            foreach (Button btn in MyCanvas.Children)
+            {
+                Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
+                Vector vector = VisualTreeHelper.GetOffset(btn);
+                rectBounds.Offset(vector);
+                if (rectBounds.IntersectsWith(SelectedRect))
+                {
+                    if (btn.Background == Brushes.Purple)
+                        btn.Background = null;
+                    else
+                    {
+                        btn.Background = Brushes.Purple;
+
+                        ButtonLocation btnLocation = new ButtonLocation();
+                        btnLocation.Top = System.Windows.Controls.Canvas.GetTop(btn);
+                        btnLocation.Left = System.Windows.Controls.Canvas.GetLeft(btn);
+                        lstButtons.Add(btnLocation);
+                    }
+                }
+                //btn.Background = Brushes.Transparent;
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string json = JsonConvert.SerializeObject(lstButtons);
+            //MessageBox.Show(json);
+        }
     }
 }

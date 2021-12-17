@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using SpotFinder.Classes;
+using SpotFinder.UserControls;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -23,33 +24,54 @@ namespace SpotFinder.Pages
         public AddFloor()
         {
             InitializeComponent();
+            LoadRooms();
         }
 
-        private async Task<List<Floor>> GetFloorsAsync()
+        public Floor ChosenFloor { get; set; }
+
+        public async Task<List<Room>> GetRooms()
         {
-            List<Floor> floors = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/floors");
+            List<Room> rooms = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/rooms");
 
             if (response.IsSuccessStatusCode)
             {
-                floors = await response.Content.ReadAsAsync<List<Floor>>();
+                rooms = await response.Content.ReadAsAsync<List<Room>>();
             }
             else
             {
                 throw new Exception(response.ReasonPhrase);
             }
 
-            return floors;
+            return rooms;
+        }
+
+        private async void LoadRooms()
+        {
+            foreach (Room room in await GetRooms())
+            {
+                if (room.FloorId == ChosenFloor.Id)
+                {
+                    UserControl roomUc = new RoomUC() { RoomName = room.RoomName, RoomType = "desk", MaxPersons = room.MaxPersons };
+                    spRoomContent.Children.Add(roomUc);
+                }
+            }
         }
 
         private async void btnSaveFloor_Click(object sender, RoutedEventArgs e)
         {
-            List<Floor> floors = await GetFloorsAsync();
+           //TODO opslaan
+        }
 
-            foreach (Floor floor in floors)
-            {
-                MessageBox.Show(floor.floor_name);
-            }
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+ 
+            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new Locations());
+        }
+
+        private void btnAddRoom_Click(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom());
         }
     }
 }

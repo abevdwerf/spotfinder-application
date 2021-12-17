@@ -10,14 +10,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpotFinder.Pages;
+using SpotFinder.Classes;
 
 namespace SpotFinder.UserControls
 {
     /// <summary>
     /// Interaction logic for Floor.xaml
     /// </summary>
-    public partial class Floor : UserControl
+    public partial class FloorLocation : UserControl
     {
+        public FloorLocation()
+        {
+            InitializeComponent();
+        }
 
         public Brush Color
         {
@@ -34,9 +40,15 @@ namespace SpotFinder.UserControls
             set { level.Text = value; }
         }
 
-        public Floor()
+        public Floor ClickedfFloor
         {
-            InitializeComponent();
+            get;
+            set;
+        }
+
+        private void FloorLocation_Click(object sender, MouseButtonEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddFloor() { ChosenFloor = ClickedfFloor});
         }
     }
 }
