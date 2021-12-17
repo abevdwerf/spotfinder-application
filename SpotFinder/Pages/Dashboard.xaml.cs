@@ -22,9 +22,21 @@ namespace SpotFinder.Pages
             InitializeComponent();
         }
 
-        private void BlockReservation_Loaded(object sender, RoutedEventArgs e)
+        private async Task<List<Floor>> GetFloorsAsync()
         {
+            List<Floor> floors = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/floors");
 
+            if (response.IsSuccessStatusCode)
+            {
+                floors = await response.Content.ReadAsAsync<List<Floor>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return floors;
         }
     }
 }
