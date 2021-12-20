@@ -38,7 +38,7 @@ namespace SpotFinder.Classes
         //update - Put
         public static async Task<HttpResponseMessage> Put(string path, StringContent content)
         {
-            HttpResponseMessage response = await Client.PatchAsync(path, content);
+            HttpResponseMessage response = await Client.PutAsync(path, content);
 
             return response;
         }

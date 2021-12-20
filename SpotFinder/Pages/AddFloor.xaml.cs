@@ -15,6 +15,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Microsoft.Win32;
 
 namespace SpotFinder.Pages
 {
@@ -83,7 +84,7 @@ namespace SpotFinder.Pages
             jsonObject.grid_location = json;
 
             //txtbl.Text = jsonObject.ToString().Replace(@"\", "");
-            MessageBox.Show(json);
+            //MessageBox.Show(json);
 
             string testjson = JsonConvert.SerializeObject(jsonObject);
 
@@ -115,7 +116,7 @@ namespace SpotFinder.Pages
 
             //MyCanvas.Children.Remove(10);
             //MyCanvas.Children.Insert(10, button2);
-            MessageBox.Show(lstButtons.Count.ToString());
+            //MessageBox.Show(lstButtons.Count.ToString());
             if (btn.Background == Brushes.Purple)
             {
                 btn.Background = Brushes.Transparent;
@@ -276,6 +277,22 @@ namespace SpotFinder.Pages
             HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
 
             return response.ToString();
+        }
+
+        private void btnAddMap_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+
+            if (op.ShowDialog() == true)
+            {
+                ImageBrush ib = new ImageBrush();
+                ib.ImageSource = new BitmapImage(new Uri(op.FileName, UriKind.Absolute));
+                MyCanvas.Background = ib;
+            }
         }
     }
 }
