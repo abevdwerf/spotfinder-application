@@ -20,7 +20,7 @@
         <StackPanel Grid.Row="1">
             <Button Content="Upload" Click="UploadImage_Click"></Button>
             <Button Content="createJSON" Click="Button_Click_1"></Button>
-            <TextBlock x:Name="txtbl"></TextBlock>
+            <TextBox x:Name="txtbl"></TextBox>
         </StackPanel>
 
         <Canvas Name="MyCanvas" Grid.Column="1" Grid.Row="1"

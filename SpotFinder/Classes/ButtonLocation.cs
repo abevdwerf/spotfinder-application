@@ -6,7 +6,7 @@ namespace SpotFinder.Classes
 {
     class ButtonLocation
     {
-        public double Left { get; set; }
-        public double Top { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 }
