@@ -6,12 +6,24 @@
         xmlns:local="clr-namespace:SpotFinder"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920" WindowState="Maximized" Topmost="False">
+    <Window.Resources>
+        <ControlTemplate TargetType="{x:Type MenuItem}" x:Key="MenuItemTemplate">
+            <Border x:Name="Border" VerticalAlignment="Center" >
+                <ContentPresenter ContentSource="Header" x:Name="HeaderHost" RecognizesAccessKey="True" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsHighlighted" Value="false">
+                    <!--<Setter Property="Background" TargetName="Border" Value="Blue"/>-->
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+     
         <StackPanel Grid.Row="0" >
             <Menu Height="50">
                 <Menu.Background>
@@ -21,9 +33,9 @@
                     </LinearGradientBrush>
                 </Menu.Background>
                 <Image Height="25" Source="/Images/logo.png" Margin="50, 0, 0,0"/>
-                <MenuItem Header="_Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
-                <MenuItem Header="_Reservations" Foreground="White" FontWeight="SemiBold" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
-                <MenuItem Header="_Locations" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
+                <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
+                <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Reservations" Foreground="White" FontWeight="SemiBold" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
+                <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Locations" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
             </Menu>
         </StackPanel>
 

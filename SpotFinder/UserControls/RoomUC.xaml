@@ -8,8 +8,6 @@
              Height="auto" Width="auto">
 
     <UserControl.Resources>
-
-
         <Style x:Key="title--style-3" TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontSize" Value="16"/>
