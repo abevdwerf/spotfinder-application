@@ -14,6 +14,7 @@ using SpotFinder.Classes;
 using System.Net.Http;
 using System.Threading.Tasks;
 using SpotFinder.UserControls;
+using System.Linq;
 
 namespace SpotFinder.Pages
 {
@@ -22,6 +23,8 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Locations : Page
     {
+        private bool LoadDropdown { get; set; } = false;
+
         public Locations()
         {
             InitializeComponent();
@@ -66,17 +69,35 @@ namespace SpotFinder.Pages
         {
             List<Location> locations = await GetLocations();
             bool allLocations = false;
+            int counter = 0;
 
+            //unregister event to change combobox
             cbLocations.SelectionChanged -= cbLocations_SelectionChanged;
+            
+            if (wpLocations.Children.Count > 0)
+            {
+                wpLocations.Children.Clear();
+            }
 
             foreach (Location location in locations)
             {
-                ComboBoxItem itemLocation = new ComboBoxItem();
-                itemLocation.Content = location.LocationName;
-                itemLocation.Tag = location.Id;
+                //if dropdown already loaded then don't load
+                if (!LoadDropdown)
+                {
+                    counter++;
 
-                cbLocations.Items.Add(itemLocation);
+                    ComboBoxItem itemLocation = new ComboBoxItem();
+                    itemLocation.Content = location.LocationName;
+                    itemLocation.Tag = location.Id.ToString();
 
+                    cbLocations.Items.Add(itemLocation);
+
+                    if (locations.Count() == counter)
+                    {
+                        LoadDropdown = true;
+                    }
+                }
+                
                 if (locationId == 0)
                 {
                     allLocations = true;
@@ -90,51 +111,28 @@ namespace SpotFinder.Pages
                     }
                 }
 
-                foreach (Floor floor in await GetFloors())
+                if (locationId == location.Id)
                 {
-                    if (locationId == floor.LocationId)
+                    foreach (Floor floor in await GetFloors())
                     {
-                        UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor };
-                        wpLocations.Children.Add(floorLocation);
+                        if (locationId == floor.LocationId)
+                        {
+                            UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor };
+                            wpLocations.Children.Add(floorLocation);
+                        }
                     }
                 }
             }
 
+            //register event
             cbLocations.SelectionChanged += cbLocations_SelectionChanged;
-        }
-
-        //private void LocationChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    string selectedtag = ((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString();
-        //    int locationid = Int32.Parse(selectedtag);
-        //    int locationId = 1;
-        //    wpLocations.Children.Clear();
-        //    cbLocations.Items.RemoveAt(1);
-        //    LoadLocations(locationId);
-        //}
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            //cbLocations.SelectionChanged += cbLocations_SelectionChanged;
         }
 
         private void cbLocations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string selectedtag = ((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString();
-            int locationId = Int32.Parse(selectedtag);
-
-            cbLocations.Items.RemoveAt(1);
+            int locationId = int.Parse(selectedtag);
             LoadLocations(locationId);
         }
-
-        //private void Selected(object sender, RoutedEventArgs e)
-        //{
-        //    //string selectedTag = ((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString();
-        //    //int locationId = Int32.Parse(selectedTag);
-        //    int locationId = 1;
-        //    wpLocations.Children.Clear();
-        //    cbLocations.Items.RemoveAt(1);
-        //    LoadLocations(locationId);
-        //}
     }
 }
