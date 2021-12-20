@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:SpotFinder.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Locations">
+      Title="Locations" Loaded="Page_Loaded">
     
     <Page.Resources>
 
@@ -37,11 +37,13 @@
     </Page.Resources>
 
     <StackPanel Background="#FBFBFB">
-        <DockPanel Margin="0 0 0 25" Background="#FFFFFF" Height="86">
+        <DockPanel Margin="0 0 0 50" Background="#FFFFFF" Height="86">
             <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
-                <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Locatie</TextBlock>
-                <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Height="39"></ComboBox>
+                <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 11 0" VerticalAlignment="Center">Location</TextBlock>
+                <ComboBox Name="cbLocations" Style="{StaticResource combobox--style-1}" Width="295" Height="39">
+                    <ComboBoxItem Content="All" Tag="0" IsSelected="True"/>
+                </ComboBox>
             </StackPanel>
         </DockPanel>
         <TextBlock Margin="100 0 0 15">Select a location to edit</TextBlock>

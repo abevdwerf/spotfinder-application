@@ -25,7 +25,7 @@ namespace SpotFinder.Pages
         public Locations()
         {
             InitializeComponent();
-            LoadLocations();
+            LoadLocations(0);
         }
 
         public async Task<List<Location>> GetLocations()
@@ -62,21 +62,79 @@ namespace SpotFinder.Pages
             return floors;
         }
 
-        private async void LoadLocations()
+        private async void LoadLocations(int locationId)
         {
             List<Location> locations = await GetLocations();
+            bool allLocations = false;
+
+            cbLocations.SelectionChanged -= cbLocations_SelectionChanged;
 
             foreach (Location location in locations)
             {
+                ComboBoxItem itemLocation = new ComboBoxItem();
+                itemLocation.Content = location.LocationName;
+                itemLocation.Tag = location.Id;
+
+                cbLocations.Items.Add(itemLocation);
+
+                if (locationId == 0)
+                {
+                    allLocations = true;
+                }
+
+                if (allLocations)
+                {
+                    if (location.Id > locationId)
+                    {
+                        locationId++;
+                    }
+                }
+
                 foreach (Floor floor in await GetFloors())
                 {
-                    if (location.Id == floor.LocationId)
+                    if (locationId == floor.LocationId)
                     {
-                        UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor};
+                        UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor };
                         wpLocations.Children.Add(floorLocation);
                     }
                 }
             }
+
+            cbLocations.SelectionChanged += cbLocations_SelectionChanged;
         }
+
+        //private void LocationChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    string selectedtag = ((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString();
+        //    int locationid = Int32.Parse(selectedtag);
+        //    int locationId = 1;
+        //    wpLocations.Children.Clear();
+        //    cbLocations.Items.RemoveAt(1);
+        //    LoadLocations(locationId);
+        //}
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            //cbLocations.SelectionChanged += cbLocations_SelectionChanged;
+        }
+
+        private void cbLocations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selectedtag = ((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString();
+            int locationId = Int32.Parse(selectedtag);
+
+            cbLocations.Items.RemoveAt(1);
+            LoadLocations(locationId);
+        }
+
+        //private void Selected(object sender, RoutedEventArgs e)
+        //{
+        //    //string selectedTag = ((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString();
+        //    //int locationId = Int32.Parse(selectedTag);
+        //    int locationId = 1;
+        //    wpLocations.Children.Clear();
+        //    cbLocations.Items.RemoveAt(1);
+        //    LoadLocations(locationId);
+        //}
     }
 }
