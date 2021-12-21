@@ -23,6 +23,8 @@ namespace SpotFinder.Classes
 
         [JsonProperty("floor_id")]
         public int FloorId { get; set; }
+        [JsonProperty("room_type_id")]
+        public int RoomTypeId { get; set; }
         [JsonProperty("room_name")]
         public string RoomName { get; set; }
         [JsonProperty("max_persons")]

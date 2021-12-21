@@ -62,14 +62,37 @@ namespace SpotFinder.Pages
             return rooms;
         }
 
+        public async Task<List<RoomType>> GetRoomTypes()
+        {
+            List<RoomType> roomType = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
+
+            if (response.IsSuccessStatusCode)
+            {
+                roomType = await response.Content.ReadAsAsync<List<RoomType>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return roomType;
+        }
+
         private async void LoadRooms()
         {
             foreach (Room room in await GetRooms())
             {
-                if (room.FloorId == ChosenFloor.Id)
+                foreach (RoomType roomtype in await GetRoomTypes())
                 {
-                    UserControl roomUc = new RoomUC() { RoomName = room.RoomName, RoomType = "desk", MaxPersons = room.MaxPersons };
-                    spRoomContent.Children.Add(roomUc);
+                    if (room.FloorId == ChosenFloor.Id)
+                    {
+                        if (room.RoomTypeId == roomtype.Id)
+                        {
+                            UserControl roomUc = new RoomUC() { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons };
+                            spRoomContent.Children.Add(roomUc);
+                        }
+                    }
                 }
             }
         }

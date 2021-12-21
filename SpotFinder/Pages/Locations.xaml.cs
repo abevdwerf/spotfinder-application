@@ -81,7 +81,7 @@ namespace SpotFinder.Pages
 
             foreach (Location location in locations)
             {
-                //if dropdown already loaded then don't load
+                //if dropdown already loaded then don't add new Items
                 if (!LoadDropdown)
                 {
                     counter++;
