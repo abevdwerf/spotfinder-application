@@ -41,6 +41,8 @@ namespace SpotFinder.Pages
         {
             InitializeComponent();
             LoadRooms();
+
+            this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
         }
 
         public Floor ChosenFloor { get; set; }
