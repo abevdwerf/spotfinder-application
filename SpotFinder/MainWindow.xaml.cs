@@ -27,6 +27,7 @@ namespace SpotFinder
             InitializeComponent();
             ChangeMenuContent(new Dashboard());
             ApiHelper.InitializeClient();
+
         }
 
         public void ChangeMenuContent(Page page)

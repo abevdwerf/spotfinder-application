@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
         d:DesignHeight="1080" d:DesignWidth="1920"  
-        Title="Spotfinder - Add floor">
+        Title="Spotfinder - Add floor" SizeChanged="Window_SizeChanged">
     <Page.Resources>
 
         <Style x:Key="nav__text" TargetType="TextBlock">
@@ -101,7 +101,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="41*"/>
+                <RowDefinition Height="499*"/>
             </Grid.RowDefinitions>
 
             <!-- Navigation -->
@@ -112,7 +113,7 @@
             </StackPanel>-->
 
             <!-- Side bar -->
-            <StackPanel Background="White" Grid.Row="0" Width="365">
+            <StackPanel Background="White" Grid.Row="0" Width="365" Grid.RowSpan="2">
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-1}" Margin="35 26 97 0">Add room</TextBlock>
                     <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10" Click="btnBack_Click" Cursor="Hand">Go Back</Button>
@@ -174,9 +175,12 @@
                 </StackPanel>
                 <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16"></ComboBox>
 
-                <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295">Save Room</Button>
+                <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnSaveRoom_Click">Save Room</Button>
 
             </StackPanel>
+            <Canvas Name="MyCanvas" Grid.Column="1"
+                    Background="#F0F0F0" SnapsToDevicePixels="True" PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove" Grid.RowSpan="2">
+            </Canvas>
         </Grid>
     </ScrollViewer>
 
