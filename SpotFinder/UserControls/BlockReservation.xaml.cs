@@ -34,9 +34,14 @@ namespace SpotFinder.UserControls
             set { roomType.Text = value; }
         }
 
-        public string Time
+        public string BeginTime
         {
-            set { time.Text = value; }
+            set { beginTime.Text = value; }
+        }
+
+        public string EndTime
+        {
+            set { endTime.Text = value; }
         }
 
         public string User

@@ -55,7 +55,12 @@
                     <TextBlock Margin="10 0" Style="{StaticResource body--style-7}">-</TextBlock>
                     <TextBlock Name="roomType" Style="{StaticResource body--style-7}">Bathroom</TextBlock>
                 </StackPanel>
-                <TextBlock Name="time" Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="beginTime" Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00</TextBlock>
+                    <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}"> - </TextBlock>
+                    <TextBlock Name="endTime" Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">16:00</TextBlock>
+                </StackPanel>
+                
                 <TextBlock Name="user" Style="{StaticResource bodyText--style-8}">OldMoneyJim for 2 people</TextBlock>
             </StackPanel>
         </Grid>
