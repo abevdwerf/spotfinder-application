@@ -128,7 +128,7 @@ namespace SpotFinder.Pages
 
         private void btnAddRoom_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom());
+            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom(this));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -157,7 +157,6 @@ namespace SpotFinder.Pages
             else
             {
                 btn.Background = Brushes.Purple;
-
 
                 ButtonLocation btnLocation = new ButtonLocation();
                 btnLocation.Y = System.Windows.Controls.Canvas.GetTop(btn);
