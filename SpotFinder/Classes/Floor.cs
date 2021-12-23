@@ -27,5 +27,7 @@ namespace SpotFinder.Classes
         [JsonProperty("floor_name")]
         public string FloorName { get; set; }
         public int FloorLevel { get; set; }
+
+        public List<Room> Rooms { get; set; }
     }
 }

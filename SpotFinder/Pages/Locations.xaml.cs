@@ -25,6 +25,8 @@ namespace SpotFinder.Pages
     {
         private bool LoadDropdown { get; set; } = false;
 
+        private List<Location> locations;
+
         public Locations()
         {
             InitializeComponent();
@@ -68,6 +70,7 @@ namespace SpotFinder.Pages
         private async void LoadLocations(int locationId)
         {
             List<Location> locations = await GetLocations();
+
             bool allLocations = false;
             int counter = 0;
 
@@ -97,29 +100,37 @@ namespace SpotFinder.Pages
                         LoadDropdown = true;
                     }
                 }
-                
-                if (locationId == 0)
-                {
-                    allLocations = true;
-                }
 
-                if (allLocations)
-                {
-                    if (location.Id > locationId)
-                    {
-                        locationId++;
-                    }
-                }
+                //if (locationId == 0)
+                //{
+                //    allLocations = true;
+                //}
 
-                if (locationId == location.Id)
+                //if (allLocations)
+                //{
+                //    if (location.Id > locationId)
+                //    {
+                //        locationId++;
+                //    }
+                //}
+
+                if (int.Parse(((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString()) == location.Id)
                 {
                     foreach (Floor floor in await GetFloors())
                     {
-                        if (locationId == floor.LocationId)
+                        if (location.Id == floor.LocationId)
                         {
                             UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor };
                             wpLocations.Children.Add(floorLocation);
                         }
+                    }
+                }
+                else if (int.Parse(((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString()) < 1)
+                {
+                    foreach (Floor floor in await GetFloors())
+                    {
+                        UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor };
+                        wpLocations.Children.Add(floorLocation);
                     }
                 }
             }
