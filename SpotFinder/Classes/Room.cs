@@ -21,6 +21,8 @@ namespace SpotFinder.Classes
             MaxPersons = maxPersons;
         }
 
+        [JsonProperty("id")]
+        public int Id { get; set; }
         [JsonProperty("floor_id")]
         public int FloorId { get; set; }
         [JsonProperty("room_type_id")]

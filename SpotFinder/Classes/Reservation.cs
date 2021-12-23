@@ -19,6 +19,8 @@ namespace SpotFinder.Classes
             RoomId = roomId;
         }
 
+        [JsonProperty("user_id")]
+        public int UserId { get; set; }
         [JsonProperty("reservation_start")]
         public DateTime ReservationStart { get; set; }
         [JsonProperty("reservation_end")]

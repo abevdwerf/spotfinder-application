@@ -25,21 +25,32 @@ namespace SpotFinder.Pages
             InitializeComponent();
         }
 
-        private async Task<List<Floor>> GetFloorsAsync()
+        // Get a list of reservation objects
+        public async Task<List<Reservation>> GetReservations()
         {
-            List<Floor> floors = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/floors");
+            List<Reservation> reservations = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/reservations");
 
             if (response.IsSuccessStatusCode)
             {
-                floors = await response.Content.ReadAsAsync<List<Floor>>();
+                reservations = await response.Content.ReadAsAsync<List<Reservation>>();
             }
             else
             {
                 throw new Exception(response.ReasonPhrase);
             }
 
-            return floors;
+            return reservations;
+        }
+
+        // For each object, create a user control
+        private async void LoadReservations()
+        {
+            foreach (Reservation reservation in await GetReservations())
+            {
+                UserControl reservationUc = new UserControls.BlockReservation() { Building="building", Room=reservation.RoomId, RoomType="RoomType", Time=reservation.reservationStart, User="user" };
+                spRoomContent.Children.Add(reservationUc);
+            }
         }
     }
 }

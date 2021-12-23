@@ -10,6 +10,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SpotFinder.Classes;
+using SpotFinder.UserControls;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Globalization;
 
 namespace SpotFinder.Pages
 {
@@ -21,6 +26,188 @@ namespace SpotFinder.Pages
         public Reservations()
         {
             InitializeComponent();
+            LoadReservations();
+        }
+
+        private async Task<List<Reservation>> GetReservations()
+        {
+            List<Reservation> reservations = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/reservations");
+
+            if (response.IsSuccessStatusCode)
+            {
+                reservations = await response.Content.ReadAsAsync<List<Reservation>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return reservations;
+        }
+
+        public async Task<List<Location>> GetLocations()
+        {
+            List<Location> locations = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/locations");
+
+            if (response.IsSuccessStatusCode)
+            {
+                locations = await response.Content.ReadAsAsync<List<Location>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return locations;
+        }
+
+        public async Task<List<Floor>> GetFloors()
+        {
+            List<Floor> floors = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/floors");
+
+            if (response.IsSuccessStatusCode)
+            {
+                floors = await response.Content.ReadAsAsync<List<Floor>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return floors;
+        }
+
+        private async Task<List<Room>> GetRooms()
+        {
+            List<Room> rooms = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/rooms");
+
+            if (response.IsSuccessStatusCode)
+            {
+                rooms = await response.Content.ReadAsAsync<List<Room>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return rooms;
+        }
+
+        public async Task<List<RoomType>> GetRoomTypes()
+        {
+            List<RoomType> roomTypes = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
+
+            if (response.IsSuccessStatusCode)
+            {
+                roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return roomTypes;
+        }
+
+
+        private async Task<List<User>> GetUsers()
+        {
+            List<User> users = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/users");
+
+            if (response.IsSuccessStatusCode)
+            {
+                users = await response.Content.ReadAsAsync<List<User>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return users;
+        }
+
+
+        //TODO een scrollviewer toevoegen aan de wrappanel zodat alle reservationsblocks in de wrappanel passen of een andere oplossing
+        private async void LoadReservations()
+        {
+            DateTime today = DateTime.Today;
+            DateTime oneDayLater = today.AddDays(1);
+            DateTime twoDaysLater = today.AddDays(2);
+
+            foreach (Reservation reservation in await GetReservations())
+            {
+               
+                BlockReservation blockReservation = new BlockReservation();
+
+                blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
+                blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
+
+                foreach (Room room in await GetRooms())
+                {
+                    if (room.Id == reservation.RoomId)
+                    {
+                        blockReservation.Room = room.RoomName;
+                        
+                        foreach (RoomType roomType in await GetRoomTypes())
+                        {
+                            if (room.RoomTypeId == roomType.Id)
+                            blockReservation.RoomType = roomType.TypeName;
+                        }
+
+                        foreach (Floor floor in await GetFloors())
+                        {
+                            if (floor.Id == room.FloorId)
+                            {
+                                foreach (Location location in await GetLocations())
+                                {
+                                    if (location.Id == floor.LocationId)
+                                        blockReservation.Building = location.LocationName;
+                                }
+                            }
+                        }
+                    } 
+                }
+
+                foreach (User user in await GetUsers())
+                {
+                    if (user.Id == reservation.UserId)
+                    {
+                        blockReservation.User = user.Name;
+                    }
+                }
+
+                if (reservation.ReservationStart.Date == today.Date)
+                {
+                    wpReservations1.Children.Add(blockReservation);
+                }
+                else if (reservation.ReservationStart.Date == oneDayLater.Date)
+                {
+                    wpReservations2.Children.Add(blockReservation);
+                }
+                else if (reservation.ReservationStart.Date == twoDaysLater.Date)
+                {
+                    wpReservations3.Children.Add(blockReservation);
+                }
+            } 
+
+            if (wpReservations1 != null)
+            {
+                tbDate1.Text = today.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
+            }
+            if (wpReservations2 != null)
+            {
+                tbDate2.Text = oneDayLater.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
+            }
+            if (wpReservations3 != null)
+            {
+                tbDate3.Text = twoDaysLater.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
+            }
         }
     }
 }
