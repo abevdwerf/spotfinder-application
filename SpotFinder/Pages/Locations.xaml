@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:SpotFinder.UserControls"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="Locations">
+      Title="Locations"
+      DataContext="{Binding RelativeSource={RelativeSource self}}">
     
     <Page.Resources>
 
@@ -41,8 +42,7 @@
             <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
                 <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 11 0" VerticalAlignment="Center">Location</TextBlock>
-                <ComboBox Name="cbLocations" Style="{StaticResource combobox--style-1}" Width="295" Height="39">
-                    <ComboBoxItem Content="All" Tag="0" IsSelected="True"/>
+                <ComboBox Name="cbLocations" Style="{StaticResource combobox--style-1}" DisplayMemberPath="LocationName"  Width="295" Height="39" SelectionChanged="cbLocations_SelectionChanged" SelectedValuePath="Id">
                 </ComboBox>
             </StackPanel>
         </DockPanel>

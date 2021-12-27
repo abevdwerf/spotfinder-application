@@ -44,13 +44,13 @@ namespace SpotFinder.Pages
         }
 
         // For each object, create a user control
-        private async void LoadReservations()
-        {
-            foreach (Reservation reservation in await GetReservations())
-            {
-                UserControl reservationUc = new UserControls.BlockReservation() { Building="building", Room=reservation.RoomId, RoomType="RoomType", Time=reservation.reservationStart, User="user" };
-                spRoomContent.Children.Add(reservationUc);
-            }
-        }
+        //private async void LoadReservations()
+        //{
+        //    foreach (Reservation reservation in await GetReservations())
+        //    {
+        //        UserControl reservationUc = new UserControls.BlockReservation() { Building="building", Room=reservation.RoomId, RoomType="RoomType", Time=reservation.reservationStart, User="user" };
+        //        spRoomContent.Children.Add(reservationUc);
+        //    }
+        //}
     }
 }
