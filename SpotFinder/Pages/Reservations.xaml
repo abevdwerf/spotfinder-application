@@ -177,18 +177,18 @@
         </DockPanel>
         <StackPanel Margin="100 0 100 0">
             <StackPanel Margin="0 0 0 50">
-                <TextBlock Name="tbDate1" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}">Maandag, 13 december</TextBlock>
+                <TextBlock Name="tbDate1" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}"></TextBlock>
                 <WrapPanel Name="wpReservations1">
                 </WrapPanel>
             </StackPanel>
             <StackPanel Margin="0 0 0 50">
-                <TextBlock Name="tbDate2" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}">Dinsdag, 14 december</TextBlock>
+                <TextBlock Name="tbDate2" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}"></TextBlock>
                 <WrapPanel Name="wpReservations2">
                     
                 </WrapPanel>
             </StackPanel>
             <StackPanel Margin="0 0 0 50">
-                <TextBlock Name="tbDate3" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}">Woensdag, 15 december</TextBlock>
+                <TextBlock Name="tbDate3" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}"></TextBlock>
                 <WrapPanel Name="wpReservations3">
                     
                 </WrapPanel>

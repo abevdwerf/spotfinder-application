@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:SpotFinder"
         d:DesignHeight="1080" d:DesignWidth="1920"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" Topmost="False">
+        Title="MainWindow" WindowState="Maximized" MinWidth="996" MinHeight="650">
     <Window.Resources>
         <ControlTemplate TargetType="{x:Type MenuItem}" x:Key="MenuItemTemplate">
             <Border x:Name="Border" VerticalAlignment="Center" >
-                <ContentPresenter ContentSource="Header" x:Name="HeaderHost" RecognizesAccessKey="True" />
+                <ContentPresenter ContentSource="Header" x:Name="HeaderHost" RecognizesAccessKey="True"/>
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsHighlighted" Value="false">
@@ -40,8 +40,8 @@
             </Menu>
         </StackPanel>
 
-        <StackPanel Grid.Row="1">
-            <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>
-        </StackPanel>
+        <ScrollViewer Name="MyScrollViewer" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
+            <Frame x:Name="Main" NavigationUIVisibility="Hidden" Source="Pages/Dashboard.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </ScrollViewer>
     </Grid>
 </Window>

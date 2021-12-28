@@ -150,111 +150,260 @@
 
     </Page.Resources>
 
-    <ScrollViewer>
-        <StackPanel Background="#FBFBFB">
-            <DockPanel Margin="0 0 0 50" Background="#FFFFFF" Height="86">
-                <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
-                    <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Locatie</TextBlock>
-                    <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Height="39"></ComboBox>
-                </StackPanel>
-            </DockPanel>
-            <TextBlock Margin="100 0 0 0" Style="{StaticResource bodyText--style-3}">Goodmorning Jim</TextBlock>
-            <TextBlock Margin="100 0 0 25" Style="{StaticResource title--style-5}">Today's overview</TextBlock>
-            <WrapPanel Margin="100 0 0 35" Orientation="Horizontal">
-                <Border BorderBrush="#ECECEC" BorderThickness="1">
+    <StackPanel>
+        <DockPanel Margin="0 0 0 50" Background="#FFFFFF" Height="86">
+            <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
+                <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Locatie</TextBlock>
+                <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Height="39"></ComboBox>
+            </StackPanel>
+        </DockPanel>
+        <TextBlock Margin="100 0 0 0" Style="{StaticResource bodyText--style-3}">Goodmorning Jim</TextBlock>
+        <TextBlock Margin="100 0 0 25" Style="{StaticResource title--style-5}">Today's overview</TextBlock>
+        <WrapPanel Margin="100 0 0 35" Orientation="Horizontal">
+            <Border BorderBrush="#ECECEC" BorderThickness="1">
+                <Grid Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Margin="0 0 0 20" Grid.Column="1" Grid.Row="1" Style="{StaticResource bodyText--style-6}">Available work spots</TextBlock>
+                    <StackPanel Grid.Column="1" Grid.Row="2">
+                        <!-- Block -->
+                        <StackPanel Margin="0 0 0 15">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#556080"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- Block -->
+                        <StackPanel Margin="0 0 0 15">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#71C285"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R9</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- Block -->
+                        <StackPanel Margin="0 0 0 15">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#F0C419"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R10</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <!-- Block -->
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#F0785A"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R11</TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- Separator -->
+                    <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Orientation="Horizontal">
+                        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    </StackPanel>
+
+                    <!-- Graph block -->
+                    <StackPanel Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
+                        <Image Margin="0 0 0 15" Width="150" Source="/Images/graph.png"/>
+                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-4}">Totaal</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-5}">324/545</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Reserveringen -->
+            <Border Margin="10 0 0 0" BorderBrush="#ECECEC" BorderThickness="1">
+                <Grid Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <TextBlock Margin="0 0 0 20" Style="{StaticResource bodyText--style-6}">Reservations</TextBlock>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#556080"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#71C285"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#F0C419"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#F0785A"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- Gebruikers -->
+            <Border Margin="10 0 0 0" BorderBrush="#ECECEC" BorderThickness="1">
+                <Grid Background="White">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <TextBlock Margin="0 0 0 20" Style="{StaticResource bodyText--style-6}">Users</TextBlock>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#556080"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#71C285"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#F0C419"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                        <DockPanel Margin="0 0 0 10" Width="200">
+                            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                                <Rectangle
+                                    Width="10"
+                                    Height="10"
+                                    Fill="#F0785A"
+                                    RadiusX="2" RadiusY="2"/>
+                                <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
+                        </DockPanel>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </WrapPanel>
+        <StackPanel Margin="100 0 100 0">
+            <TextBlock Margin="0 0 0 20" Grid.Column="1" Grid.Row="1" Style="{StaticResource bodyText--style-6}">New reservations</TextBlock>
+            <WrapPanel Name="wpReservations">
+                <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
                     <Grid Background="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-
-                        <TextBlock Margin="0 0 0 20" Grid.Column="1" Grid.Row="1" Style="{StaticResource bodyText--style-6}">Available work spots</TextBlock>
-                        <StackPanel Grid.Column="1" Grid.Row="2">
-                            <!-- Block -->
-                            <StackPanel Margin="0 0 0 15">
-                                <StackPanel Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#556080"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                            <!-- Block -->
-                            <StackPanel Margin="0 0 0 15">
-                                <StackPanel Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#71C285"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R9</TextBlock>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                            <!-- Block -->
-                            <StackPanel Margin="0 0 0 15">
-                                <StackPanel Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0C419"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R10</TextBlock>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                            <!-- Block -->
-                            <StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0785A"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R11</TextBlock>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">324/680 available</TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-                        </StackPanel>
-                        <!-- Separator -->
-                        <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Orientation="Horizontal">
-                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-                        </StackPanel>
-
-                        <!-- Graph block -->
-                        <StackPanel Grid.Column="5" Grid.Row="1" Grid.RowSpan="2">
-                            <Image Margin="0 0 0 15" Width="150" Source="/Images/graph.png"/>
-                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-4}">Totaal</TextBlock>
-                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource bodyText--style-5}">324/545</TextBlock>
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
+                            <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                            <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
                         </StackPanel>
                     </Grid>
                 </Border>
-
-                <!-- Reserveringen -->
-                <Border Margin="10 0 0 0" BorderBrush="#ECECEC" BorderThickness="1">
+                <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
                     <Grid Background="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
@@ -262,63 +411,19 @@
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-
                         <StackPanel Grid.Column="1" Grid.Row="1">
-                            <TextBlock Margin="0 0 0 20" Style="{StaticResource bodyText--style-6}">Reservations</TextBlock>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#556080"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#71C285"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0C419"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0785A"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
+                            <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
+                            <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                            <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
                         </StackPanel>
                     </Grid>
                 </Border>
-
-                <!-- Gebruikers -->
-                <Border Margin="10 0 0 0" BorderBrush="#ECECEC" BorderThickness="1">
+                <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
                     <Grid Background="White">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
@@ -326,166 +431,59 @@
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
                         </Grid.RowDefinitions>
-
                         <StackPanel Grid.Column="1" Grid.Row="1">
-                            <TextBlock Margin="0 0 0 20" Style="{StaticResource bodyText--style-6}">Users</TextBlock>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#556080"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#71C285"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0C419"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
-                            <DockPanel Margin="0 0 0 10" Width="200">
-                                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                                    <Rectangle
-                                    Width="10"
-                                    Height="10"
-                                    Fill="#F0785A"
-                                    RadiusX="2" RadiusY="2"/>
-                                    <TextBlock Margin="8 0 0 0" Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                </StackPanel>
-                                <TextBlock HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource title--style-3}">32</TextBlock>
-                            </DockPanel>
+                            <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
+                            <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                            <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
+                    <Grid Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
+                            <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                            <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
+                    <Grid Background="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="30"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
+                            <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
+                            <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
+                            <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
                         </StackPanel>
                     </Grid>
                 </Border>
             </WrapPanel>
-            <StackPanel Margin="100 0 100 0">
-                <TextBlock Margin="0 0 0 20" Grid.Column="1" Grid.Row="1" Style="{StaticResource bodyText--style-6}">New reservations</TextBlock>
-                <WrapPanel>
-                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
-                        <Grid Background="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
-                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
-                        <Grid Background="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
-                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
-                        <Grid Background="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
-                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
-                        <Grid Background="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
-                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Margin="0 0 10 0" BorderBrush="#ECECEC" BorderThickness="1">
-                        <Grid Background="White">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="50"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Column="1" Grid.Row="1">
-                                <TextBlock Style="{StaticResource bodyText--style-4}">Rachelsmolen R8</TextBlock>
-                                <TextBlock Style="{StaticResource body--style-7}">OIL 0.10 - Silence Room</TextBlock>
-                                <TextBlock Margin="0 0 0 3" VerticalAlignment="Bottom" Style="{StaticResource bodyText--style-5}">14:00 - 16:00</TextBlock>
-                                <TextBlock Style="{StaticResource bodyText--style-8}">OldMoneyJim</TextBlock>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </WrapPanel>
-            </StackPanel>
         </StackPanel>
-    </ScrollViewer>
+    </StackPanel>
 </Page>
