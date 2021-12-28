@@ -196,15 +196,15 @@ namespace SpotFinder.Pages
                 }
             } 
 
-            if (wpReservations1 != null)
+            if (wpReservations1.Children != null)
             {
                 tbDate1.Text = today.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
             }
-            if (wpReservations2 != null)
+            if (wpReservations2.Children != null)
             {
                 tbDate2.Text = oneDayLater.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
             }
-            if (wpReservations3 != null)
+            if (wpReservations3.Children != null)
             {
                 tbDate3.Text = twoDaysLater.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
             }

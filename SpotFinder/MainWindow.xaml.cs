@@ -41,17 +41,45 @@ namespace SpotFinder
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
+            SetActiveStyleMenuItem("Dashboard");
             Main.Navigate(new Dashboard());
         }
 
         private void Reservation_click(object sender, RoutedEventArgs e)
         {
+            SetActiveStyleMenuItem("Reservations");
             Main.Navigate(new Reservations());
         }
 
         private void Locations_Click(object sender, RoutedEventArgs e)
         {
+            SetActiveStyleMenuItem("Locations");
             Main.Navigate(new Locations());
+        }
+
+        private void SetActiveStyleMenuItem(string activeMenu)
+        {
+            Style activeStyle = FindResource("ActiveMenuItem") as Style;
+            Style defaultStyle = FindResource("DefaultMenuItem") as Style;
+
+            if (activeMenu == "Dashboard")
+            {
+                Dashboard.Style = activeStyle;
+                Reservations.Style = defaultStyle;
+                Locations.Style = defaultStyle;
+            }
+            else if (activeMenu == "Reservations")
+            {
+                Reservations.Style = activeStyle;
+                Dashboard.Style = defaultStyle;
+                Locations.Style = defaultStyle;
+            }
+            else
+            {
+                Locations.Style = activeStyle;
+                Dashboard.Style = defaultStyle;
+                Reservations.Style = defaultStyle;
+            }
         }
     }
 }

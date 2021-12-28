@@ -18,6 +18,14 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <Style TargetType="MenuItem" x:Key="ActiveMenuItem">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style TargetType="MenuItem" x:Key="DefaultMenuItem">
+            <Setter Property="Foreground" Value="#BFFFFFFF" />
+            <Setter Property="FontWeight" Value="Regular" />
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -34,9 +42,9 @@
                     </LinearGradientBrush>
                 </Menu.Background>
                 <Image Height="25" Source="/Images/logo.png" Margin="50, 0, 0,0"/>
-                <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Dashboard" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
-                <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Reservations" Foreground="White" FontWeight="SemiBold" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
-                <MenuItem Template="{StaticResource MenuItemTemplate}" Header="Locations" Foreground="White" FontWeight="SemiBold" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
+                <MenuItem Name="Dashboard" Style="{StaticResource ActiveMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Dashboard" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
+                <MenuItem Name="Reservations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Reservations" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
+                <MenuItem Name="Locations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Locations" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
             </Menu>
         </StackPanel>
 
