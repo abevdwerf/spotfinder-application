@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SpotFinder.UserControls;
 
 namespace SpotFinder.Pages
 {
@@ -23,6 +24,9 @@ namespace SpotFinder.Pages
         public Dashboard()
         {
             InitializeComponent();
+            DataContext = this;
+            // LoadDashboard(0)
+            LoadReservations();
         }
 
         // Get a list of reservation objects
@@ -42,6 +46,149 @@ namespace SpotFinder.Pages
 
             return reservations;
         }
+
+        public async Task<List<Location>> GetLocations()
+        {
+            List<Location> locations = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/locations");
+
+            if (response.IsSuccessStatusCode)
+            {
+                locations = await response.Content.ReadAsAsync<List<Location>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return locations;
+        }
+
+        public async Task<List<Floor>> GetFloors()
+        {
+            List<Floor> floors = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/floors");
+
+            if (response.IsSuccessStatusCode)
+            {
+                floors = await response.Content.ReadAsAsync<List<Floor>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return floors;
+        }
+
+        private async Task<List<Room>> GetRooms()
+        {
+            List<Room> rooms = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/rooms");
+
+            if (response.IsSuccessStatusCode)
+            {
+                rooms = await response.Content.ReadAsAsync<List<Room>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return rooms;
+        }
+
+        public async Task<List<RoomType>> GetRoomTypes()
+        {
+            List<RoomType> roomTypes = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
+
+            if (response.IsSuccessStatusCode)
+            {
+                roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return roomTypes;
+        }
+
+        private async Task<List<User>> GetUsers()
+        {
+            List<User> users = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/users");
+
+            if (response.IsSuccessStatusCode)
+            {
+                users = await response.Content.ReadAsAsync<List<User>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return users;
+        }
+
+        private async void LoadReservations()
+        {
+            DateTime today = DateTime.Today;
+            DateTime oneDayLater = today.AddDays(1);
+            DateTime twoDaysLater = today.AddDays(2);
+            int counter = 0;    // Counts amount of blockreservations added
+
+            foreach (Reservation reservation in await GetReservations())
+            {
+
+                BlockReservation blockReservation = new BlockReservation();
+
+                blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
+                blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
+
+                foreach (Room room in await GetRooms())
+                {
+                    if (room.Id == reservation.RoomId)
+                    {
+                        blockReservation.Room = room.RoomName;
+
+                        foreach (RoomType roomType in await GetRoomTypes())
+                        {
+                            if (room.RoomTypeId == roomType.Id)
+                                blockReservation.RoomType = roomType.TypeName;
+                        }
+
+                        foreach (Floor floor in await GetFloors())
+                        {
+                            if (floor.Id == room.FloorId)
+                            {
+                                foreach (Location location in await GetLocations())
+                                {
+                                    if (location.Id == floor.LocationId)
+                                        blockReservation.Building = location.LocationName;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                foreach (User user in await GetUsers())
+                {
+                    if (user.Id == reservation.UserId)
+                    {
+                        blockReservation.User = user.Name;
+                    }
+                }
+
+                if(counter < 5)
+                {
+                    wpReservations.Children.Add(blockReservation);
+                    counter++;
+                }
+            }
+        }
+
 
         // For each object, create a user control
         //private async void LoadReservations()
