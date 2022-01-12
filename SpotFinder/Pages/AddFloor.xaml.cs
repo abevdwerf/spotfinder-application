@@ -96,6 +96,10 @@ namespace SpotFinder.Pages
                         }
                     }
                 }
+                //if (room.FloorId == ChosenFloor.Id)
+                //{
+                //    ChosenFloor.Rooms.Add(room);
+                //}
             }
         }
 

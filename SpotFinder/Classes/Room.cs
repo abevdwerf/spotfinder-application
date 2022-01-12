@@ -31,6 +31,8 @@ namespace SpotFinder.Classes
         public string RoomName { get; set; }
         [JsonProperty("max_persons")]
         public int MaxPersons { get; set; }
+        [JsonProperty("grid_location")]
+        public string GridLocation { get; set; }
 
         //public async Task<List<Floor>> GetFloors()
         //{

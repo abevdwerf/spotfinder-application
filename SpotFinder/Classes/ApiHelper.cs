@@ -16,7 +16,7 @@ namespace SpotFinder.Classes
             Client.BaseAddress = new Uri("http://127.0.0.1:8000");
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json")); //Only Json
-            Client.DefaultRequestHeaders.Add("x-authorization", "tnUK9vo1l7DxRwZR246yl7xCRKcs7ZxEpwYPyjuNJlowcnhxdqvjIjxVCWf75FVb");
+            Client.DefaultRequestHeaders.Add("x-authorization", "2gIyuQlYBlVtm24wAQUCNuIIpEkROKRR4YO0Ib3Kr8FDurGXQYJHkAmbosk9GSdd");
         }
 
         //create - Post
