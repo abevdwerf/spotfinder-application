@@ -100,6 +100,14 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
+
+        <Style x:Key="button--style-5" TargetType="Button">
+            <Setter Property="Background" Value="Black"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="0 10 0 10"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
     </Page.Resources>
 
     <ScrollViewer>
@@ -152,38 +160,20 @@
 
                 <Separator Style="{StaticResource separator--style-1}"/>
 
-                <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Furnishing</TextBlock>
-                <TextBlock Style="{StaticResource bodyText--style-1}" Margin="35 0 0 10">Drag any table into your room.</TextBlock>
-
-                <Button Style="{StaticResource button--style-2}">
-                    <StackPanel Orientation="Horizontal" Width="295">
-                        <Image Margin="0 0 25 0" Source="/Images/table_normal.png"/>
-                        <TextBlock Style="{StaticResource bodyText--style-2}">Normal table</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Style="{StaticResource button--style-2}">
-                    <StackPanel Orientation="Horizontal" Width="295">
-                        <Image Margin="0 0 25 0" Source="/Images/table_round.png"/>
-                        <TextBlock Style="{StaticResource bodyText--style-2}">Round table</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Style="{StaticResource button--style-2}">
-                    <StackPanel Orientation="Horizontal" Width="295">
-                        <Image Margin="0 0 25 0" Source="/Images/table_corner.png"/>
-                        <TextBlock Style="{StaticResource bodyText--style-2}">Cornet table</TextBlock>
-                    </StackPanel>
-                </Button>
-
-                <Separator Style="{StaticResource separator--style-1}"/>
-
-                <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Table</TextBlock>
+                <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Add table</TextBlock>
 
                 <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Capacity</TextBlock>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
                     <TextBox Name="tbPeople" Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
                     <TextBlock VerticalAlignment="Center" Foreground="#7F7F7F" FontSize="14">People</TextBlock>
                 </StackPanel>
-                <ComboBox x:Name="cbModules" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16"></ComboBox>
+                <Button Name="btnAddTable" Style="{StaticResource button--style-5}" Width="295" Click="btnAddTable_Click">Add Table</Button>
+                
+
+                <Separator Style="{StaticResource separator--style-1}"/>
+                <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Tables</TextBlock>
+                <Separator Style="{StaticResource separator--style-1}"/>
+
                 <ComboBox x:Name="cbRoomTypes" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="TypeName"></ComboBox>
 
                 <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnSaveRoom_Click">Save Room</Button>
