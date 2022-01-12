@@ -1,7 +1,12 @@
-﻿using SpotFinder.Classes;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SpotFinder.Classes;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -38,6 +43,7 @@ namespace SpotFinder.Pages
             InitializeComponent();
 
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
+            LoadRoomTypes();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -210,9 +216,91 @@ namespace SpotFinder.Pages
             }
         }
 
-        private void btnSaveRoom_Click(object sender, RoutedEventArgs e)
+        private void btnAddMap_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+
+            if (op.ShowDialog() == true)
+            {
+                ImageBrush ib = new ImageBrush();
+                ib.ImageSource = new BitmapImage(new Uri(op.FileName, UriKind.Absolute));
+                MyCanvas.Background = ib;
+            }
+        }
+
+        private async void btnSaveRoom_Click(object sender, RoutedEventArgs e)
         {
             Room room = new Room();
+            room.FloorId = currentFloor.ChosenFloor.Id;
+            room.RoomName = tbName.Text;
+            room.MaxPersons = int.Parse(tbPeople.Text);
+            room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
+
+            room.GridLocation = JsonConvert.SerializeObject(lstButtons);
+
+            //dynamic jsonObject = new JObject();
+            //jsonObject.grid_location = json;
+
+            //txtbl.Text = jsonObject.ToString().Replace(@"\", "");
+            //MessageBox.Show(json);
+
+            //string testjson = JsonConvert.SerializeObject(jsonObject);
+
+            //room.GridLocation = testjson;
+
+            await PostButtonGrid(room);
+        }
+
+        private async Task<string> PostButtonGrid(Room room)
+        {
+            string json = JsonConvert.SerializeObject(room);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Post("api/room/create", content);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Succeeded");
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+            return response.ToString();
+
+        }
+
+        private async Task<List<RoomType>> GetRoomTypes()
+        {
+            List<RoomType> roomTypes = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
+
+            if (response.IsSuccessStatusCode)
+            {
+                roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            //StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            //HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
+
+            return roomTypes;
+        }
+
+        private async void LoadRoomTypes()
+        {
+            cbRoomTypes.ItemsSource = await GetRoomTypes();
+
+        }
+
+        private void cbRoomTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
