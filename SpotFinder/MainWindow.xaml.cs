@@ -25,7 +25,7 @@ namespace SpotFinder
         public MainWindow()
         {
             InitializeComponent();
-            ApiHelper.InitializeClient();
+            //ApiHelper.InitializeClient();
             Loaded += MainWindow_Loaded;
         }
 

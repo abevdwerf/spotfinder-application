@@ -20,7 +20,7 @@ namespace SpotFinder.Classes
         }
 
         //create - Post
-        public static async Task<HttpResponseMessage> Post(string path, HttpContent content)
+        public static async Task<HttpResponseMessage> Post(string path, FormUrlEncodedContent content)
         {
             HttpResponseMessage response = await Client.PostAsync(path, content);
 
