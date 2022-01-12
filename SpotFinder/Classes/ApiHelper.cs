@@ -12,9 +12,9 @@ namespace SpotFinder.Classes
 
         public static void InitializeClient()
         {
-            HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            Client = new HttpClient(clientHandler);
+            //HttpClientHandler clientHandler = new HttpClientHandler();
+            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            Client = new HttpClient();
             Client.BaseAddress = new Uri("http://127.0.0.1:8000/");
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json")); //Only Json
@@ -22,7 +22,7 @@ namespace SpotFinder.Classes
         }
 
         //create - Post
-        public static async Task<HttpResponseMessage> Post(string path, HttpContent content)
+        public static async Task<HttpResponseMessage> Post(string path, StringContent content)
         {
             HttpResponseMessage response = await Client.PostAsync(path, content);
 

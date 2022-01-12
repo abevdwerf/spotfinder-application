@@ -19,7 +19,7 @@
                 <Border Background="White" CornerRadius="10,0,0,10">
                     <Grid Margin="50">
                         <StackPanel>
-                            <TextBlock Margin="10,0">Registreren</TextBlock>
+                            <TextBlock Margin="10,0" FontWeight="Bold" FontSize="32">Sign up</TextBlock>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -27,31 +27,42 @@
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Margin="10">
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Username"></TextBlock>
+                                        <TextBlock Text="Username" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
                                         <TextBox Name="tbUsername"></TextBox>
+                                        <TextBlock Name="tbErrorUsername" FontWeight="Bold"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Password"></TextBlock>
-                                        <TextBox Name="Password"></TextBox>
+                                        <TextBlock Text="Password" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
+                                        <PasswordBox Name="pbPassword"></PasswordBox>
+                                        <TextBlock Name="tbErrorPassword" FontWeight="Bold"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
-                                <StackPanel  Grid.Column="1" Margin="10">
+                                <StackPanel Grid.Column="1" Margin="10">
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Email"></TextBlock>
+                                        <TextBlock Text="Email" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
                                         <TextBox Name="tbEmail"></TextBox>
+                                        <TextBlock Name="tbErrorEmail" FontWeight="Bold"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Confrim password"></TextBlock>
-                                        <TextBox Name="tbConfirmPassword"></TextBox>
+                                        <TextBlock Text="Confirm password" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
+                                        <PasswordBox Name="pbConfirmPassword"></PasswordBox>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
-                            <TextBlock HorizontalAlignment="Center">Let op: We zullen een verificatie-mail versturen naar uw e-mailadres.
-Hou dus goed je mailbox van je e-mailadres in de gaten.</TextBlock>
-                            <Button Name="btnCreateAccount" Margin="15,15,15,0">Create account</Button>
-                            <CheckBox Name="checkbLocationUpdates" Margin="10,10,0,5">Ik wil graag locatie-updates ontvangen.</CheckBox>
-                            <CheckBox Name="checkbServiceConditions" Margin="10,0,0,0">Ik ga akkoord met de service-voorwaarden.</CheckBox>
-                            <TextBlock HorizontalAlignment="Center" Margin="0,50,0,0">Ik heb al een account</TextBlock>
+                            
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock FontWeight="Bold" FontSize="18" Margin="0 0 3 0" Foreground="#FF666666" >Pay attention:</TextBlock>
+                                <TextBlock FontSize="18" Foreground="#FF666666">We will send a verification email to your email address. So keep an eye on your mailbox of your e-mail address.</TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="10">
+                                <CheckBox Name="checkbLocationUpdates" VerticalContentAlignment="Center" FontSize="18" VerticalAlignment="Center" Foreground="#FF666666">I would like to receive location updates.</CheckBox>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox Name="checkbServiceConditions" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF666666">I agree with the service conditions.</CheckBox>
+                                    <TextBlock Name="tbErrorServiceConditions" FontWeight="Bold"></TextBlock>
+                                </StackPanel>
+                                <Button Name="btnCreateAccount" Margin="15,15,15,0" Click="btnCreateAccount_Click">Create account</Button>
+                                <TextBlock HorizontalAlignment="Center" FontSize="18" Margin="0,50,0,0" Foreground="#FF666666">I already have an account and would like to Sign in.</TextBlock>
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </Border>

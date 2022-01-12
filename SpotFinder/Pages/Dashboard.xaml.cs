@@ -173,13 +173,13 @@ namespace SpotFinder.Pages
                     }
                 }
 
-                foreach (User user in await GetUsers())
-                {
-                    if (user.Id == reservation.UserId)
-                    {
-                        blockReservation.User = user.Name;
-                    }
-                }
+                //foreach (User user in await GetUsers())
+                //{
+                //    if (user.Id == reservation.UserId)
+                //    {
+                //        blockReservation.User = user.Name;
+                //    }
+                //}
 
                 if(counter < 5)
                 {
