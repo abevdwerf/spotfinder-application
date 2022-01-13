@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using SpotFinder.Classes;
 
 namespace SpotFinder
 {
@@ -13,5 +14,9 @@ namespace SpotFinder
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            ApiHelper.InitializeClient();
+        }  
     }
 }

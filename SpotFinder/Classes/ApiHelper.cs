@@ -18,11 +18,11 @@ namespace SpotFinder.Classes
             Client.BaseAddress = new Uri("http://127.0.0.1:8000/");
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json")); //Only Json
-            Client.DefaultRequestHeaders.Add("x-authorization", "2gIyuQlYBlVtm24wAQUCNuIIpEkROKRR4YO0Ib3Kr8FDurGXQYJHkAmbosk9GSdd");
+            Client.DefaultRequestHeaders.Add("x-authorization", "5ayRNMHCMcbpVI4XGXTISG6LOZFBOxWbsE6VcoqvOCDjvTZJRQUAOPoULnBRKAAh");
         }
 
         //create - Post
-        public static async Task<HttpResponseMessage> Post(string path, HttpContent content)
+        public static async Task<HttpResponseMessage> Post(string path, StringContent content)
         {
             HttpResponseMessage response = await Client.PostAsync(path, content);
 
