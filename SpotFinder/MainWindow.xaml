@@ -32,21 +32,25 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-     
-        <StackPanel Grid.Row="0" >
-            <Menu Height="50">
-                <Menu.Background>
-                    <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
-                        <GradientStop Color="#FFA000FC"/>
-                        <GradientStop Color="#FF350063" Offset="1"/>
-                    </LinearGradientBrush>
-                </Menu.Background>
-                <Image Height="25" Source="/Images/logo.png" Margin="50, 0, 0,0"/>
-                <MenuItem Name="Dashboard" Style="{StaticResource ActiveMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Dashboard" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
-                <MenuItem Name="Reservations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Reservations" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
-                <MenuItem Name="Locations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Locations" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
-            </Menu>
-        </StackPanel>
+
+        <Menu Grid.Row="0">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Stretch"></DockPanel>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <Menu.Background>
+                <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
+                    <GradientStop Color="#FFA000FC"/>
+                    <GradientStop Color="#FF350063" Offset="1"/>
+                </LinearGradientBrush>
+            </Menu.Background>
+            <Image Height="25" Source="/Images/logo.png" Margin="50, 0, 0,0"/>
+            <MenuItem Name="Dashboard" Style="{StaticResource ActiveMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Dashboard" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
+            <MenuItem Name="Reservations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Reservations" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
+            <MenuItem Name="Locations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Locations" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
+            <MenuItem Name="Logout" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Log out" FontSize="16" Height="50" Margin="0 0 100 0" VerticalAlignment="Center"  Cursor="Hand" HorizontalAlignment="Right" Click="LogOut_Click"/>
+        </Menu>
 
         <ScrollViewer Name="MyScrollViewer" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
             <Frame x:Name="Main" NavigationUIVisibility="Hidden" Source="Pages/Dashboard.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

@@ -6,6 +6,58 @@
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
         Title="Login"  Height="1080" Width="1920" WindowState="Maximized">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="PasswordBoxControlTemplate" TargetType="{x:Type PasswordBox}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+        <Style TargetType="Button" x:Key="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" >
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid Background="#feea00">
         <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
@@ -19,17 +71,24 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Column="0" Background="#ffffff" CornerRadius="10" >
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
-                        <TextBlock Margin="10,0">Inloggen</TextBlock>
+                        <TextBlock Margin="10 0 0 15" FontWeight="Bold" FontSize="32">Login</TextBlock>
                         <StackPanel Margin="10,10">
-                            <TextBlock Text="Username"></TextBlock>
-                            <TextBox Name="tbUsername"></TextBox>
+                            <TextBlock Text="Username" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
+                            <TextBox Name="tbUsername" Template="{StaticResource TextBoxBaseControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></TextBox>
                         </StackPanel>
                         <StackPanel Margin="10,10">
-                            <TextBlock Text="Password"></TextBlock>
-                            <TextBox Name="tbPasssword"></TextBox>
+                            <TextBlock Text="Password" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
+                                <PasswordBox Name="pbPassword" Template="{StaticResource PasswordBoxControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></PasswordBox>
                         </StackPanel>
-                        <Button x:Name="btnLogin" Margin="15,15,15,0" Click="btnLogin_Click">Login</Button>
-                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="100" HorizontalAlignment="Center" Margin="0,50,0,0" VerticalAlignment="Bottom">Registreer hier om een account te maken</TextBlock>
+                        <Button x:Name="btnLogin" Style="{StaticResource Button}" Margin="10,15,10,0" Height="60" FontSize="22" FontWeight="SemiBold" Click="btnLogin_Click" Background="#FFA200FF" Foreground="White" Cursor="Hand">Login</Button>
+                        <TextBlock Margin="10,0" Name="tbError" FontSize="18" FontWeight="Bold"></TextBlock>
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="150" HorizontalAlignment="Center" Margin="0,50,0,30" VerticalAlignment="Bottom">
+                                <Run Text="Sign up" FontSize="18" Foreground="#FF666666" />
+                                <Run Name="runSignUp" Text="here" FontSize="18" FontWeight="SemiBold" Cursor="Hand" MouseLeftButtonDown="runSignUp_MouseLeftButtonDown" Foreground="#FFA200FF"/>
+                                <Run Text="to create an account." FontSize="18" Foreground="#FF666666"/>
+                            </TextBlock>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
                 <Border Grid.Column="1" Background="#a200ff" CornerRadius="0,10,10,0">

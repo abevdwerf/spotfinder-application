@@ -29,51 +29,70 @@ namespace SpotFinder.Pages
         }
 
         public async Task SignUp()
-        {
-            //var content = new FormUrlEncodedContent(new[]
-            //{
-            //    new KeyValuePair<string, string>("name", tbUsername.Text),
-            //    new KeyValuePair<string, string>("email", tbEmail.Text),
-            //    new KeyValuePair<string, string>("password", pbPassword.Password),
-            //    new KeyValuePair<string, string>("password_confirmation", pbConfirmPassword.Password),
-            //    new KeyValuePair<string, string>("service-conditions", (checkbServiceConditions.IsChecked == true) ? "1" : "")
-            //});
+        { 
+            User user = new User(tbUsername.Text, tbEmail.Text, pbPassword.Password, pbConfirmPassword.Password);
+           
+            string json = JsonConvert.SerializeObject(user);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            //HttpResponseMessage response = await ApiHelper.Post("api/register", content);
+            HttpResponseMessage response = await ApiHelper.Post("api/register", content);
 
-            //if (((int)response.StatusCode) == 422)
-            //{
-            //    var result = await response.Content.ReadAsStringAsync();
-            //    var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
+            if (((int)response.StatusCode) == 401)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
 
-            //    string errorMessageName = string.Join(",", jsonData["errors"]["name"] ?? "");
-            //    string errorMessageEmail = string.Join(",", jsonData["errors"]["email"] ?? "");
-            //    string errorMessagePassword = string.Join(",", jsonData["errors"]["password"] ?? "");
-            //    string errorMessageServiceConditions = string.Join(",", jsonData["errors"]["service-conditions"] ?? "");
+                string errorMessageName = string.Join(",", jsonData["error"]["name"] ?? "");
+                string errorMessageEmail = string.Join(",", jsonData["error"]["email"] ?? "");
+                string errorMessagePassword = string.Join(",", jsonData["error"]["password"] ?? "");
+                string errorMessagePasswordConfirmation = string.Join(",", jsonData["error"]["PasswordConfirmation"] ?? "");
 
-            //    tbErrorUsername.Text = errorMessageName;
-            //    tbErrorEmail.Text = errorMessageEmail;
-            //    tbErrorPassword.Text = errorMessagePassword;
-            //    tbErrorServiceConditions.Text = errorMessageServiceConditions;
+                tbErrorUsername.Text = errorMessageName;
+                tbErrorEmail.Text = errorMessageEmail;
+                tbErrorPassword.Text = errorMessagePassword;
+                tbErrorPasswordConfirmation.Text = errorMessagePasswordConfirmation;
+            }
+            else if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
 
-            //}
-            //else if (response.IsSuccessStatusCode)
-            //{
-            //    Login login = new Login();
-            //    login.Show();
+                string token = jsonData["success"]["token"];
 
-            //    //sluit de register form af
-            //    Close();
-            //}
-            //else
-            //{
-            //    throw new Exception(response.ReasonPhrase);
-            //}
+                ApiHelper.Token = token;
+
+                MainWindow main = new MainWindow();
+                main.Show();
+
+                //sluit de register form af
+                Close();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
         }
 
         private async void btnCreateAccount_Click(object sender, RoutedEventArgs e)
         {
-            //await SignUp();   
+            if (checkbServiceConditions.IsChecked == true)
+            {
+               tbErrorServiceConditions.Text = "";
+               await SignUp();
+            }
+            else
+            {
+                tbErrorServiceConditions.Text = "The service conditions are required.";
+            }
+        }
+
+        private void runLogin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+
+            //sluit de login form af
+            Close();
         }
     }
 }

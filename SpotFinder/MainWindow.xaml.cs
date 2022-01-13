@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SpotFinder.Classes;
+using System.Net.Http;
 
 namespace SpotFinder
 {
@@ -56,6 +57,11 @@ namespace SpotFinder
             SetActiveStyleMenuItem("Locations");
             Main.Navigate(new Locations());
         }
+        
+        private async void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            await LogOut();
+        }
 
         private void SetActiveStyleMenuItem(string activeMenu)
         {
@@ -79,6 +85,25 @@ namespace SpotFinder
                 Locations.Style = activeStyle;
                 Dashboard.Style = defaultStyle;
                 Reservations.Style = defaultStyle;
+            }
+        }
+
+        public async Task LogOut()
+        {
+            
+            HttpResponseMessage response = await ApiHelper.Post("api/logout", null);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Login login = new Login();
+                login.Show();
+
+                //sluit de Mainwindow af
+                Close();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
             }
         }
     }
