@@ -138,11 +138,14 @@ namespace SpotFinder.Pages
             DateTime oneDayLater = today.AddDays(1);
             DateTime twoDaysLater = today.AddDays(2);
             int counter = 0;    // Counts amount of blockreservations added
+            int reservationCounter = 0;
+            int userCounter = 0;
 
             foreach (Reservation reservation in await GetReservations())
             {
 
                 BlockReservation blockReservation = new BlockReservation();
+                reservationCounter++;
 
                 blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
                 blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
@@ -173,13 +176,10 @@ namespace SpotFinder.Pages
                     }
                 }
 
-                //foreach (User user in await GetUsers())
-                //{
-                //    if (user.Id == reservation.UserId)
-                //    {
-                //        blockReservation.User = user.Name;
-                //    }
-                //}
+                foreach (User user in await GetUsers())
+                {
+                    userCounter++;
+                }
 
                 if(counter < 5)
                 {
@@ -187,6 +187,9 @@ namespace SpotFinder.Pages
                     counter++;
                 }
             }
+
+            ReservationSum.Text = reservationCounter.ToString();
+            UsersSum.Text = userCounter.ToString();
         }
 
 
