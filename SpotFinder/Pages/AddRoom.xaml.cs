@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SpotFinder.Classes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -27,16 +28,15 @@ namespace SpotFinder.Pages
         private double widthCanvas;
         private Point startPoint;
         private Point pointWhereMouseIs;
-
         // private Canvas startPoint;
         Rectangle selectionRectangle = new Rectangle();
-
         private const int size = 12;
         //private const int space = 0;
-
         private List<ButtonLocation> lstButtons = new List<ButtonLocation>();
-
         AddFloor currentFloor;
+        private List<Desk> desks = new List<Desk>();
+        int number = 0;
+
         public AddRoom(AddFloor currentFloor)
         {
             this.currentFloor = currentFloor;
@@ -44,6 +44,7 @@ namespace SpotFinder.Pages
 
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
             LoadRoomTypes();
+            LoadModules();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -298,9 +299,41 @@ namespace SpotFinder.Pages
 
         }
 
+        private async void LoadModules()
+        {
+            cbModules.ItemsSource = await GetModules();
+        }
+
+        private async Task<List<Module>> GetModules()
+        {
+            List<Module> modules = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/modules");
+
+            if (response.IsSuccessStatusCode)
+            {
+                modules = await response.Content.ReadAsAsync<List<Module>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return modules;
+        }
+
         private void cbRoomTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnAddTable_Click(object sender, RoutedEventArgs e)
+        {
+            number++;
+            Desk desk = new Desk();
+            desk.AvailableSpaces = int.Parse(tbPeople.Text);
+
+            desks.Add(desk);
+            lbTables.Items.Add(number.ToString());
         }
     }
 }

@@ -138,7 +138,7 @@
 
                 <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Name</TextBlock>
                 <TextBox Name="tbName" Style="{StaticResource textbox--style-1}" Width="295"/>
-                <Button Name="btnAddMap" Style="{StaticResource button--style-4}" Click="btnAddMap_Click">+ Add map</Button>
+                <Button Margin="35, 10" Name="btnAddMap" Style="{StaticResource button--style-4}" Click="btnAddMap_Click">+ Add map</Button>
 
                 <Separator Style="{StaticResource separator--style-1}"/>
 
@@ -167,11 +167,13 @@
                     <TextBox Name="tbPeople" Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
                     <TextBlock VerticalAlignment="Center" Foreground="#7F7F7F" FontSize="14">People</TextBlock>
                 </StackPanel>
+                <ComboBox x:Name="cbModules" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="ModuleName"></ComboBox>
                 <Button Name="btnAddTable" Style="{StaticResource button--style-5}" Width="295" Click="btnAddTable_Click">Add Table</Button>
                 
 
                 <Separator Style="{StaticResource separator--style-1}"/>
                 <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Tables</TextBlock>
+                <ListBox x:Name="lbTables" Height="100" Margin="35, 10"></ListBox>
                 <Separator Style="{StaticResource separator--style-1}"/>
 
                 <ComboBox x:Name="cbRoomTypes" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="TypeName"></ComboBox>
