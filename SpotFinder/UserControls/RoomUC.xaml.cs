@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotFinder.Pages;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -36,6 +37,11 @@ namespace SpotFinder.UserControls
         public int MaxPersons
         {
             set { maxPersons.Text = value.ToString(); }
+        }
+
+        private void btnRoom1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom() { ChosenFloor = ClickedfFloor });
         }
     }
 }
