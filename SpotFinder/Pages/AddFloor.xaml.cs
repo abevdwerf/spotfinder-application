@@ -37,6 +37,8 @@ namespace SpotFinder.Pages
 
         private List<ButtonLocation> lstButtons = new List<ButtonLocation>();
 
+        private Random rnd = new Random();
+
         public AddFloor()
         {
             InitializeComponent();
@@ -85,6 +87,44 @@ namespace SpotFinder.Pages
         {
             foreach (Room room in await GetRooms())
             {
+                SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(255), (byte)rnd.Next(255), (byte)rnd.Next(255)));
+
+                List<ButtonLocation> root = null;
+                //var json = File.ReadAllText("json1.json");
+                if (room.GridLocation != null)
+                {
+                    root = JsonConvert.DeserializeObject<List<ButtonLocation>>(room.GridLocation);
+
+                    foreach (Button btn in MyCanvas.Children)
+                    {
+                        foreach (ButtonLocation btnLoc in root)
+                        {
+                            Point pt1 = new Point();
+                            pt1.X = btnLoc.X;
+                            pt1.Y = btnLoc.Y;
+
+                            Point pt2 = new Point();
+                            pt2.X = btnLoc.X + size;
+                            pt2.Y = btnLoc.Y + size;
+                            Rect SelectedRect = new Rect(pt1, pt2);
+
+
+                            Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
+                            Vector vector = VisualTreeHelper.GetOffset(btn);
+                            rectBounds.Offset(vector);
+                            if (rectBounds.IntersectsWith(SelectedRect))
+                            {
+                                btn.Background = randomColor;
+                            }
+                        }
+                        //btn.Background = Brushes.Transparent;
+                    }
+                }
+
+                //foreach (var p in root.hireSchedules)
+                //{
+                //    ///do something
+                //}
                 foreach (RoomType roomtype in await GetRoomTypes())
                 {
                     if (room.FloorId == ChosenFloor.Id)
@@ -103,7 +143,7 @@ namespace SpotFinder.Pages
             }
         }
 
-        private async void btnSaveFloor_Click(object sender, RoutedEventArgs e)
+        private void btnSaveFloor_Click(object sender, RoutedEventArgs e)
         {
             //TODO opslaan
 
@@ -117,7 +157,7 @@ namespace SpotFinder.Pages
 
             string testjson = JsonConvert.SerializeObject(jsonObject);
 
-            await PutButtonGrid(testjson);
+            //await PutButtonGrid(testjson);
 
             //var arrayOfObjects = JsonConvert.SerializeObject(
             //    new[] { JsonConvert.DeserializeObject(json1), JsonConvert.DeserializeObject(json2) }

@@ -139,54 +139,54 @@ namespace SpotFinder.Pages
             DateTime twoDaysLater = today.AddDays(2);
             int counter = 0;    // Counts amount of blockreservations added
 
-            foreach (Reservation reservation in await GetReservations())
-            {
+            //foreach (Reservation reservation in await GetReservations())
+            //{
 
-                BlockReservation blockReservation = new BlockReservation();
+            //    BlockReservation blockReservation = new BlockReservation();
 
-                blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
-                blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
+            //    blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
+            //    blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
 
-                foreach (Room room in await GetRooms())
-                {
-                    if (room.Id == reservation.RoomId)
-                    {
-                        blockReservation.Room = room.RoomName;
+            //    foreach (Room room in await GetRooms())
+            //    {
+            //        if (room.Id == reservation.RoomId)
+            //        {
+            //            blockReservation.Room = room.RoomName;
 
-                        foreach (RoomType roomType in await GetRoomTypes())
-                        {
-                            if (room.RoomTypeId == roomType.Id)
-                                blockReservation.RoomType = roomType.TypeName;
-                        }
+            //            foreach (RoomType roomType in await GetRoomTypes())
+            //            {
+            //                if (room.RoomTypeId == roomType.Id)
+            //                    blockReservation.RoomType = roomType.TypeName;
+            //            }
 
-                        foreach (Floor floor in await GetFloors())
-                        {
-                            if (floor.Id == room.FloorId)
-                            {
-                                foreach (Location location in await GetLocations())
-                                {
-                                    if (location.Id == floor.LocationId)
-                                        blockReservation.Building = location.LocationName;
-                                }
-                            }
-                        }
-                    }
-                }
+            //            foreach (Floor floor in await GetFloors())
+            //            {
+            //                if (floor.Id == room.FloorId)
+            //                {
+            //                    foreach (Location location in await GetLocations())
+            //                    {
+            //                        if (location.Id == floor.LocationId)
+            //                            blockReservation.Building = location.LocationName;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
 
-                //foreach (User user in await GetUsers())
-                //{
-                //    if (user.Id == reservation.UserId)
-                //    {
-                //        blockReservation.User = user.Name;
-                //    }
-                //}
+            //    //foreach (User user in await GetUsers())
+            //    //{
+            //    //    if (user.Id == reservation.UserId)
+            //    //    {
+            //    //        blockReservation.User = user.Name;
+            //    //    }
+            //    //}
 
-                if(counter < 5)
-                {
-                    wpReservations.Children.Add(blockReservation);
-                    counter++;
-                }
-            }
+            //    if(counter < 5)
+            //    {
+            //        wpReservations.Children.Add(blockReservation);
+            //        counter++;
+            //    }
+            //}
         }
 
 
