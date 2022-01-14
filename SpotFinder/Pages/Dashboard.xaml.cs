@@ -26,7 +26,7 @@ namespace SpotFinder.Pages
             InitializeComponent();
             DataContext = this;
             // LoadDashboard(0)
-            LoadReservations();
+            //LoadReservations();
         }
 
         // Get a list of reservation objects
