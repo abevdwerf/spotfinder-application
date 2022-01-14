@@ -131,7 +131,7 @@ namespace SpotFinder.Pages
                     {
                         if (room.RoomTypeId == roomtype.Id)
                         {
-                            UserControl roomUc = new RoomUC(this, room) { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons, ClickedRoom = room };
+                            UserControl roomUc = new RoomUC() { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons };
                             spRoomContent.Children.Add(roomUc);
                         }
                     }
