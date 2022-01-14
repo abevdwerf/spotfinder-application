@@ -36,10 +36,73 @@ namespace SpotFinder.Pages
         AddFloor currentFloor;
         private List<Desk> desks = new List<Desk>();
         int number = 0;
+        int roomId;
+        int maxPersons = 0;
+        private Random rnd = new Random();
 
+        private Room currentRoom;
         public AddRoom(AddFloor currentFloor)
         {
             this.currentFloor = currentFloor;
+            InitializeComponent();
+
+            this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
+            LoadRoomTypes();
+            LoadModules();
+        }
+
+        public AddRoom(AddFloor currentFloor, Room currentRoom)
+        {
+            InitializeComponent();
+            this.currentFloor = currentFloor;
+            this.currentRoom = currentRoom;
+            LoadRoomTypes();
+            LoadModules();
+
+            this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
+            loadRoom();
+        }
+        private void loadRoom()
+        {
+            SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(255), (byte)rnd.Next(255), (byte)rnd.Next(255)));
+
+            List<ButtonLocation> root = null;
+            //var json = File.ReadAllText("json1.json");
+            if (currentRoom.GridLocation != null)
+            {
+                root = JsonConvert.DeserializeObject<List<ButtonLocation>>(currentRoom.GridLocation);
+
+                foreach (Button btn in MyCanvas.Children)
+                {
+                    foreach (ButtonLocation btnLoc in root)
+                    {
+                        Point pt1 = new Point();
+                        pt1.X = btnLoc.X;
+                        pt1.Y = btnLoc.Y;
+
+                        Point pt2 = new Point();
+                        pt2.X = btnLoc.X + size;
+                        pt2.Y = btnLoc.Y + size;
+                        Rect SelectedRect = new Rect(pt1, pt2);
+
+
+                        Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
+                        Vector vector = VisualTreeHelper.GetOffset(btn);
+                        rectBounds.Offset(vector);
+                        if (rectBounds.IntersectsWith(SelectedRect))
+                        {
+                            btn.Background = randomColor;
+                        }
+                    }
+                    //btn.Background = Brushes.Transparent;
+                }
+            }
+            tbName.Text = currentRoom.RoomName;
+            tbPeople.Text = currentRoom.MaxPersons.ToString();
+        }
+
+        public AddRoom()
+        {
             InitializeComponent();
 
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
@@ -238,22 +301,30 @@ namespace SpotFinder.Pages
             Room room = new Room();
             room.FloorId = currentFloor.ChosenFloor.Id;
             room.RoomName = tbName.Text;
-            room.MaxPersons = int.Parse(tbPeople.Text);
             room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
 
             room.GridLocation = JsonConvert.SerializeObject(lstButtons);
 
-            //dynamic jsonObject = new JObject();
-            //jsonObject.grid_location = json;
-
-            //txtbl.Text = jsonObject.ToString().Replace(@"\", "");
-            //MessageBox.Show(json);
-
-            //string testjson = JsonConvert.SerializeObject(jsonObject);
-
-            //room.GridLocation = testjson;
+            room.MaxPersons = maxPersons;
 
             await PostButtonGrid(room);
+            await PostDesks();
+        }
+
+        private async Task<string> PostDesks()
+        {
+            string json = JsonConvert.SerializeObject(desks);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Post("api/desk/create", content);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("desks geup.lad");
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+            return response.ToString();
         }
 
         private async Task<string> PostButtonGrid(Room room)
@@ -263,7 +334,16 @@ namespace SpotFinder.Pages
             HttpResponseMessage response = await ApiHelper.Post("api/room/create", content);
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("Succeeded");
+                string test = await response.Content.ReadAsStringAsync();
+                dynamic data = JObject.Parse(test);
+                MessageBox.Show(data.last_insert_id.ToString());
+                //room.Id = data.last_insert_id;
+                roomId = data.last_insert_id;
+
+                foreach (Desk desk in desks)
+                {
+                    desk.RoomId = data.last_insert_id;
+                }
             }
             else
             {
@@ -331,6 +411,9 @@ namespace SpotFinder.Pages
             number++;
             Desk desk = new Desk();
             desk.AvailableSpaces = int.Parse(tbPeople.Text);
+            desk.ModuleId = (Int32)cbModules.SelectedValue;
+
+            maxPersons = maxPersons + int.Parse(tbPeople.Text);
 
             desks.Add(desk);
             lbTables.Items.Add(number.ToString());
