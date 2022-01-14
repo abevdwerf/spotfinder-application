@@ -5,7 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
-        Title="Register" Height="1080" Width="1920">
+        Title="Register" Height="1080" Width="1920" WindowState="Maximized">
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="PasswordBoxControlTemplate" TargetType="{x:Type PasswordBox}">
+            <Border Background="{TemplateBinding Background}" 
+                x:Name="Bd" CornerRadius="10">
+                <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <Trigger Property="Width" Value="Auto">
+                    <Setter Property="MinWidth" Value="100"/>
+                </Trigger>
+                <Trigger Property="Height" Value="Auto">
+                    <Setter Property="MinHeight" Value="20"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <Style TargetType="Button" x:Key="Button">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" >
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Window.Resources>
+
     <Grid Background="#feea00">
         <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
                         <Border.Effect >
@@ -19,7 +74,7 @@
                 <Border Background="White" CornerRadius="10,0,0,10">
                     <Grid Margin="50">
                         <StackPanel>
-                            <TextBlock Margin="10,0" FontWeight="Bold" FontSize="32">Sign up</TextBlock>
+                            <TextBlock Margin="10 0 0 15" FontWeight="Bold" FontSize="32">Sign up</TextBlock>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -28,40 +83,63 @@
                                 <StackPanel Margin="10">
                                     <StackPanel Margin="0,5,0,5">
                                         <TextBlock Text="Username" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
-                                        <TextBox Name="tbUsername"></TextBox>
-                                        <TextBlock Name="tbErrorUsername" FontWeight="Bold"></TextBlock>
+                                        <TextBox Name="tbUsername" Template="{StaticResource TextBoxBaseControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></TextBox>
+                                        <TextBlock Name="tbErrorUsername" FontSize="18" FontWeight="Bold"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Margin="0,5,0,5">
                                         <TextBlock Text="Password" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
-                                        <PasswordBox Name="pbPassword"></PasswordBox>
-                                        <TextBlock Name="tbErrorPassword" FontWeight="Bold"></TextBlock>
+                                        <PasswordBox Name="pbPassword" Template="{StaticResource PasswordBoxControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></PasswordBox>
+                                        <TextBlock Name="tbErrorPassword" FontSize="18" FontWeight="Bold"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Margin="10">
                                     <StackPanel Margin="0,5,0,5">
-                                        <TextBlock Text="Email" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
-                                        <TextBox Name="tbEmail"></TextBox>
-                                        <TextBlock Name="tbErrorEmail" FontWeight="Bold"></TextBlock>
+                                        <TextBlock Text="E-mail address" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
+                                        <TextBox Name="tbEmail" Template="{StaticResource TextBoxBaseControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></TextBox>
+                                        <TextBlock Name="tbErrorEmail" FontSize="18" FontWeight="Bold"></TextBlock>
                                     </StackPanel>
                                     <StackPanel Margin="0,5,0,5">
                                         <TextBlock Text="Confirm password" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
-                                        <PasswordBox Name="pbConfirmPassword"></PasswordBox>
+                                        <PasswordBox Name="pbConfirmPassword" Template="{StaticResource PasswordBoxControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></PasswordBox>
+                                        <TextBlock Name="tbErrorPasswordConfirmation" FontSize="18" FontWeight="Bold"></TextBlock>
                                     </StackPanel>
                                 </StackPanel>
                             </Grid>
-                            
-                            <StackPanel Orientation="Horizontal" Margin="10">
-                                <TextBlock FontWeight="Bold" FontSize="18" Margin="0 0 3 0" Foreground="#FF666666" >Pay attention:</TextBlock>
-                                <TextBlock FontSize="18" Foreground="#FF666666">We will send a verification email to your email address. So keep an eye on your mailbox of your e-mail address.</TextBlock>
-                            </StackPanel>
+
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="18" Margin="10 30 0 20" Foreground="#FF666666" Width="560" Height="50">
+                                <Run Text="Pay attention:" FontWeight="Bold"/>
+                                <Run Text="We will send a verification email to your email address. So keep an eye on your mailbox of your e-mail address." />
+                            </TextBlock>
                             <StackPanel Margin="10">
-                                <CheckBox Name="checkbLocationUpdates" VerticalContentAlignment="Center" FontSize="18" VerticalAlignment="Center" Foreground="#FF666666">I would like to receive location updates.</CheckBox>
-                                <StackPanel Orientation="Horizontal">
-                                    <CheckBox Name="checkbServiceConditions" VerticalContentAlignment="Center" FontSize="18" Foreground="#FF666666">I agree with the service conditions.</CheckBox>
-                                    <TextBlock Name="tbErrorServiceConditions" FontWeight="Bold"></TextBlock>
+                                <CheckBox Name="checkbLocationUpdates" VerticalContentAlignment="Center" FontSize="9" Margin="0 0 0 20" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#FF666666" FontWeight="Medium" Content="I would like to receive location updates." Cursor="Hand">
+                                    <CheckBox.Resources>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="CornerRadius" Value="3" />
+                                        </Style>
+                                    </CheckBox.Resources>
+                                    <CheckBox.LayoutTransform>
+                                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                    </CheckBox.LayoutTransform>
+
+                                </CheckBox>
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 20" >
+                                    <CheckBox Name="checkbServiceConditions" VerticalContentAlignment="Center" FontSize="9" Foreground="#FF666666" HorizontalContentAlignment="Right" FontWeight="Medium" Content="I agree with the service conditions." Cursor="Hand">
+                                        <CheckBox.Resources>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="CornerRadius" Value="3" />
+                                            </Style>
+                                        </CheckBox.Resources>
+                                        <CheckBox.LayoutTransform>
+                                            <ScaleTransform ScaleX="2" ScaleY="2"/>
+                                        </CheckBox.LayoutTransform>
+                                    </CheckBox>
+                                    <TextBlock Name="tbErrorServiceConditions" FontSize="18" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
                                 </StackPanel>
-                                <Button Name="btnCreateAccount" Margin="15,15,15,0" Click="btnCreateAccount_Click">Create account</Button>
-                                <TextBlock HorizontalAlignment="Center" FontSize="18" Margin="0,50,0,0" Foreground="#FF666666">I already have an account and would like to Sign in.</TextBlock>
+                                <Button Name="btnCreateAccount" Style="{StaticResource Button}" Margin="0 20 0 0" Height="60" FontSize="22" FontWeight="SemiBold" Background="#FFA200FF" Foreground="White" Click="btnCreateAccount_Click" Cursor="Hand">Create account</Button>
+                                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="250" HorizontalAlignment="Center" FontSize="18" Margin="0,50,0,0" Height="50" Foreground="#FF666666">
+                                    <Run Text="I already have an account and would like to" FontSize="18" Foreground="#FF666666"/>
+                                    <Run Name="runLogin" Text="Sign in." FontSize="18" FontWeight="SemiBold" MouseLeftButtonDown="runLogin_MouseLeftButtonDown" Cursor="Hand" Foreground="#FFA200FF"/>
+                                </TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

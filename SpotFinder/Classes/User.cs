@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace SpotFinder.Classes
 {
@@ -11,8 +12,27 @@ namespace SpotFinder.Classes
 
         }
 
+        public User(string name, string password)
+        {
+            Name = name;
+            Password = password;
+        }
 
-        public int Id { get; set; } 
+        public User(string name, string email, string password, string passwordConfirmation)
+        {
+            Name = name;
+            Email = email;
+            Password = password;
+            PasswordConfirmation = passwordConfirmation;
+        }
+
+        public int Id { get; set; }
+        [JsonProperty("name")]
         public string Name { get; set; }
+        [JsonProperty("email")]
+        public string Email { get; set; }
+        [JsonProperty("password")]
+        public string Password { get; set; }
+        public string PasswordConfirmation { get; set; }
     }
 }

@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace SpotFinder.Classes
 {
     public static class ApiHelper
     {
         private static HttpClient Client { get; set; }
+
+        public static string Token
+        {
+            get
+            {
+                return Client.DefaultRequestHeaders.Authorization.ToString() ?? "";
+            }
+            set 
+            {
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", value);
+            }
+        }
 
         public static void InitializeClient()
         {
@@ -17,8 +30,8 @@ namespace SpotFinder.Classes
             Client = new HttpClient();
             Client.BaseAddress = new Uri("http://127.0.0.1:8000/");
             Client.DefaultRequestHeaders.Accept.Clear();
-            Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json")); //Only Json
-            Client.DefaultRequestHeaders.Add("x-authorization", "ku6h7v2xuF5ZKpYSrRF7m9SFWZE5x1do3s84jNAJLHylXiPD1yijxB5DFD6qOBRN");
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //Only Json
+            Client.DefaultRequestHeaders.Add("x-authorization", "YCpDZIQNqXurblSEfNaCj9YLBcMf3JSLmNVLhK1FdgIkQMj6QiZEhx90kgz9WDWi");
         }
 
         //create - Post
