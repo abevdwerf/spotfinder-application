@@ -59,31 +59,47 @@ namespace SpotFinder.Pages
             this.currentRoom = currentRoom;
             LoadRoomTypes();
             LoadModules();
+            LoadTables();
 
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
-            loadRoom();
         }
+
+        private async void LoadTables()
+        {
+            List<Desk> desks = await GetDesks();
+
+            foreach (Desk desk in desks)
+            {
+                if (desk.RoomId == currentRoom.Id)
+                {
+                    lbTables.Items.Add(desk.AvailableSpaces);
+                }
+            }
+        }
+
         private void loadRoom()
         {
             SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(255), (byte)rnd.Next(255), (byte)rnd.Next(255)));
 
-            List<ButtonLocation> root = null;
+            MyCanvas.Arrange(new Rect(MyCanvas.RenderSize));
+            //MyCanvas.Measure(MyCanvas.RenderSize);
             //var json = File.ReadAllText("json1.json");
             if (currentRoom.GridLocation != null)
             {
-                root = JsonConvert.DeserializeObject<List<ButtonLocation>>(currentRoom.GridLocation);
+                lstButtons = JsonConvert.DeserializeObject<List<ButtonLocation>>(currentRoom.GridLocation);
 
                 foreach (Button btn in MyCanvas.Children)
                 {
-                    foreach (ButtonLocation btnLoc in root)
+                    foreach (ButtonLocation btnLoc in lstButtons)
                     {
+
                         Point pt1 = new Point();
-                        pt1.X = btnLoc.X;
-                        pt1.Y = btnLoc.Y;
+                        pt1.X = btnLoc.X + 1;
+                        pt1.Y = btnLoc.Y + 1;
 
                         Point pt2 = new Point();
-                        pt2.X = btnLoc.X + size;
-                        pt2.Y = btnLoc.Y + size;
+                        pt2.X = btnLoc.X + (size - 1);
+                        pt2.Y = btnLoc.Y + (size - 1);
                         Rect SelectedRect = new Rect(pt1, pt2);
 
 
@@ -159,6 +175,7 @@ namespace SpotFinder.Pages
                     button.Background = null;
                     MyCanvas.Children.Add(button);
 
+
                     System.Windows.Controls.Canvas.SetLeft(button, i * size);
                     System.Windows.Controls.Canvas.SetTop(button, j * size);
                 }
@@ -170,6 +187,8 @@ namespace SpotFinder.Pages
             heightCanvas = MyCanvas.ActualHeight / size;
             widthCanvas = MyCanvas.ActualWidth / size;
             DrawButtons();
+
+            loadRoom();
             //txtbl.Text = MyCanvas.Width.ToString() + "  ActualHeight: " + MyCanvas.ActualHeight.ToString() + "  ActualWidth: " + MyCanvas.ActualWidth.ToString();
             //change button size with windows size...
 
@@ -205,7 +224,6 @@ namespace SpotFinder.Pages
                 return;
             }
 
-            Rectangle selectionRectangle = new Rectangle();
 
             //  show the rectangle again
             System.Windows.Controls.Canvas.SetLeft(selectionRectangle, Math.Min(startPoint.X, pointWhereMouseIs.X));
@@ -365,6 +383,26 @@ namespace SpotFinder.Pages
             //HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
 
             return roomTypes;
+        }
+
+        private async Task<List<Desk>> GetDesks()
+        {
+            List<Desk> desks = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/desks");
+
+            if (response.IsSuccessStatusCode)
+            {
+                desks = await response.Content.ReadAsAsync<List<Desk>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            //StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+            //HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
+
+            return desks;
         }
 
         private async void LoadRoomTypes()

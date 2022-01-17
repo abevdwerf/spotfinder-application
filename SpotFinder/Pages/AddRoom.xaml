@@ -173,7 +173,7 @@
 
                 <Separator Style="{StaticResource separator--style-1}"/>
                 <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Tables</TextBlock>
-                <ListBox x:Name="lbTables" Height="100" Margin="35, 10"></ListBox>
+                <ListBox x:Name="lbTables" Height="75" Margin="35, 10"></ListBox>
                 <Separator Style="{StaticResource separator--style-1}"/>
 
                 <ComboBox x:Name="cbRoomTypes" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="TypeName"></ComboBox>
