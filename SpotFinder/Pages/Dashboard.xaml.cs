@@ -190,6 +190,28 @@ namespace SpotFinder.Pages
 
             ReservationSum.Text = reservationCounter.ToString();
             UsersSum.Text = userCounter.ToString();
+
+            // Amount of spots available
+            foreach(Location location in await GetLocations())
+            {
+                AvailableWorkSpots availableWorkSpots = new AvailableWorkSpots();
+                availableWorkSpots.Building = location.LocationName;
+                int capacityCounter = 0;
+                
+                foreach(Room room in await GetRooms())
+                {
+                    foreach(Floor floor in await GetFloors())
+                    {
+                        if(room.Id == floor.Id && floor.Id == location.Id)
+                        {
+                            capacityCounter += room.MaxPersons;
+                        }
+                    }
+                }
+
+                availableWorkSpots.Available = capacityCounter.ToString();
+                availableList.Children.Add(availableWorkSpots);
+            }
         }
 
 
