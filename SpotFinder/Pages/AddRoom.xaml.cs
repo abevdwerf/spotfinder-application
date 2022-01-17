@@ -104,9 +104,8 @@ namespace SpotFinder.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            //((MainWindow)Application.Current.MainWindow).ChangeMenuContent(currentFloor);
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mw.ChangeMenuContent(currentFloor);
+            mw.Main.Navigate(currentFloor);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

@@ -51,7 +51,7 @@ namespace SpotFinder.UserControls
         private void btnRoom1_Click(object sender, RoutedEventArgs e)
         {
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mw.ChangeMenuContent(new AddRoom(floor, room));
+            mw.Main.Navigate(new AddRoom(floor, room));
         }
     }
 }
