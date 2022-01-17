@@ -2,6 +2,7 @@
 using SpotFinder.Pages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,9 +48,10 @@ namespace SpotFinder.UserControls
 
         public Room ClickedRoom { get; set; }
 
-        private void btnRoom1_MouseDown(object sender, MouseButtonEventArgs e)
+        private void btnRoom1_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom(floor, room));
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.ChangeMenuContent(new AddRoom(floor, room));
         }
     }
 }

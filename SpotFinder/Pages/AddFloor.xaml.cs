@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Win32;
+using System.Linq;
 
 namespace SpotFinder.Pages
 {
@@ -166,13 +167,17 @@ namespace SpotFinder.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
- 
-            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new Locations());
+
+            //((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new Locations());
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.ChangeMenuContent(new Locations());
         }
 
         private void btnAddRoom_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom(this));
+            //((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom(this));
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.ChangeMenuContent(new AddRoom(this));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

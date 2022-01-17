@@ -5,6 +5,7 @@ using SpotFinder.Classes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,18 +102,11 @@ namespace SpotFinder.Pages
             tbPeople.Text = currentRoom.MaxPersons.ToString();
         }
 
-        public AddRoom()
-        {
-            InitializeComponent();
-
-            this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
-            LoadRoomTypes();
-            LoadModules();
-        }
-
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(currentFloor);
+            //((MainWindow)Application.Current.MainWindow).ChangeMenuContent(currentFloor);
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.ChangeMenuContent(currentFloor);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
