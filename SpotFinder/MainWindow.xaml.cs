@@ -35,11 +35,6 @@ namespace SpotFinder
             Main.Navigate(new Dashboard());
         }
 
-        public void ChangeMenuContent(Page page)
-        {
-            Main.Navigate(page);
-        }
-
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Dashboard");

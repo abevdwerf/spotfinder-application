@@ -1,6 +1,8 @@
-﻿using SpotFinder.Pages;
+﻿using SpotFinder.Classes;
+using SpotFinder.Pages;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +21,14 @@ namespace SpotFinder.UserControls
     /// </summary>
     public partial class RoomUC : UserControl
     {
-        public RoomUC()
+        private AddFloor floor;
+        private Room room;
+
+        public RoomUC(AddFloor floor, Room room)
         {
             InitializeComponent();
+            this.floor = floor;
+            this.room = room;
         }
 
         public string RoomName
@@ -39,9 +46,12 @@ namespace SpotFinder.UserControls
             set { maxPersons.Text = value.ToString(); }
         }
 
-        private void btnRoom1_MouseDown(object sender, MouseButtonEventArgs e)
+        public Room ClickedRoom { get; set; }
+
+        private void btnRoom1_Click(object sender, RoutedEventArgs e)
         {
-            //((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom() { ChosenFloor = ClickedfFloor });
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.Main.Navigate(new AddRoom(floor, room));
         }
     }
 }

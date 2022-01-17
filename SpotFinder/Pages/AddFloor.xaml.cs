@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Win32;
+using System.Linq;
 
 namespace SpotFinder.Pages
 {
@@ -131,7 +132,7 @@ namespace SpotFinder.Pages
                     {
                         if (room.RoomTypeId == roomtype.Id)
                         {
-                            UserControl roomUc = new RoomUC() { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons };
+                            UserControl roomUc = new RoomUC(this, room) { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons, ClickedRoom = room };
                             spRoomContent.Children.Add(roomUc);
                         }
                     }
@@ -166,13 +167,14 @@ namespace SpotFinder.Pages
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
- 
-            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new Locations());
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.Main.Navigate(new Locations());
         }
 
         private void btnAddRoom_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddRoom(this));
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.Main.Navigate(new AddRoom(this));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

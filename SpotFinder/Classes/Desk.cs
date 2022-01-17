@@ -22,6 +22,8 @@ namespace SpotFinder.Classes
         public int AvailableSpaces { get; set; }
         [JsonProperty("room_id")]
         public int RoomId { get; set; }
+        [JsonProperty("module_id")]
+        public int ModuleId { get; set; }
 
     }
 }

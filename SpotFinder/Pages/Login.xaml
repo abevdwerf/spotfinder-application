@@ -59,45 +59,59 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="#feea00">
-        <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
-            <Border.Effect >
-                <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
-            </Border.Effect>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="4*"/>
-                </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Background="#ffffff" CornerRadius="10" >
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
-                        <TextBlock Margin="10 0 0 15" FontWeight="Bold" FontSize="32">Login</TextBlock>
-                        <StackPanel Margin="10,10">
-                            <TextBlock Text="Username" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
-                            <TextBox Name="tbUsername" Template="{StaticResource TextBoxBaseControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></TextBox>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
+        <Grid Background="#feea00">
+            <Border Background="AliceBlue" Margin="75" CornerRadius="10" Panel.ZIndex="1">
+                <Border.Effect >
+                    <DropShadowEffect ShadowDepth="0.1" Opacity="0.7"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Background="#ffffff" CornerRadius="10" >
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="350">
+                            <TextBlock Margin="10 0 0 15" FontWeight="Bold" FontSize="32">Login</TextBlock>
+                            <StackPanel Margin="10,10">
+                                <TextBlock Text="Username" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
+                                <TextBox Name="tbUsername" Template="{StaticResource TextBoxBaseControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0 12 0 0"></TextBox>
+                            </StackPanel>
+                            <StackPanel Margin="10,10">
+                                <TextBlock Text="Password" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
+                                <PasswordBox Name="pbPassword" Template="{StaticResource PasswordBoxControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Margin="0 12 0 0"></PasswordBox>
+                            </StackPanel>
+                            <Button x:Name="btnLogin" Style="{StaticResource Button}" Margin="10,15,10,0" Height="60" FontSize="22" FontWeight="SemiBold" Click="btnLogin_Click" Background="#FFA200FF" Foreground="White" Cursor="Hand">Login</Button>
+                            <TextBlock Margin="10,0" Name="tbError" FontSize="18" FontWeight="Bold"></TextBlock>
+                            <StackPanel>
+                                <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="150" HorizontalAlignment="Center" Margin="0,50,0,30" VerticalAlignment="Bottom">
+                                    <Run Text="Sign up" FontSize="18" Foreground="#FF666666" />
+                                    <Run Name="runSignUp" Text="here" FontSize="18" FontWeight="SemiBold" Cursor="Hand" MouseLeftButtonDown="runSignUp_MouseLeftButtonDown" Foreground="#FFA200FF"/>
+                                    <Run Text="to create an account." FontSize="18" Foreground="#FF666666"/>
+                                </TextBlock>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Margin="10,10">
-                            <TextBlock Text="Password" FontSize="20" FontWeight="SemiBold" Foreground="#FF666666"></TextBlock>
-                                <PasswordBox Name="pbPassword" Template="{StaticResource PasswordBoxControlTemplate}" Height="45" FontSize="18" FontWeight="Bold" Background="#FFE3E3E3" VerticalContentAlignment="Center" Margin="0 12 0 0"></PasswordBox>
-                        </StackPanel>
-                        <Button x:Name="btnLogin" Style="{StaticResource Button}" Margin="10,15,10,0" Height="60" FontSize="22" FontWeight="SemiBold" Click="btnLogin_Click" Background="#FFA200FF" Foreground="White" Cursor="Hand">Login</Button>
-                        <TextBlock Margin="10,0" Name="tbError" FontSize="18" FontWeight="Bold"></TextBlock>
-                        <StackPanel>
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="150" HorizontalAlignment="Center" Margin="0,50,0,30" VerticalAlignment="Bottom">
-                                <Run Text="Sign up" FontSize="18" Foreground="#FF666666" />
-                                <Run Name="runSignUp" Text="here" FontSize="18" FontWeight="SemiBold" Cursor="Hand" MouseLeftButtonDown="runSignUp_MouseLeftButtonDown" Foreground="#FFA200FF"/>
-                                <Run Text="to create an account." FontSize="18" Foreground="#FF666666"/>
+                    </Border>
+                    <Border Grid.Column="1" CornerRadius="0,10,10,0">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF330061" Offset="1"/>
+                                <GradientStop Color="#FFA200FF" Offset="0"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <StackPanel Margin="100 112 100 0">
+                            <Image Margin="0 0 0 15" Width="280" Source="/Images/working-person-illustration.png"/>
+                            <TextBlock FontWeight="Bold" FontSize="43" Foreground="White" HorizontalAlignment="Center">SpotFinder</TextBlock>
+                            <TextBlock Margin="0 20 0 0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontSize="18" FontWeight="SemiBold">
+                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
                             </TextBlock>
                         </StackPanel>
-                    </StackPanel>
-                </Border>
-                <Border Grid.Column="1" Background="#a200ff" CornerRadius="0,10,10,0">
-
-                </Border>
-            </Grid>
-        </Border>
-        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="10,461,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="269"/>
-        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Right" Height="315" Margin="0,350,-230,0" Fill="#a200ff"  VerticalAlignment="Top" Width="263"/>
-        <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="1000,10,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="260"/>
-    </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+            <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="10,461,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="269"/>
+            <Ellipse Panel.ZIndex="0" HorizontalAlignment="Right" Height="315" Margin="0,350,-230,0" Fill="#a200ff"  VerticalAlignment="Top" Width="263"/>
+            <Ellipse Panel.ZIndex="0" HorizontalAlignment="Left" Height="268" Margin="1000,10,0,0" Fill="#a200ff"  VerticalAlignment="Top" Width="260"/>
+        </Grid>
+    </ScrollViewer>
 </Window>

@@ -8,11 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\detective-illustration.png" />
     <None Remove="Images\graph.png" />
     <None Remove="Images\logo.png" />
     <None Remove="Images\pen.png" />
     <None Remove="Images\person.png" />
     <None Remove="Images\room.png" />
+    <None Remove="Images\working-person-illustration.png" />
     <None Remove="Pages\working-person-illustration.svg" />
   </ItemGroup>
 
@@ -22,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\detective-illustration.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\graph.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -35,6 +40,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\room.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\working-person-illustration.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
