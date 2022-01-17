@@ -20,12 +20,6 @@ namespace SpotFinder.UserControls
 
     public partial class AvailableWorkSpots : UserControl
     {
-
-        public Brush Color
-        {
-            set { color.Fill = value; }
-        }
-
         public string Building
         {
             set { building.Text = value; }

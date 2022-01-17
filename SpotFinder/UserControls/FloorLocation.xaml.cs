@@ -49,10 +49,8 @@ namespace SpotFinder.UserControls
 
         private void FloorLocation_Click(object sender, MouseButtonEventArgs e)
         {
-            //((MainWindow)Application.Current.MainWindow).ChangeMenuContent(new AddFloor() { ChosenFloor = ClickedfFloor});
-
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mw.ChangeMenuContent(new AddFloor() { ChosenFloor = ClickedfFloor });
+            mw.Main.Navigate(new AddFloor() { ChosenFloor = ClickedfFloor });
         }
     }
 }
