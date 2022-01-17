@@ -25,13 +25,13 @@ namespace SpotFinder.Classes
 
         public static void InitializeClient()
         {
-            //HttpClientHandler clientHandler = new HttpClientHandler();
-            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri("http://127.0.0.1:8000/");
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            Client = new HttpClient(clientHandler);
+            Client.BaseAddress = new Uri("https://145.220.75.123/");
             Client.DefaultRequestHeaders.Accept.Clear();
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //Only Json
-            Client.DefaultRequestHeaders.Add("x-authorization", "YCpDZIQNqXurblSEfNaCj9YLBcMf3JSLmNVLhK1FdgIkQMj6QiZEhx90kgz9WDWi");
+            Client.DefaultRequestHeaders.Add("x-authorization", "Yk3NXSpbxEZkyymN3JhHAqhE3VzWiVQGVvfeLo21CR8mW42tb8yhK9sVLrnTtMNJ");
         }
 
         //create - Post

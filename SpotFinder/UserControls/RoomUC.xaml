@@ -29,8 +29,8 @@
         </Style>
     </UserControl.Resources>
     <StackPanel Background="white">
-        <Button Name="btnRoom1" Style="{StaticResource button--style-5}" Cursor="Hand" MouseDown="btnRoom1_MouseDown">
-            <Grid MouseDown="btnRoom1_MouseDown">
+        <Button Name="btnRoom1" Style="{StaticResource button--style-5}" Cursor="Hand" Click="btnRoom1_Click">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="275"/>
                     <ColumnDefinition Width="15"/>
