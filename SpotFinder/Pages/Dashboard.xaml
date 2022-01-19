@@ -150,14 +150,7 @@
 
     </Page.Resources>
 
-    <StackPanel>
-        <DockPanel Margin="0 0 0 50" Background="#FFFFFF" Height="86">
-            <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
-            <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
-                <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Locatie</TextBlock>
-                <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Height="39"></ComboBox>
-            </StackPanel>
-        </DockPanel>
+    <StackPanel Margin="0 25 0 0">
         <TextBlock Margin="100 0 0 0" Style="{StaticResource bodyText--style-3}">Goodmorning Jim</TextBlock>
         <TextBlock Margin="100 0 0 25" Style="{StaticResource title--style-5}">Today's overview</TextBlock>
         <WrapPanel Margin="100 0 0 35" Orientation="Horizontal">
