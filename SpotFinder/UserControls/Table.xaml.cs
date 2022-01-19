@@ -14,25 +14,18 @@ using System.Windows.Shapes;
 namespace SpotFinder.UserControls
 {
     /// <summary>
-    /// Interaction logic for AvailableWorkSpots.xaml
+    /// Interaction logic for Table.xaml
     /// </summary>
-    /// 
-
-    public partial class AvailableWorkSpots : UserControl
+    public partial class Table : UserControl
     {
-        public string Building
-        {
-            set { building.Text = value; }
-        }
-
-        public string Available
-        {
-            set { available.Text = value; }
-        }
-
-        public AvailableWorkSpots()
+        public Table()
         {
             InitializeComponent();
+        }
+
+        public string Capacity
+        {
+            set { capacity.Text = value; }
         }
     }
 }
