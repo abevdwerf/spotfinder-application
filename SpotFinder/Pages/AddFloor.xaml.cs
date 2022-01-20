@@ -168,6 +168,7 @@ namespace SpotFinder.Pages
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.ShowDropdown = Visibility.Visible;
             mw.Main.Navigate(new Locations());
         }
 
