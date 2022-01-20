@@ -21,17 +21,16 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Dashboard : Page
     {
-        private Location currentLocation;
-
-        public Dashboard()
+        public Dashboard(Location currentLocation)
         {
             InitializeComponent();
-            DataContext = this;
-            // LoadDashboard(0)
-            //LoadReservations();
+            LoadReservations(currentLocation);
         }
 
-        public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; } }
+        private List<Reservation> reservationsList;
+        private List<Room> roomList;
+        private List<RoomType> roomTypeList;
+        private List<User> userList;
 
         // Get a list of reservation objects
         public async Task<List<Reservation>> GetReservations()
@@ -49,40 +48,6 @@ namespace SpotFinder.Pages
             }
 
             return reservations;
-        }
-
-        public async Task<List<Location>> GetLocations()
-        {
-            List<Location> locations = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/locations");
-
-            if (response.IsSuccessStatusCode)
-            {
-                locations = await response.Content.ReadAsAsync<List<Location>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return locations;
-        }
-
-        public async Task<List<Floor>> GetFloors()
-        {
-            List<Floor> floors = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/floors");
-
-            if (response.IsSuccessStatusCode)
-            {
-                floors = await response.Content.ReadAsAsync<List<Floor>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return floors;
         }
 
         private async Task<List<Room>> GetRooms()
@@ -136,97 +101,89 @@ namespace SpotFinder.Pages
             return users;
         }
 
-        private async void LoadReservations()
+        private async void LoadReservations(Location location )
         {
             DateTime today = DateTime.Today;
-            DateTime oneDayLater = today.AddDays(1);
-            DateTime twoDaysLater = today.AddDays(2);
             int counter = 0;    // Counts amount of blockreservations added
             int reservationCounter = 0;
-            int userCounter = 0;
 
-            foreach (Reservation reservation in await GetReservations())
+            reservationsList = await GetReservations();
+            roomList = await GetRooms();
+            roomTypeList = await GetRoomTypes();
+            userList = await GetUsers();
+
+            foreach (Reservation reservation in reservationsList)
             {
-
-                BlockReservation blockReservation = new BlockReservation();
-                reservationCounter++;
-
-                blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
-                blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
-
-                foreach (Room room in await GetRooms())
+                if (counter < 5)
                 {
-                    if (room.Id == reservation.RoomId)
+                    foreach (Room room in roomList)
                     {
-                        blockReservation.Room = room.RoomName;
-
-                        foreach (RoomType roomType in await GetRoomTypes())
+                        if (room.Id == reservation.RoomId)
                         {
-                            if (room.RoomTypeId == roomType.Id)
-                                blockReservation.RoomType = roomType.TypeName;
-                        }
-
-                        foreach (Floor floor in await GetFloors())
-                        {
-                            if (floor.Id == room.FloorId)
+                            foreach (Floor floor in location.Floors)
                             {
-                                foreach (Location location in await GetLocations())
+                                if (floor.Id == room.FloorId)
                                 {
                                     if (location.Id == floor.LocationId)
+                                    {
+                                        reservationCounter++;
+                                        BlockReservation blockReservation = new BlockReservation();
+
+                                        blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
+                                        blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
+                                        blockReservation.Room = room.RoomName;
                                         blockReservation.Building = location.LocationName;
+
+                                        foreach (RoomType roomType in roomTypeList)
+                                        {
+                                            if (room.RoomTypeId == roomType.Id)
+                                            {
+                                                blockReservation.RoomType = roomType.TypeName;
+                                                break;
+                                            }
+                                        }
+
+                                        foreach (User user in userList)
+                                        {
+                                            if (user.Id == reservation.UserId)
+                                            {
+                                                blockReservation.User = user.Name;
+                                                break;
+                                            }
+                                        }
+
+                                        wpReservations.Children.Add(blockReservation);
+                                        counter++;
+                                    }
+                                    break;
                                 }
                             }
                         }
                     }
                 }
-
-                foreach (User user in await GetUsers())
-                {
-                    userCounter++;
-                }
-
-                if(counter < 5)
-                {
-                    wpReservations.Children.Add(blockReservation);
-                    counter++;
-                }
             }
 
             ReservationSum.Text = reservationCounter.ToString();
-            UsersSum.Text = userCounter.ToString();
+            UsersSum.Text = userList.Count.ToString();
 
             // Amount of spots available
-            foreach(Location location in await GetLocations())
+            AvailableWorkSpots availableWorkSpots = new AvailableWorkSpots();
+            availableWorkSpots.Building = location.LocationName;
+            int capacityCounter = 0;
+
+            foreach (Room room in roomList)
             {
-                AvailableWorkSpots availableWorkSpots = new AvailableWorkSpots();
-                availableWorkSpots.Building = location.LocationName;
-                int capacityCounter = 0;
-                
-                foreach(Room room in await GetRooms())
+                foreach (Floor floor in location.Floors)
                 {
-                    foreach(Floor floor in await GetFloors())
+                    if (room.Id == floor.Id && floor.Id == location.Id)
                     {
-                        if(room.Id == floor.Id && floor.Id == location.Id)
-                        {
-                            capacityCounter += room.MaxPersons;
-                        }
+                        capacityCounter += room.MaxPersons;
                     }
                 }
-
-                availableWorkSpots.Available = capacityCounter.ToString();
-                availableList.Children.Add(availableWorkSpots);
             }
+
+            availableWorkSpots.Available = capacityCounter.ToString();
+            availableList.Children.Add(availableWorkSpots);
         }
-
-
-        // For each object, create a user control
-        //private async void LoadReservations()
-        //{
-        //    foreach (Reservation reservation in await GetReservations())
-        //    {
-        //        UserControl reservationUc = new UserControls.BlockReservation() { Building="building", Room=reservation.RoomId, RoomType="RoomType", Time=reservation.reservationStart, User="user" };
-        //        spRoomContent.Children.Add(reservationUc);
-        //    }
-        //}
     }
 }

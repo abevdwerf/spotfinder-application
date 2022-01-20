@@ -25,10 +25,7 @@ namespace SpotFinder
     {
         private List<Location> locationsList;
         private List<Floor> floorList;
-
-        private Dashboard dashboard = new Dashboard();
-        private Reservations reservations = new Reservations();
-        private Locations locations = new Locations();
+        private Location lct;
 
         public MainWindow()
         {
@@ -42,33 +39,37 @@ namespace SpotFinder
             set { dpLocationDropwdown.Visibility = value; }
         }
 
-        //events
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        public Location Location
         {
-            locationsList = await GetLocations();
+            get { return lct; }
+            set { lct = value; }
+        }
+
+        //events
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             LoadAllLocations();
-            Main.Navigate(dashboard);
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Dashboard");
             ShowDropdown = Visibility.Visible;
-            Main.Navigate(dashboard);
+            Main.Navigate(new Dashboard(lct));
         }
 
         private void Reservation_click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Reservations");
             ShowDropdown = Visibility.Visible;
-            Main.Navigate(reservations);
+            Main.Navigate(new Reservations(lct));
         }
 
         private void Locations_Click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Locations");
             ShowDropdown = Visibility.Visible;
-            Main.Navigate(locations);
+            Main.Navigate(new Locations(lct));
         }
 
         private async void LogOut_Click(object sender, RoutedEventArgs e)
@@ -78,11 +79,26 @@ namespace SpotFinder
 
         private void cbLocations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Location lct = (Location)cbLocations.SelectedItem;
+            Location = (Location)cbLocations.SelectedItem;
 
-            dashboard.CurrentLocation = lct;
-            reservations.CurrentLocation = lct;
-            locations.CurrentLocation = lct;
+            if (Main.Content != null)
+            {
+                switch (Main.Content.GetType().Name)
+                {
+                    case "Dashboard":
+                        Main.Navigate(new Dashboard(lct));
+                        break;
+                    case "Reservations":
+                        Main.Navigate(new Reservations(lct));
+                        break;
+                    case "Locations":
+                        Main.Navigate(new Locations(lct));
+                        break;
+                    default:
+
+                        break;
+                }
+            }
         }
 
         private void SetActiveStyleMenuItem(string activeMenu)
@@ -114,7 +130,6 @@ namespace SpotFinder
         {
             locationsList = await GetLocations();
             floorList = await GetFloors();
-            cbLocations.ItemsSource = locationsList;
 
             foreach (Location location in locationsList)
             {
@@ -126,6 +141,10 @@ namespace SpotFinder
                     }
                 }
             }
+
+            cbLocations.ItemsSource = locationsList;
+
+            Main.Navigate(new Dashboard(Location));
         }
 
         private async Task LogOut()

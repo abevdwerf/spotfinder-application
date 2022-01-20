@@ -36,16 +36,17 @@ namespace SpotFinder.Pages
 
         //private List<Floor> floorList;
 
-        private Location currentLocation;
+        //private Location currentLocation;
 
-        public Locations()
+        public Locations(Location currentLocation)
         {
             InitializeComponent();
+            LoadFloors(currentLocation);
             //DataContext = this;
             //LoadAllLocations();
         }
 
-        public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; LoadFloors(currentLocation); } }
+        //public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; LoadFloors(currentLocation); } }
 
         //private async void LoadAllLocations()
         //{

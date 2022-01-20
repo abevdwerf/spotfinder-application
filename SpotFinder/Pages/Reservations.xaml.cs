@@ -28,15 +28,15 @@ namespace SpotFinder.Pages
         private List<RoomType> roomTypeList;
         private List<User> userList;
 
-        private Location currentLocation;
+        //private Location currentLocation;
 
-        public Reservations()
+        public Reservations(Location currentLocation)
         {
             InitializeComponent();
-            //LoadReservations();
+            LoadReservations(currentLocation);
         }
 
-        public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; LoadReservations(currentLocation); } }
+        //public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; LoadReservations(currentLocation); } }
 
         private async Task<List<Reservation>> GetReservations()
         {
@@ -188,10 +188,9 @@ namespace SpotFinder.Pages
                                     else if (reservation.ReservationStart.Date == twoDaysLater.Date)
                                     {
                                         wpReservations3.Children.Add(blockReservation);
-                                    }
-
-                                    break;
-                                }
+                                    }                                   
+                                } 
+                                break;
                             }
                         }
                     } 
