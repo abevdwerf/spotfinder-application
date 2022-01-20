@@ -43,9 +43,8 @@ namespace SpotFinder
         }
 
         //events
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            locationsList = await GetLocations();
             LoadAllLocations();
             Main.Navigate(dashboard);
         }
@@ -80,7 +79,7 @@ namespace SpotFinder
         {
             Location lct = (Location)cbLocations.SelectedItem;
 
-            dashboard.CurrentLocation = lct;
+            dashboard.CurrentLocation = lct;        
             reservations.CurrentLocation = lct;
             locations.CurrentLocation = lct;
         }
@@ -114,7 +113,6 @@ namespace SpotFinder
         {
             locationsList = await GetLocations();
             floorList = await GetFloors();
-            cbLocations.ItemsSource = locationsList;
 
             foreach (Location location in locationsList)
             {
@@ -126,6 +124,8 @@ namespace SpotFinder
                     }
                 }
             }
+
+            cbLocations.ItemsSource = locationsList;
         }
 
         private async Task LogOut()
