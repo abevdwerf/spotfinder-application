@@ -188,10 +188,9 @@ namespace SpotFinder.Pages
                                     else if (reservation.ReservationStart.Date == twoDaysLater.Date)
                                     {
                                         wpReservations3.Children.Add(blockReservation);
-                                    }
-
-                                    break;
-                                }
+                                    }                                   
+                                } 
+                                break;
                             }
                         }
                     } 

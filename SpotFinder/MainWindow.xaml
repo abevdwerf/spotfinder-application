@@ -82,7 +82,7 @@
                 </StackPanel>
             </DockPanel>
             <ScrollViewer Name="MyScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
-                <Frame x:Name="Main" NavigationUIVisibility="Hidden" Source="Pages/Dashboard.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <Frame x:Name="Main" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             </ScrollViewer>
         </DockPanel>
     </Grid>

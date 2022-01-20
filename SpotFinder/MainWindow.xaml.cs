@@ -26,9 +26,6 @@ namespace SpotFinder
         private List<Location> locationsList;
         private List<Floor> floorList;
         private Location lct;
-        //public Dashboard dashboard = new Dashboard();
-        //public Reservations reservations = new Reservations();
-        //public Locations locations = new Locations();
 
         public MainWindow()
         {
@@ -52,7 +49,6 @@ namespace SpotFinder
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             LoadAllLocations();
-            Main.Navigate(new Dashboard(lct));
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
@@ -85,20 +81,23 @@ namespace SpotFinder
         {
             Location = (Location)cbLocations.SelectedItem;
 
-            switch (Main.Content.GetType().Name)
+            if (Main.Content != null)
             {
-                case "Dashboard":
-                    Main.Navigate(new Dashboard(lct));
-                    break;
-                case "Reservations":
-                    Main.Navigate(new Reservations(lct));
-                    break;
-                case "Locations":
-                    Main.Navigate(new Locations(lct));
-                    break;
-                default:
+                switch (Main.Content.GetType().Name)
+                {
+                    case "Dashboard":
+                        Main.Navigate(new Dashboard(lct));
+                        break;
+                    case "Reservations":
+                        Main.Navigate(new Reservations(lct));
+                        break;
+                    case "Locations":
+                        Main.Navigate(new Locations(lct));
+                        break;
+                    default:
 
-                    break;
+                        break;
+                }
             }
         }
 
@@ -144,6 +143,8 @@ namespace SpotFinder
             }
 
             cbLocations.ItemsSource = locationsList;
+
+            Main.Navigate(new Dashboard(Location));
         }
 
         private async Task LogOut()
