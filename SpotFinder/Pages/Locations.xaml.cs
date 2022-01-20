@@ -26,151 +26,81 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Locations : Page
     {
-        private bool LoadDropdown { get; set; } = false;
+        //private List<Location> locationsList;
 
-        private List<Location> locationsList;
+        //public List<Location> LocationList
+        //{
+        //    get { return locationsList; }
+        //    set { locationsList = value; }
+        //}
 
-        public List<Location> LocationList
-        {
-            get { return locationsList; }
-            set { locationsList = value; }
-        }
+        //private List<Floor> floorList;
 
-        private List<Floor> floorList;
+        //private Location currentLocation;
 
-        public Locations()
+        public Locations(Location currentLocation)
         {
             InitializeComponent();
-            DataContext = this;
-            //LoadLocations(0);
-            LoadAllLocations();
+            LoadFloors(currentLocation);
+            //DataContext = this;
+            //LoadAllLocations();
         }
 
-        private async void LoadAllLocations()
-        {
-            locationsList = await GetLocations();
-            floorList = await GetFloors();
-            cbLocations.ItemsSource = locationsList;
+        //public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; LoadFloors(currentLocation); } }
 
-            foreach (Location location in locationsList)
-            {
-                foreach (Floor floor in floorList)
-                {
-                    if (floor.LocationId == location.Id)
-                    {
-                        location.Floors.Add(floor);
-                    }
-                }
-            }
-        }
-
-        public async Task<List<Location>> GetLocations()
-        {
-            List<Location> locationsList = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/locations");
-
-            if (response.IsSuccessStatusCode)
-            {
-                locationsList = await response.Content.ReadAsAsync<List<Location>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return locationsList;
-        }
-
-        public async Task<List<Floor>> GetFloors()
-        {
-            List<Floor> floors = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/floors");
-
-            if (response.IsSuccessStatusCode)
-            {
-                floors = await response.Content.ReadAsAsync<List<Floor>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return floors;
-        }
-
-        //private async void LoadLocations(int locationId)
+        //private async void LoadAllLocations()
         //{
         //    locationsList = await GetLocations();
-
-        //    bool allLocations = false;
-        //    int counter = 0;
-
-        //    //unregister event to change combobox
-        //    cbLocations.SelectionChanged -= cbLocations_SelectionChanged;
-            
-        //    if (wpLocations.Children.Count > 0)
-        //    {
-        //        wpLocations.Children.Clear();
-        //    }
+        //    floorList = await GetFloors();
+        //    //cbLocations.ItemsSource = locationsList;
 
         //    foreach (Location location in locationsList)
         //    {
-        //        //if dropdown already loaded then don't add new Items
-        //        if (!LoadDropdown)
+        //        foreach (Floor floor in floorList)
         //        {
-        //            counter++;
-
-        //            ComboBoxItem itemLocation = new ComboBoxItem();
-        //            itemLocation.Content = location.LocationName;
-        //            itemLocation.Tag = location.Id.ToString();
-
-        //            cbLocations.Items.Add(itemLocation);
-
-        //            if (locationsList.Count() == counter)
+        //            if (floor.LocationId == location.Id)
         //            {
-        //                LoadDropdown = true;
+        //                location.Floors.Add(floor);
         //            }
         //        }
-
-        //        //if (locationId == 0)
-        //        //{
-        //        //    allLocations = true;
-        //        //}
-
-        //        //if (allLocations)
-        //        //{
-        //        //    if (location.Id > locationId)
-        //        //    {
-        //        //        locationId++;
-        //        //    }
-        //        //}
-
-        //        //if (int.Parse(((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString()) == location.Id)
-        //        //{
-        //        //    foreach (Floor floor in await GetFloors())
-        //        //    {
-        //        //        if (location.Id == floor.LocationId)
-        //        //        {
-        //        //            UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor };
-        //        //            wpLocations.Children.Add(floorLocation);
-        //        //        }
-        //        //    }
-        //        //}
-        //        //else if (int.Parse(((ComboBoxItem)cbLocations.SelectedItem).Tag.ToString()) < 1)
-        //        //{
-        //        //    foreach (Floor floor in await GetFloors())
-        //        //    {
-        //        //        UserControl floorLocation = new FloorLocation() { Building = location.LocationName, Level = floor.FloorName, ClickedfFloor = floor };
-        //        //        wpLocations.Children.Add(floorLocation);
-        //        //    }
-        //        //}
         //    }
-
-        //    //register event
-        //    cbLocations.SelectionChanged += cbLocations_SelectionChanged;
         //}
 
-        private void LoadFloors(Location location)
+        //public async Task<List<Location>> GetLocations()
+        //{
+        //    List<Location> locationsList = null;
+        //    HttpResponseMessage response = await ApiHelper.Get("api/locations");
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        locationsList = await response.Content.ReadAsAsync<List<Location>>();
+        //    }
+        //    else
+        //    {
+        //        throw new Exception(response.ReasonPhrase);
+        //    }
+
+        //    return locationsList;
+        //}
+
+        //public async Task<List<Floor>> GetFloors()
+        //{
+        //    List<Floor> floors = null;
+        //    HttpResponseMessage response = await ApiHelper.Get("api/floors");
+
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        floors = await response.Content.ReadAsAsync<List<Floor>>();
+        //    }
+        //    else
+        //    {
+        //        throw new Exception(response.ReasonPhrase);
+        //    }
+
+        //    return floors;
+        //}
+
+        public void LoadFloors(Location location)
         {
             if (wpLocations.Children.Count > 0)
             {
@@ -186,10 +116,10 @@ namespace SpotFinder.Pages
             }
         }
 
-        private void cbLocations_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Location lct = (Location)cbLocations.SelectedItem;
-            LoadFloors(lct);
-        }
+        //private void cbLocations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    Location lct = (Location)cbLocations.SelectedItem;
+        //    LoadFloors(lct);
+        //}
     }
 }

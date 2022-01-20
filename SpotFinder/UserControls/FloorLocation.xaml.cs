@@ -50,6 +50,7 @@ namespace SpotFinder.UserControls
         private void FloorLocation_Click(object sender, MouseButtonEventArgs e)
         {
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.ShowDropdown = Visibility.Collapsed;
             mw.Main.Navigate(new AddFloor() { ChosenFloor = ClickedfFloor });
         }
     }

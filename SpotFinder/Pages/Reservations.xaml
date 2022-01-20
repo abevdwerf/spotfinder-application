@@ -161,22 +161,8 @@
     </Page.Resources>
 
     <StackPanel Background="#FBFBFB">
-        <DockPanel Margin="0 0 0 25" Background="#FFFFFF" Height="86">
-            <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
-            <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
-                <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Locatie</TextBlock>
-                <ComboBox Style="{StaticResource combobox--style-1}" Width="295" Height="39"></ComboBox>
-            </StackPanel>
-        </DockPanel>
-        <DockPanel Margin="0 0 0 25">
-            <StackPanel HorizontalAlignment="Right" Margin="0 0 100 0" Orientation="Horizontal">
-                <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 20 0" VerticalAlignment="Center">Search</TextBlock>
-                <TextBox  Margin="0 0 15 0" Name="tbName" Style="{StaticResource textbox--style-1}" Width="295"/>
-                <Button  Name="btnFilter" VerticalAlignment="Center" Style="{StaticResource button--style-6}">Filter</Button>
-            </StackPanel>
-        </DockPanel>
         <StackPanel Margin="100 0 100 0">
-            <StackPanel Margin="0 0 0 50">
+            <StackPanel Margin="0 25 0 50">
                 <TextBlock Name="tbDate1" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}"></TextBlock>
                 <WrapPanel Name="wpReservations1">
                 </WrapPanel>
@@ -184,13 +170,11 @@
             <StackPanel Margin="0 0 0 50">
                 <TextBlock Name="tbDate2" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}"></TextBlock>
                 <WrapPanel Name="wpReservations2">
-                    
                 </WrapPanel>
             </StackPanel>
             <StackPanel Margin="0 0 0 50">
                 <TextBlock Name="tbDate3" Margin="0 0 0 15" Style="{StaticResource bodyText--style-3}"></TextBlock>
                 <WrapPanel Name="wpReservations3">
-                    
                 </WrapPanel>
             </StackPanel>
         </StackPanel>

@@ -23,18 +23,20 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Reservations : Page
     {
-        public Reservations()
-        {
-            InitializeComponent();
-            LoadReservations();
-        }
-
         private List<Reservation> reservationsList;
         private List<Room> roomList;
         private List<RoomType> roomTypeList;
-        private List<Floor> floorList;
-        private List<Location> locationList;
         private List<User> userList;
+
+        //private Location currentLocation;
+
+        public Reservations(Location currentLocation)
+        {
+            InitializeComponent();
+            LoadReservations(currentLocation);
+        }
+
+        //public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; LoadReservations(currentLocation); } }
 
         private async Task<List<Reservation>> GetReservations()
         {
@@ -51,40 +53,6 @@ namespace SpotFinder.Pages
             }
 
             return reservations;
-        }
-
-        private async Task<List<Location>> GetLocations()
-        {
-            List<Location> locations = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/locations");
-
-            if (response.IsSuccessStatusCode)
-            {
-                locations = await response.Content.ReadAsAsync<List<Location>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return locations;
-        }
-
-        private async Task<List<Floor>> GetFloors()
-        {
-            List<Floor> floors = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/floors");
-
-            if (response.IsSuccessStatusCode)
-            {
-                floors = await response.Content.ReadAsAsync<List<Floor>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return floors;
         }
 
         private async Task<List<Room>> GetRooms()
@@ -138,13 +106,26 @@ namespace SpotFinder.Pages
             return users;
         }
 
-        private async void LoadReservations()
+        private async void LoadReservations(Location location)
         {
+            if (wpReservations1.Children.Count > 0)
+            {
+                wpReservations1.Children.Clear();
+            }
+
+            if (wpReservations2.Children.Count > 0)
+            {
+                wpReservations2.Children.Clear();
+            }
+
+            if (wpReservations3.Children.Count > 0)
+            {
+                wpReservations3.Children.Clear();
+            }
+
             reservationsList = await GetReservations();
             roomList = await GetRooms();
             roomTypeList = await GetRoomTypes();
-            floorList = await GetFloors();
-            locationList = await GetLocations();
             userList = await GetUsers();
 
             DateTime today = DateTime.Today;
@@ -155,67 +136,88 @@ namespace SpotFinder.Pages
             tbDate2.Text = oneDayLater.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
             tbDate3.Text = twoDaysLater.ToString("dddd, dd MMMM", CultureInfo.InvariantCulture);
 
+            string message = "No reservations have been made for this date yet";
+
+            //controleren of location bij de reservering past anders hoeft de blockreservation niet aangemaakt te worden
+
             foreach (Reservation reservation in reservationsList)
             {
-                BlockReservation blockReservation = new BlockReservation();
-
-                blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
-                blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
-
                 foreach (Room room in roomList)
                 {
                     if (room.Id == reservation.RoomId)
                     {
-                        blockReservation.Room = room.RoomName;
-                        
-                        foreach (RoomType roomType in roomTypeList)
-                        {
-                            if (room.RoomTypeId == roomType.Id)
-                            {
-                                blockReservation.RoomType = roomType.TypeName;
-                                break;
-                            }
-                        }
-
-                        foreach (Floor floor in floorList)
+                        foreach (Floor floor in location.Floors)
                         {
                             if (floor.Id == room.FloorId)
                             {
-                                foreach (Location location in locationList)
+                                if (location.Id == floor.LocationId)
                                 {
-                                    if (location.Id == floor.LocationId)
+                                    BlockReservation blockReservation = new BlockReservation();
+
+                                    blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
+                                    blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
+                                    blockReservation.Room = room.RoomName;
+                                    blockReservation.Building = location.LocationName;
+
+                                    foreach (RoomType roomType in roomTypeList)
                                     {
-                                        blockReservation.Building = location.LocationName;
-                                        break;
+                                        if (room.RoomTypeId == roomType.Id)
+                                        {
+                                            blockReservation.RoomType = roomType.TypeName;
+                                            break;
+                                        }
                                     }
+
+                                    foreach (User user in userList)
+                                    {
+                                        if (user.Id == reservation.UserId)
+                                        {
+                                            blockReservation.User = user.Name;
+                                            break;
+                                        }
+                                    }
+
+                                    if (reservation.ReservationStart.Date == today.Date)
+                                    {
+                                        wpReservations1.Children.Add(blockReservation);
+                                    }
+                                    else if (reservation.ReservationStart.Date == oneDayLater.Date)
+                                    {
+                                        wpReservations2.Children.Add(blockReservation);
+                                    }
+                                    else if (reservation.ReservationStart.Date == twoDaysLater.Date)
+                                    {
+                                        wpReservations3.Children.Add(blockReservation);
+                                    }
+
+                                    break;
                                 }
                             }
                         }
                     } 
                 }
+            }
 
-                foreach (User user in userList)
-                {
-                    if (user.Id == reservation.UserId)
-                    {
-                        blockReservation.User = user.Name;
-                        break;
-                    }
-                }
+            if (wpReservations1.Children.Count == 0)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = message;
+                wpReservations1.Children.Add(textBlock);
+            }
 
-                if (reservation.ReservationStart.Date == today.Date)
-                {
-                    wpReservations1.Children.Add(blockReservation);
-                }
-                else if (reservation.ReservationStart.Date == oneDayLater.Date)
-                {
-                    wpReservations2.Children.Add(blockReservation);
-                }
-                else if (reservation.ReservationStart.Date == twoDaysLater.Date)
-                {
-                    wpReservations3.Children.Add(blockReservation);
-                }
-            } 
+            if (wpReservations2.Children.Count == 0)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = message;
+                wpReservations2.Children.Add(textBlock);
+            }
+            
+            if (wpReservations3.Children.Count == 0)
+            {
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = message;
+                wpReservations3.Children.Add(textBlock);
+            }
         }
     }
 }

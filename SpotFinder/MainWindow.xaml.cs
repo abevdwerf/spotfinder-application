@@ -23,39 +23,83 @@ namespace SpotFinder
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<Location> locationsList;
+        private List<Floor> floorList;
+        private Location lct;
+        //public Dashboard dashboard = new Dashboard();
+        //public Reservations reservations = new Reservations();
+        //public Locations locations = new Locations();
+
         public MainWindow()
         {
             InitializeComponent();
-            //ApiHelper.InitializeClient();
+            DataContext = this;
             Loaded += MainWindow_Loaded;
         }
 
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        public Visibility ShowDropdown
         {
-            Main.Navigate(new Dashboard());
+            set { dpLocationDropwdown.Visibility = value; }
+        }
+
+        public Location Location
+        {
+            get { return lct; }
+            set { lct = value; }
+        }
+
+        //events
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadAllLocations();
+            Main.Navigate(new Dashboard(lct));
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Dashboard");
-            Main.Navigate(new Dashboard());
+            ShowDropdown = Visibility.Visible;
+            Main.Navigate(new Dashboard(lct));
         }
 
         private void Reservation_click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Reservations");
-            Main.Navigate(new Reservations());
+            ShowDropdown = Visibility.Visible;
+            Main.Navigate(new Reservations(lct));
         }
 
         private void Locations_Click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Locations");
-            Main.Navigate(new Locations());
+            ShowDropdown = Visibility.Visible;
+            Main.Navigate(new Locations(lct));
         }
-        
+
         private async void LogOut_Click(object sender, RoutedEventArgs e)
         {
             await LogOut();
+        }
+
+        private void cbLocations_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Location = (Location)cbLocations.SelectedItem;
+
+            switch (Main.Content.GetType().Name)
+            {
+                case "Dashboard":
+                    Main.Navigate(new Dashboard(lct));
+                    break;
+                case "Reservations":
+                    Main.Navigate(new Reservations(lct));
+                    break;
+                case "Locations":
+                    Main.Navigate(new Locations(lct));
+                    break;
+                default:
+
+                    break;
+            }
         }
 
         private void SetActiveStyleMenuItem(string activeMenu)
@@ -83,9 +127,28 @@ namespace SpotFinder
             }
         }
 
-        public async Task LogOut()
+        private async void LoadAllLocations()
         {
-            
+            locationsList = await GetLocations();
+            floorList = await GetFloors();
+
+            foreach (Location location in locationsList)
+            {
+                foreach (Floor floor in floorList)
+                {
+                    if (floor.LocationId == location.Id)
+                    {
+                        location.Floors.Add(floor);
+                    }
+                }
+            }
+
+            cbLocations.ItemsSource = locationsList;
+        }
+
+        private async Task LogOut()
+        {
+
             HttpResponseMessage response = await ApiHelper.Post("api/logout", null);
 
             if (response.IsSuccessStatusCode)
@@ -100,6 +163,40 @@ namespace SpotFinder
             {
                 throw new Exception(response.ReasonPhrase);
             }
+        }
+
+        private async Task<List<Location>> GetLocations()
+        {
+            List<Location> locationsList = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/locations");
+
+            if (response.IsSuccessStatusCode)
+            {
+                locationsList = await response.Content.ReadAsAsync<List<Location>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return locationsList;
+        }
+
+        private async Task<List<Floor>> GetFloors()
+        {
+            List<Floor> floors = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/floors");
+
+            if (response.IsSuccessStatusCode)
+            {
+                floors = await response.Content.ReadAsAsync<List<Floor>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return floors;
         }
     }
 }

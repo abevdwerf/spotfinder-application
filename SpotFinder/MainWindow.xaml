@@ -26,6 +26,25 @@
             <Setter Property="Foreground" Value="#BFFFFFFF" />
             <Setter Property="FontWeight" Value="Regular" />
         </Style>
+        <Style x:Key="bodyText--style-2" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#7F7F7F"/>
+        </Style>
+
+        <Style x:Key="title--style-4" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+
+        <!-- Combobox -->
+        <Style x:Key="combobox--style-1" TargetType="ComboBox">
+            <Setter Property="Background" Value="#F6F6F6"/>
+            <Setter Property="BorderBrush" Value="#E7E7E7"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="15 10 0 10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -33,13 +52,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
-            <StackPanel.Background>
+        <DockPanel Grid.Row="0">
+            <DockPanel.Background>
                 <LinearGradientBrush EndPoint="1.2,1" StartPoint="0,0">
                     <GradientStop Color="#FFA000FC"/>
                     <GradientStop Color="#FF350063" Offset="1"/>
                 </LinearGradientBrush>
-            </StackPanel.Background>
+            </DockPanel.Background>
             <Image Height="25" Source="/Images/logo.png" Margin="50, 0, 0,0"/>
             <Menu Background="Transparent">
                 <Menu.ItemsPanel>
@@ -50,12 +69,21 @@
                 <MenuItem Name="Dashboard" Style="{StaticResource ActiveMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Dashboard" FontSize="16" Margin="50,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Dashboard_Click"/>
                 <MenuItem Name="Reservations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Reservations" FontSize="16" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Reservation_click"/>
                 <MenuItem Name="Locations" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Locations" FontSize="16" Margin="40,0,40,0" Height="50" VerticalAlignment="Center" Cursor="Hand" Click="Locations_Click"/>
-                <MenuItem Name="Logout" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Log out" FontSize="16" Height="50" Margin="0 0 100 0" VerticalAlignment="Center"  Cursor="Hand" HorizontalAlignment="Right" Click="LogOut_Click"/>
+                <MenuItem Name="Logout" Style="{StaticResource DefaultMenuItem}" Template="{StaticResource MenuItemTemplate}" Header="Log out" FontSize="16" Height="50" Margin="0 0 100 0" VerticalAlignment="Center" Cursor="Hand" HorizontalAlignment="Right" Click="LogOut_Click"/>
             </Menu>
-        </StackPanel>
-        
-        <ScrollViewer Name="MyScrollViewer" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
-            <Frame x:Name="Main" NavigationUIVisibility="Hidden" Source="Pages/Dashboard.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+            <DockPanel Name="dpLocationDropwdown" DockPanel.Dock="Top" Background="#FFFFFF" Height="86">
+                <TextBlock Style="{StaticResource title--style-4}" VerticalAlignment="Center" Margin="100 0 0 0">Fontys Eindhoven</TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 0 100 0" HorizontalAlignment="Right" DockPanel.Dock="Right" Width="366">
+                    <TextBlock Style="{StaticResource bodyText--style-2}" Margin="0 0 11 0" VerticalAlignment="Center" Foreground="#FFB1B1B1">Location</TextBlock>
+                    <ComboBox Name="cbLocations" Style="{StaticResource combobox--style-1}" DisplayMemberPath="LocationName"  Width="295" Height="39" SelectionChanged="cbLocations_SelectionChanged" SelectedValuePath="Id" SelectedIndex="0"/>
+                </StackPanel>
+            </DockPanel>
+            <ScrollViewer Name="MyScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="auto">
+                <Frame x:Name="Main" NavigationUIVisibility="Hidden" Source="Pages/Dashboard.xaml" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </ScrollViewer>
+        </DockPanel>
     </Grid>
 </Window>
