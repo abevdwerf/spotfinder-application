@@ -26,8 +26,15 @@ namespace SpotFinder.Pages
             InitializeComponent();
             DataContext = this;
             // LoadDashboard(0)
-            //LoadReservations();
+            LoadReservations();
         }
+
+        private List<Reservation> reservationsList;
+        private List<Room> roomList;
+        private List<RoomType> roomTypeList;
+        private List<Floor> floorList;
+        private List<Location> locationList;
+        private List<User> userList;
 
         // Get a list of reservation objects
         public async Task<List<Reservation>> GetReservations()
@@ -141,7 +148,14 @@ namespace SpotFinder.Pages
             int reservationCounter = 0;
             int userCounter = 0;
 
-            foreach (Reservation reservation in await GetReservations())
+            reservationsList = await GetReservations();
+            roomList = await GetRooms();
+            roomTypeList = await GetRoomTypes();
+            floorList = await GetFloors();
+            locationList = await GetLocations();
+            userList = await GetUsers();
+
+            foreach (Reservation reservation in reservationsList)
             {
 
                 BlockReservation blockReservation = new BlockReservation();
@@ -150,23 +164,23 @@ namespace SpotFinder.Pages
                 blockReservation.BeginTime = reservation.ReservationStart.ToShortTimeString();
                 blockReservation.EndTime = reservation.ReservationEnd.ToShortTimeString();
 
-                foreach (Room room in await GetRooms())
+                foreach (Room room in roomList)
                 {
                     if (room.Id == reservation.RoomId)
                     {
                         blockReservation.Room = room.RoomName;
 
-                        foreach (RoomType roomType in await GetRoomTypes())
+                        foreach (RoomType roomType in roomTypeList)
                         {
                             if (room.RoomTypeId == roomType.Id)
                                 blockReservation.RoomType = roomType.TypeName;
                         }
 
-                        foreach (Floor floor in await GetFloors())
+                        foreach (Floor floor in floorList)
                         {
                             if (floor.Id == room.FloorId)
                             {
-                                foreach (Location location in await GetLocations())
+                                foreach (Location location in locationList)
                                 {
                                     if (location.Id == floor.LocationId)
                                         blockReservation.Building = location.LocationName;
@@ -176,31 +190,39 @@ namespace SpotFinder.Pages
                     }
                 }
 
-                foreach (User user in await GetUsers())
+                foreach (User user in userList)
                 {
-                    userCounter++;
+                    if(reservation.UserId == user.Id)
+                    {
+                        blockReservation.User = user.Name;
+                    }
                 }
 
-                if(counter < 5)
+                if (counter < 5)
                 {
                     wpReservations.Children.Add(blockReservation);
                     counter++;
                 }
             }
 
+            foreach (User user in userList)
+            {
+                userCounter++;
+            }
+
             ReservationSum.Text = reservationCounter.ToString();
             UsersSum.Text = userCounter.ToString();
 
             // Amount of spots available
-            foreach(Location location in await GetLocations())
+            foreach(Location location in locationList)
             {
                 AvailableWorkSpots availableWorkSpots = new AvailableWorkSpots();
                 availableWorkSpots.Building = location.LocationName;
                 int capacityCounter = 0;
                 
-                foreach(Room room in await GetRooms())
+                foreach(Room room in roomList)
                 {
-                    foreach(Floor floor in await GetFloors())
+                    foreach(Floor floor in floorList)
                     {
                         if(room.Id == floor.Id && floor.Id == location.Id)
                         {
