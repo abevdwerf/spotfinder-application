@@ -26,9 +26,9 @@ namespace SpotFinder
         private List<Location> locationsList;
         private List<Floor> floorList;
 
-        private Dashboard dashboard = new Dashboard();
-        private Reservations reservations = new Reservations();
-        private Locations locations = new Locations();
+        public Dashboard dashboard = new Dashboard();
+        public Reservations reservations = new Reservations();
+        public Locations locations = new Locations();
 
         public MainWindow()
         {
