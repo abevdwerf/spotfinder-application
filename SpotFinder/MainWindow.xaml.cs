@@ -25,10 +25,10 @@ namespace SpotFinder
     {
         private List<Location> locationsList;
         private List<Floor> floorList;
-
-        public Dashboard dashboard = new Dashboard();
-        public Reservations reservations = new Reservations();
-        public Locations locations = new Locations();
+        private Location lct;
+        //public Dashboard dashboard = new Dashboard();
+        //public Reservations reservations = new Reservations();
+        //public Locations locations = new Locations();
 
         public MainWindow()
         {
@@ -42,32 +42,38 @@ namespace SpotFinder
             set { dpLocationDropwdown.Visibility = value; }
         }
 
+        public Location Location
+        {
+            get { return lct; }
+            set { lct = value; }
+        }
+
         //events
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             LoadAllLocations();
-            Main.Navigate(dashboard);
+            Main.Navigate(new Dashboard(lct));
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Dashboard");
             ShowDropdown = Visibility.Visible;
-            Main.Navigate(dashboard);
+            Main.Navigate(new Dashboard(lct));
         }
 
         private void Reservation_click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Reservations");
             ShowDropdown = Visibility.Visible;
-            Main.Navigate(reservations);
+            Main.Navigate(new Reservations(lct));
         }
 
         private void Locations_Click(object sender, RoutedEventArgs e)
         {
             SetActiveStyleMenuItem("Locations");
             ShowDropdown = Visibility.Visible;
-            Main.Navigate(locations);
+            Main.Navigate(new Locations(lct));
         }
 
         private async void LogOut_Click(object sender, RoutedEventArgs e)
@@ -77,11 +83,23 @@ namespace SpotFinder
 
         private void cbLocations_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Location lct = (Location)cbLocations.SelectedItem;
+            Location = (Location)cbLocations.SelectedItem;
 
-            dashboard.CurrentLocation = lct;        
-            reservations.CurrentLocation = lct;
-            locations.CurrentLocation = lct;
+            switch (Main.Content.GetType().Name)
+            {
+                case "Dashboard":
+                    Main.Navigate(new Dashboard(lct));
+                    break;
+                case "Reservations":
+                    Main.Navigate(new Reservations(lct));
+                    break;
+                case "Locations":
+                    Main.Navigate(new Locations(lct));
+                    break;
+                default:
+
+                    break;
+            }
         }
 
         private void SetActiveStyleMenuItem(string activeMenu)

@@ -21,9 +21,9 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Dashboard : Page
     {
-        private Location currentLocation;
+        //private Location currentLocation;
 
-        public Dashboard()
+        public Dashboard(Location currentLocation)
         {
             InitializeComponent();
             DataContext = this;
@@ -31,7 +31,7 @@ namespace SpotFinder.Pages
             //LoadReservations();
         }
 
-        public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; } }
+        //public Location CurrentLocation { get { return currentLocation; } set { currentLocation = value; } }
 
         // Get a list of reservation objects
         public async Task<List<Reservation>> GetReservations()

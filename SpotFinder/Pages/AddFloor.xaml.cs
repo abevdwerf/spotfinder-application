@@ -169,7 +169,7 @@ namespace SpotFinder.Pages
         {
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             mw.ShowDropdown = Visibility.Visible;
-            mw.Main.Navigate(mw.locations);
+            mw.Main.Navigate(new Locations(mw.Location));
         }
 
         private void btnAddRoom_Click(object sender, RoutedEventArgs e)
