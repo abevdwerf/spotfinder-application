@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotFinder.Classes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -14,18 +15,19 @@ using System.Windows.Shapes;
 namespace SpotFinder.UserControls
 {
     /// <summary>
-    /// Interaction logic for Table.xaml
+    /// Interaction logic for TableUC.xaml
     /// </summary>
-    public partial class Table : UserControl
+    public partial class TableUC : UserControl
     {
-        public Table()
-        {
-            InitializeComponent();
-        }
-
         public string Capacity
         {
             set { capacity.Text = value; }
+        }
+        public Desk Desk { get; set; }
+
+        public TableUC()
+        {
+            InitializeComponent();
         }
     }
 }

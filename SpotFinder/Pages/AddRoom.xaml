@@ -173,12 +173,13 @@
 
                 <Separator Style="{StaticResource separator--style-1}"/>
                 <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Tables</TextBlock>
-                <ListBox x:Name="lbTables" Height="100" Margin="35, 10"></ListBox>
+                <ListBox x:Name="lbTables" Height="75" Margin="35, 10" MouseDoubleClick="lbTables_MouseDoubleClick" SelectionChanged="lbTables_SelectionChanged"></ListBox>
                 <Separator Style="{StaticResource separator--style-1}"/>
 
                 <ComboBox x:Name="cbRoomTypes" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="TypeName"></ComboBox>
 
                 <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnSaveRoom_Click">Save Room</Button>
+                <Button Name="btnUpdateRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnUpdateRoom_Click" Visibility="Collapsed">Update Room</Button>
 
             </StackPanel>
             <Canvas Name="MyCanvas" Grid.Column="1"

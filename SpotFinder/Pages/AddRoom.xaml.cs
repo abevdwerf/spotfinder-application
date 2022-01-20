@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SpotFinder.Classes;
+using SpotFinder.UserControls;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -52,6 +53,7 @@ namespace SpotFinder.Pages
             LoadModules();
         }
 
+        //Update room constructor
         public AddRoom(AddFloor currentFloor, Room currentRoom)
         {
             InitializeComponent();
@@ -59,31 +61,70 @@ namespace SpotFinder.Pages
             this.currentRoom = currentRoom;
             LoadRoomTypes();
             LoadModules();
+            LoadTables();
+            btnSaveRoom.Visibility = Visibility.Collapsed;
+            btnUpdateRoom.Visibility = Visibility.Visible;
 
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
-            loadRoom();
         }
+
+        #region LoadData
+        private async void LoadRoomTypes()
+        {
+            List<RoomType> roomTypes = await GetRoomTypes();
+            cbRoomTypes.ItemsSource = roomTypes;
+
+            if (currentRoom != null)
+            {
+                foreach (RoomType roomType in roomTypes)
+                {
+                    if (currentRoom.RoomTypeId == roomType.Id)
+                    {
+                        cbRoomTypes.SelectedItem = roomType;
+                    }
+                }
+            }
+        }
+
+        private async void LoadTables()
+        {
+            desks = await GetDesks();
+
+            foreach (Desk desk in desks)
+            {
+                if (desk.RoomId == currentRoom.Id)
+                {
+                    UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
+                    lbTables.Items.Add(ucTable);
+
+                    cbModules.SelectedItem = (cbModules.SelectedValue = desk.ModuleId.ToString());
+                }
+            }
+        }
+
         private void loadRoom()
         {
             SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(255), (byte)rnd.Next(255), (byte)rnd.Next(255)));
 
-            List<ButtonLocation> root = null;
+            MyCanvas.Arrange(new Rect(MyCanvas.RenderSize));
+            //MyCanvas.Measure(MyCanvas.RenderSize);
             //var json = File.ReadAllText("json1.json");
             if (currentRoom.GridLocation != null)
             {
-                root = JsonConvert.DeserializeObject<List<ButtonLocation>>(currentRoom.GridLocation);
+                lstButtons = JsonConvert.DeserializeObject<List<ButtonLocation>>(currentRoom.GridLocation);
 
                 foreach (Button btn in MyCanvas.Children)
                 {
-                    foreach (ButtonLocation btnLoc in root)
+                    foreach (ButtonLocation btnLoc in lstButtons)
                     {
+
                         Point pt1 = new Point();
-                        pt1.X = btnLoc.X;
-                        pt1.Y = btnLoc.Y;
+                        pt1.X = btnLoc.X + 1;
+                        pt1.Y = btnLoc.Y + 1;
 
                         Point pt2 = new Point();
-                        pt2.X = btnLoc.X + size;
-                        pt2.Y = btnLoc.Y + size;
+                        pt2.X = btnLoc.X + (size - 1);
+                        pt2.Y = btnLoc.Y + (size - 1);
                         Rect SelectedRect = new Rect(pt1, pt2);
 
 
@@ -95,11 +136,104 @@ namespace SpotFinder.Pages
                             btn.Background = randomColor;
                         }
                     }
-                    //btn.Background = Brushes.Transparent;
                 }
             }
             tbName.Text = currentRoom.RoomName;
             tbPeople.Text = currentRoom.MaxPersons.ToString();
+        }
+
+        private async void LoadModules()
+        {
+            cbModules.ItemsSource = await GetModules();
+        }
+
+        private async void LoadModules(int deskId)
+        {
+            List<Module> modules = await GetModules();
+
+            cbModules.ItemsSource = modules;
+
+            foreach (Module module in modules)
+            {
+                if (deskId == module.DeskId)
+                {
+                    cbModules.SelectedItem = module;
+                }
+            }
+        }
+        #endregion
+
+        #region ClickHandlers
+        private void btnAddTable_Click(object sender, RoutedEventArgs e)
+        {
+            number++;
+            Desk desk = new Desk();
+            desk.AvailableSpaces = int.Parse(tbPeople.Text);
+            desk.ModuleId = (Int32)cbModules.SelectedValue;
+
+            maxPersons = maxPersons + int.Parse(tbPeople.Text);
+
+            desks.Add(desk);
+            lbTables.Items.Add(number.ToString());
+        }
+
+
+        private async void btnUpdateRoom_Click(object sender, RoutedEventArgs e)
+        {
+            currentRoom.RoomName = tbName.Text;
+            currentRoom.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
+
+            currentRoom.GridLocation = JsonConvert.SerializeObject(lstButtons);
+
+            currentRoom.MaxPersons = maxPersons;
+
+            await UpdateRoom(currentRoom);
+            await PostDesks();
+        }
+
+        private void lbTables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (MessageBox.Show("Delete Table?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                if (lbTables.SelectedItem != null)
+                {
+                    //do Yes stuff
+                    TableUC deskUc = (TableUC)lbTables.SelectedItem;
+                    desks.Remove(deskUc.Desk);
+                    lbTables.Items.Remove(deskUc);
+                }
+            }
+        }
+
+        private void btnAddMap_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+
+            if (op.ShowDialog() == true)
+            {
+                ImageBrush ib = new ImageBrush();
+                ib.ImageSource = new BitmapImage(new Uri(op.FileName, UriKind.Absolute));
+                MyCanvas.Background = ib;
+            }
+        }
+
+        private async void btnSaveRoom_Click(object sender, RoutedEventArgs e)
+        {
+            Room room = new Room();
+            room.FloorId = currentFloor.ChosenFloor.Id;
+            room.RoomName = tbName.Text;
+            room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
+
+            room.GridLocation = JsonConvert.SerializeObject(lstButtons);
+
+            room.MaxPersons = maxPersons;
+
+            await PostRoom(room);
+            await PostDesks();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -107,6 +241,7 @@ namespace SpotFinder.Pages
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             mw.Main.Navigate(currentFloor);
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
@@ -115,9 +250,6 @@ namespace SpotFinder.Pages
             btn2.Click += Button_Click;
             btn2.Background = Brushes.Red;
 
-            //MyCanvas.Children.Remove(10);
-            //MyCanvas.Children.Insert(10, button2);
-            //MessageBox.Show(lstButtons.Count.ToString());
             if (btn.Background == Brushes.Purple)
             {
                 btn.Background = Brushes.Transparent;
@@ -141,7 +273,120 @@ namespace SpotFinder.Pages
                 lstButtons.Add(btnLocation);
             }
         }
+        #endregion
 
+        #region APiRequests
+        private async Task<string> UpdateRoom(Room currentRoom)
+        {
+            string json = JsonConvert.SerializeObject(desks);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Post("api/desk/update/" + currentRoom.Id, content);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("desks geupdated");
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+            return response.ToString();
+        }
+
+        private async Task<string> PostDesks()
+        {
+            string json = JsonConvert.SerializeObject(desks);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Post("api/desk/create", content);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("desks geup.lad");
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+            return response.ToString();
+        }
+
+        private async Task<string> PostRoom(Room room)
+        {
+            string json = JsonConvert.SerializeObject(room);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Post("api/room/create", content);
+            if (response.IsSuccessStatusCode)
+            {
+                string test = await response.Content.ReadAsStringAsync();
+                dynamic data = JObject.Parse(test);
+                MessageBox.Show(data.last_insert_id.ToString());
+                //room.Id = data.last_insert_id;
+                roomId = data.last_insert_id;
+
+                foreach (Desk desk in desks)
+                {
+                    desk.RoomId = data.last_insert_id;
+                }
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+            return response.ToString();
+
+        }
+
+        private async Task<List<RoomType>> GetRoomTypes()
+        {
+            List<RoomType> roomTypes = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
+
+            if (response.IsSuccessStatusCode)
+            {
+                roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return roomTypes;
+        }
+
+        private async Task<List<Desk>> GetDesks()
+        {
+            List<Desk> desks = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/desks");
+
+            if (response.IsSuccessStatusCode)
+            {
+                desks = await response.Content.ReadAsAsync<List<Desk>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return desks;
+        }
+
+        private async Task<List<Module>> GetModules()
+        {
+            List<Module> modules = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/modules");
+
+            if (response.IsSuccessStatusCode)
+            {
+                modules = await response.Content.ReadAsAsync<List<Module>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return modules;
+        }
+        #endregion
+
+        #region GridMethods
         public void DrawButtons()
         {
             for (int j = 0; j < heightCanvas; j++)
@@ -158,6 +403,7 @@ namespace SpotFinder.Pages
                     button.Background = null;
                     MyCanvas.Children.Add(button);
 
+
                     System.Windows.Controls.Canvas.SetLeft(button, i * size);
                     System.Windows.Controls.Canvas.SetTop(button, j * size);
                 }
@@ -169,17 +415,11 @@ namespace SpotFinder.Pages
             heightCanvas = MyCanvas.ActualHeight / size;
             widthCanvas = MyCanvas.ActualWidth / size;
             DrawButtons();
-            //txtbl.Text = MyCanvas.Width.ToString() + "  ActualHeight: " + MyCanvas.ActualHeight.ToString() + "  ActualWidth: " + MyCanvas.ActualWidth.ToString();
-            //change button size with windows size...
 
-            //if (ActualWidth < 400)
-            //{
-            //    heightCanvas = 100;
-            //    widthCanvas = 100;
-            //}
-            //else if (ActualWidth < 400)
-            //{
-            //}
+            if (currentRoom != null)
+            {
+                loadRoom();
+            }
         }
 
         private void EditedItems_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -204,7 +444,6 @@ namespace SpotFinder.Pages
                 return;
             }
 
-            Rectangle selectionRectangle = new Rectangle();
 
             //  show the rectangle again
             System.Windows.Controls.Canvas.SetLeft(selectionRectangle, Math.Min(startPoint.X, pointWhereMouseIs.X));
@@ -219,10 +458,6 @@ namespace SpotFinder.Pages
                 if (rectBounds.IntersectsWith(SelectedRect))
                 {
                     btn.Background = Brushes.LightGreen;
-
-                    //double test1 = System.Windows.Controls.Canvas.GetTop(btn);
-                    //double test2 = System.Windows.Controls.Canvas.GetTop(btn);
-                    //lstTest.Add(test1);
                 }
                 else
                 {
@@ -269,147 +504,21 @@ namespace SpotFinder.Pages
                         lstButtons.Add(btnLocation);
                     }
                 }
-                //btn.Background = Brushes.Transparent;
             }
         }
-
-        private void btnAddMap_Click(object sender, RoutedEventArgs e)
-        {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-
-            if (op.ShowDialog() == true)
-            {
-                ImageBrush ib = new ImageBrush();
-                ib.ImageSource = new BitmapImage(new Uri(op.FileName, UriKind.Absolute));
-                MyCanvas.Background = ib;
-            }
-        }
-
-        private async void btnSaveRoom_Click(object sender, RoutedEventArgs e)
-        {
-            Room room = new Room();
-            room.FloorId = currentFloor.ChosenFloor.Id;
-            room.RoomName = tbName.Text;
-            room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
-
-            room.GridLocation = JsonConvert.SerializeObject(lstButtons);
-
-            room.MaxPersons = maxPersons;
-
-            await PostButtonGrid(room);
-            await PostDesks();
-        }
-
-        private async Task<string> PostDesks()
-        {
-            string json = JsonConvert.SerializeObject(desks);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await ApiHelper.Post("api/desk/create", content);
-            if (response.IsSuccessStatusCode)
-            {
-                MessageBox.Show("desks geup.lad");
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-            return response.ToString();
-        }
-
-        private async Task<string> PostButtonGrid(Room room)
-        {
-            string json = JsonConvert.SerializeObject(room);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await ApiHelper.Post("api/room/create", content);
-            if (response.IsSuccessStatusCode)
-            {
-                string test = await response.Content.ReadAsStringAsync();
-                dynamic data = JObject.Parse(test);
-                MessageBox.Show(data.last_insert_id.ToString());
-                //room.Id = data.last_insert_id;
-                roomId = data.last_insert_id;
-
-                foreach (Desk desk in desks)
-                {
-                    desk.RoomId = data.last_insert_id;
-                }
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-            return response.ToString();
-
-        }
-
-        private async Task<List<RoomType>> GetRoomTypes()
-        {
-            List<RoomType> roomTypes = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
-
-            if (response.IsSuccessStatusCode)
-            {
-                roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            //StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-            //HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
-
-            return roomTypes;
-        }
-
-        private async void LoadRoomTypes()
-        {
-            cbRoomTypes.ItemsSource = await GetRoomTypes();
-
-        }
-
-        private async void LoadModules()
-        {
-            cbModules.ItemsSource = await GetModules();
-        }
-
-        private async Task<List<Module>> GetModules()
-        {
-            List<Module> modules = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/modules");
-
-            if (response.IsSuccessStatusCode)
-            {
-                modules = await response.Content.ReadAsAsync<List<Module>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return modules;
-        }
-
+        #endregion
+               
         private void cbRoomTypes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
 
-        private void btnAddTable_Click(object sender, RoutedEventArgs e)
+
+
+        private void lbTables_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            number++;
-            Desk desk = new Desk();
-            desk.AvailableSpaces = int.Parse(tbPeople.Text);
-            desk.ModuleId = (Int32)cbModules.SelectedValue;
-
-            maxPersons = maxPersons + int.Parse(tbPeople.Text);
-
-            desks.Add(desk);
-            lbTables.Items.Add(number.ToString());
+            TableUC desk = (TableUC)lbTables.SelectedItem;
+            LoadModules(desk.Desk.Id);
         }
     }
 }
