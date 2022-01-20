@@ -110,7 +110,6 @@
         </Style>
     </Page.Resources>
 
-    <ScrollViewer>
         <!-- Page -->
         <Grid Background="#F0F0F0">
             <Grid.ColumnDefinitions>
@@ -169,7 +168,7 @@
                 </StackPanel>
                 <ComboBox x:Name="cbModules" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="ModuleName"></ComboBox>
                 <Button Name="btnAddTable" Style="{StaticResource button--style-5}" Width="295" Click="btnAddTable_Click">Add Table</Button>
-                
+
 
                 <Separator Style="{StaticResource separator--style-1}"/>
                 <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Tables</TextBlock>
@@ -186,8 +185,5 @@
                     Background="#F0F0F0" SnapsToDevicePixels="True" PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove" Grid.RowSpan="2">
             </Canvas>
         </Grid>
-    </ScrollViewer>
-
-
 </Page>
 
