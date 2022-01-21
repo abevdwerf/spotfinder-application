@@ -60,7 +60,7 @@ namespace SpotFinder.Pages
             this.currentFloor = currentFloor;
             this.currentRoom = currentRoom;
             LoadRoomTypes();
-            LoadModules();
+            //LoadModules();
             LoadTables();
             btnSaveRoom.Visibility = Visibility.Collapsed;
             btnUpdateRoom.Visibility = Visibility.Visible;
@@ -88,16 +88,28 @@ namespace SpotFinder.Pages
 
         private async void LoadTables()
         {
-            desks = await GetDesks();
+            List<Desk> allDesks = await GetDesks();
+            //desks = await GetDesks();
 
-            foreach (Desk desk in desks)
+            List<Module> modules = await GetModules();
+            cbModules.ItemsSource = modules;
+
+            foreach (Desk desk in allDesks)
             {
                 if (desk.RoomId == currentRoom.Id)
                 {
+                    desks.Add(desk);
                     UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
                     lbTables.Items.Add(ucTable);
 
                     cbModules.SelectedItem = (cbModules.SelectedValue = desk.ModuleId.ToString());
+                    foreach (Module module in modules)
+                    {
+                        if (desk.Id == module.DeskId)
+                        {
+                            desk.ModuleId = module.Id;
+                        }
+                    }
                 }
             }
         }
@@ -144,10 +156,11 @@ namespace SpotFinder.Pages
 
         private async void LoadModules()
         {
+            List<Module> modules = await GetModules();
             cbModules.ItemsSource = await GetModules();
         }
 
-        private async void LoadModules(int deskId)
+        private async void LoadModules(Desk desk)
         {
             List<Module> modules = await GetModules();
 
@@ -155,7 +168,7 @@ namespace SpotFinder.Pages
 
             foreach (Module module in modules)
             {
-                if (deskId == module.DeskId)
+                if (desk.Id == module.DeskId)
                 {
                     cbModules.SelectedItem = module;
                 }
@@ -166,15 +179,16 @@ namespace SpotFinder.Pages
         #region ClickHandlers
         private void btnAddTable_Click(object sender, RoutedEventArgs e)
         {
-            number++;
             Desk desk = new Desk();
             desk.AvailableSpaces = int.Parse(tbPeople.Text);
             desk.ModuleId = (Int32)cbModules.SelectedValue;
+            desk.RoomId = currentRoom.Id;
 
             maxPersons = maxPersons + int.Parse(tbPeople.Text);
 
             desks.Add(desk);
-            lbTables.Items.Add(number.ToString());
+            UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
+            lbTables.Items.Add(ucTable);
         }
 
 
@@ -188,10 +202,13 @@ namespace SpotFinder.Pages
             currentRoom.MaxPersons = maxPersons;
 
             await UpdateRoom(currentRoom);
-            await PostDesks();
+            if (desks.Count > 0)
+            {
+                await PostDesksUpdate();
+            }
         }
 
-        private void lbTables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private async void lbTables_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (MessageBox.Show("Delete Table?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
@@ -201,6 +218,22 @@ namespace SpotFinder.Pages
                     TableUC deskUc = (TableUC)lbTables.SelectedItem;
                     desks.Remove(deskUc.Desk);
                     lbTables.Items.Remove(deskUc);
+                    lbTables.SelectedItem = null;
+                    await DeleteDesk(deskUc.Desk);
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Delete room tiles?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                //do Yes stuff
+                lstButtons.Clear();
+
+                foreach (Button btn in MyCanvas.Children)
+                {
+                    btn.Background = Brushes.Transparent;
                 }
             }
         }
@@ -233,7 +266,10 @@ namespace SpotFinder.Pages
             room.MaxPersons = maxPersons;
 
             await PostRoom(room);
-            await PostDesks();
+            if (desks.Count > 0)
+            {
+                await PostDesks();
+            }
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -276,11 +312,25 @@ namespace SpotFinder.Pages
         #endregion
 
         #region APiRequests
+        private async Task<string> DeleteDesk(Desk desk)
+        {
+            HttpResponseMessage response = await ApiHelper.Delete("api/desk/delete/" + desk.Id);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("desks deleted");
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+            return response.ToString();
+        }
+
         private async Task<string> UpdateRoom(Room currentRoom)
         {
-            string json = JsonConvert.SerializeObject(desks);
+            string json = JsonConvert.SerializeObject(currentRoom);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await ApiHelper.Post("api/desk/update/" + currentRoom.Id, content);
+            HttpResponseMessage response = await ApiHelper.Put("api/room/update/" + currentRoom.Id, content);
             if (response.IsSuccessStatusCode)
             {
                 MessageBox.Show("desks geupdated");
@@ -300,6 +350,22 @@ namespace SpotFinder.Pages
             if (response.IsSuccessStatusCode)
             {
                 MessageBox.Show("desks geup.lad");
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+            return response.ToString();
+        }
+
+        private async Task<string> PostDesksUpdate()
+        {
+            string json = JsonConvert.SerializeObject(desks);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Post("api/desk/create/" + currentRoom.Id, content);
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("desks geupdated");
             }
             else
             {
@@ -517,8 +583,12 @@ namespace SpotFinder.Pages
 
         private void lbTables_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TableUC desk = (TableUC)lbTables.SelectedItem;
-            LoadModules(desk.Desk.Id);
+            if (lbTables.SelectedItem != null)
+            {
+                TableUC desk = (TableUC)lbTables.SelectedItem;
+                LoadModules(desk.Desk);
+                tbPeople.Text = desk.Desk.AvailableSpaces.ToString();
+            }
         }
     }
 }
