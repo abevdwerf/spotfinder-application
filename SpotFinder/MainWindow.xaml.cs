@@ -26,6 +26,7 @@ namespace SpotFinder
         private List<Location> locationsList;
         private List<Floor> floorList;
         private Location lct;
+        private string username;
 
         public MainWindow()
         {
@@ -45,6 +46,12 @@ namespace SpotFinder
             set { lct = value; }
         }
 
+        public string Username
+        {
+            get { return username; }
+            set { username = value; }
+        }
+
         //events
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -55,7 +62,7 @@ namespace SpotFinder
         {
             SetActiveStyleMenuItem("Dashboard");
             ShowDropdown = Visibility.Visible;
-            Main.Navigate(new Dashboard(lct));
+            Main.Navigate(new Dashboard(lct, username));
         }
 
         private void Reservation_click(object sender, RoutedEventArgs e)
@@ -86,7 +93,7 @@ namespace SpotFinder
                 switch (Main.Content.GetType().Name)
                 {
                     case "Dashboard":
-                        Main.Navigate(new Dashboard(lct));
+                        Main.Navigate(new Dashboard(lct, username));
                         break;
                     case "Reservations":
                         Main.Navigate(new Reservations(lct));
@@ -144,7 +151,7 @@ namespace SpotFinder
 
             cbLocations.ItemsSource = locationsList;
 
-            Main.Navigate(new Dashboard(Location));
+            Main.Navigate(new Dashboard(Location, Username));
         }
 
         private async Task LogOut()

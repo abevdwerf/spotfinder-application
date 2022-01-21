@@ -21,10 +21,12 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Dashboard : Page
     {
-        public Dashboard(Location currentLocation)
+        public Dashboard(Location currentLocation, string Username)
         {
             InitializeComponent();
+            tbUsername.Text = Username;
             LoadReservations(currentLocation);
+            
         }
 
         private List<Reservation> reservationsList;
@@ -103,7 +105,6 @@ namespace SpotFinder.Pages
 
         private async void LoadReservations(Location location )
         {
-            DateTime today = DateTime.Today;
             int counter = 0;    // Counts amount of blockreservations added
             int reservationCounter = 0;
 

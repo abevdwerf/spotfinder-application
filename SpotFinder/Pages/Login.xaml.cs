@@ -57,6 +57,9 @@ namespace SpotFinder.Pages
 
                     MainWindow main = new MainWindow();
                     main.Show();
+                MainWindow main = new MainWindow();
+                main.Username = jsonData["success"]["name"];
+                main.Show();
 
                     //sluit de login form af
                     Close();

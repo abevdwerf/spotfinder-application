@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SpotFinder.Pages"
         mc:Ignorable="d"
-        Title="Login"  Height="1080" Width="1920" WindowState="Maximized">
+        Title="Spotfinder - Login"  Height="1080" Width="1920" WindowState="Maximized">
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxBaseControlTemplate" TargetType="{x:Type TextBoxBase}">
             <Border Background="{TemplateBinding Background}" 
@@ -103,7 +103,7 @@
                             <Image Margin="0 0 0 15" Width="280" Source="/Images/working-person-illustration.png"/>
                             <TextBlock FontWeight="Bold" FontSize="43" Foreground="White" HorizontalAlignment="Center">SpotFinder</TextBlock>
                             <TextBlock Margin="0 20 0 0" TextWrapping="Wrap" TextAlignment="Center" Foreground="White" FontSize="18" FontWeight="SemiBold">
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                                SpotFinder is an service which helps you find a available workplace. With our website you can search for workplaces and reserve rooms. With our management-application you can create, add and delete rooms and define all workspaces that will be shown on the website.
                             </TextBlock>
                         </StackPanel>
                     </Border>
