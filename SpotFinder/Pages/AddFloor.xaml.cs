@@ -39,6 +39,7 @@ namespace SpotFinder.Pages
         private List<ButtonLocation> lstButtons = new List<ButtonLocation>();
 
         private Random rnd = new Random();
+        private Floor chosenFloor;
 
         public AddFloor()
         {   
@@ -48,7 +49,7 @@ namespace SpotFinder.Pages
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
         }
 
-        public Floor ChosenFloor { get; set; }
+        public Floor ChosenFloor { get { return chosenFloor; } set { chosenFloor = value; LoadFloorName(); } }
 
         public async Task<List<Room>> GetRooms()
         {
@@ -132,7 +133,7 @@ namespace SpotFinder.Pages
                     {
                         if (room.RoomTypeId == roomtype.Id)
                         {
-                            UserControl roomUc = new RoomUC(this, room) { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons, ClickedRoom = room };
+                            RoomUC roomUc = new RoomUC(this, room) { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons, ClickedRoom = room };
                             spRoomContent.Children.Add(roomUc);
                         }
                     }
@@ -142,6 +143,11 @@ namespace SpotFinder.Pages
                 //    ChosenFloor.Rooms.Add(room);
                 //}
             }
+        }
+
+        private void LoadFloorName()
+        {
+            tbFloorName.Text = ChosenFloor.FloorName;
         }
 
         private void btnSaveFloor_Click(object sender, RoutedEventArgs e)

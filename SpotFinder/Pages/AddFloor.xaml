@@ -63,7 +63,7 @@
             <StackPanel DockPanel.Dock="Top">
 
                 <DockPanel VerticalAlignment="Top">
-                    <TextBlock DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 97 0">First floor</TextBlock>
+                    <TextBlock Name="tbFloorName" DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 97 0">First floor</TextBlock>
                     <Button Name="btnBack" HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15" Click="btnBack_Click" Cursor="Hand">Go Back</Button>
                 </DockPanel>
 

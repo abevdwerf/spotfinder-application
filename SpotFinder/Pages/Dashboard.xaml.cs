@@ -103,7 +103,6 @@ namespace SpotFinder.Pages
 
         private async void LoadReservations(Location location )
         {
-            DateTime today = DateTime.Today;
             int counter = 0;    // Counts amount of blockreservations added
             int reservationCounter = 0;
 
