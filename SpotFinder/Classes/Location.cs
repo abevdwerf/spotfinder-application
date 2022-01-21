@@ -7,11 +7,6 @@ namespace SpotFinder.Classes
 {
     public class Location
     {
-        public Location()
-        {
-
-        }
-
         public Location(string locationName)
         {
             LocationName = locationName;

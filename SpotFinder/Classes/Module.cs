@@ -13,10 +13,5 @@ namespace SpotFinder.Classes
         public int DeskId { get; set; }
         [JsonProperty("module_name")]
         public string ModuleName { get; set; }
-
-        public Module()
-        {
-
-        }
     }
 }

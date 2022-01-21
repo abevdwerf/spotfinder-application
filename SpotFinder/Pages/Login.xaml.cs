@@ -28,41 +28,45 @@ namespace SpotFinder.Pages
 
         public async Task SignIn()
         {
-            User user = new User(tbUsername.Text, pbPassword.Password);
-
-            string json = JsonConvert.SerializeObject(user);
-            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await ApiHelper.Post("api/login", content);
-
-            if (((int)response.StatusCode) == 401)
+            try
             {
-                var result = await response.Content.ReadAsStringAsync();
-                var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
+                User user = new User(tbUsername.Text, pbPassword.Password);
 
-                string errorMessage = string.Join(",", jsonData["error"].Value ?? "");
+                string json = JsonConvert.SerializeObject(user);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                tbError.Text = errorMessage;
+                HttpResponseMessage response = await ApiHelper.Post("api/login", content);
+
+                if (((int)response.StatusCode) == 401)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
+
+                    string errorMessage = string.Join(",", jsonData["error"].Value ?? "");
+
+                    tbError.Text = errorMessage;
+                }
+                else if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
+
+                    string token = jsonData["success"]["token"];
+
+                    ApiHelper.Token = token;
+
+                    MainWindow main = new MainWindow();
+                    main.Username = jsonData["success"]["name"];
+                    main.Show();
+
+                    //sluit de login form af
+                    Close();
+                }
             }
-            else if (response.IsSuccessStatusCode)
+            catch (Exception e)
             {
-                var result = await response.Content.ReadAsStringAsync();
-                var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
 
-                string token = jsonData["success"]["token"];
-
-                ApiHelper.Token = token;
-
-                MainWindow main = new MainWindow();
-                main.Username = jsonData["success"]["name"];
-                main.Show();
-
-                //sluit de login form af
-                Close();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
         }
 

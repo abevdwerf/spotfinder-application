@@ -9,11 +9,6 @@ namespace SpotFinder.Classes
 {
     public class Room
     {
-        public Room()
-        {
-
-        }
-
         public Room(int floorId, string roomName, int maxPersons)
         {
             FloorId = floorId;

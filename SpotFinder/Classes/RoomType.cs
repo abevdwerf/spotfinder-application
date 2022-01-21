@@ -7,11 +7,6 @@ namespace SpotFinder.Classes
 {
     public class RoomType
     {
-        RoomType()
-        {
-
-        }
-
         [JsonProperty("id")]
         public int Id { get; set; }
         [JsonProperty("type_name")]

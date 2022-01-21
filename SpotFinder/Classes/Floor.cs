@@ -9,11 +9,6 @@ namespace SpotFinder.Classes
 {
     public class Floor
     {
-        public Floor()
-        {
-
-        }
-
         public Floor(string floorName, int floorLevel)
         {
             FloorName = floorName;
