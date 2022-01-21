@@ -54,6 +54,7 @@ namespace SpotFinder.Pages
                 ApiHelper.Token = token;
 
                 MainWindow main = new MainWindow();
+                main.Username = jsonData["success"]["name"];
                 main.Show();
 
                 //sluit de login form af

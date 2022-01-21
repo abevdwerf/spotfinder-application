@@ -21,10 +21,12 @@ namespace SpotFinder.Pages
     /// </summary>
     public partial class Dashboard : Page
     {
-        public Dashboard(Location currentLocation)
+        public Dashboard(Location currentLocation, string Username)
         {
             InitializeComponent();
+            tbUsername.Text = Username;
             LoadReservations(currentLocation);
+            
         }
 
         private List<Reservation> reservationsList;

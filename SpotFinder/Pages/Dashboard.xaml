@@ -151,7 +151,10 @@
     </Page.Resources>
 
     <StackPanel Margin="0 25 0 0">
-        <TextBlock Margin="100 0 0 0" Style="{StaticResource bodyText--style-3}">Goodmorning Jim</TextBlock>
+        <TextBlock Margin="100 0 0 0" Style="{StaticResource bodyText--style-3}">
+            <Run Text="Goodmorning"/>
+            <Run Name="tbUsername" Text="Jim"/>
+        </TextBlock>
         <TextBlock Margin="100 0 0 25" Style="{StaticResource title--style-5}">Today's overview</TextBlock>
         <WrapPanel Margin="100 0 0 35" Orientation="Horizontal">
             <Border BorderBrush="#ECECEC" BorderThickness="1">
