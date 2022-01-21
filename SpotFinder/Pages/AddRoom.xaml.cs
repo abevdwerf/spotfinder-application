@@ -179,10 +179,8 @@ namespace SpotFinder.Pages
         #region ClickHandlers
         private void btnAddTable_Click(object sender, RoutedEventArgs e)
         {
-            Desk desk = new Desk();
-            desk.AvailableSpaces = int.Parse(tbPeople.Text);
+            Desk desk = new Desk(int.Parse(tbPeople.Text), currentRoom.Id);
             desk.ModuleId = (Int32)cbModules.SelectedValue;
-            desk.RoomId = currentRoom.Id;
 
             maxPersons = maxPersons + int.Parse(tbPeople.Text);
 
@@ -256,14 +254,10 @@ namespace SpotFinder.Pages
 
         private async void btnSaveRoom_Click(object sender, RoutedEventArgs e)
         {
-            Room room = new Room();
-            room.FloorId = currentFloor.ChosenFloor.Id;
-            room.RoomName = tbName.Text;
+            Room room = new Room(currentFloor.ChosenFloor.Id, tbName.Text, maxPersons);
             room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
 
             room.GridLocation = JsonConvert.SerializeObject(lstButtons);
-
-            room.MaxPersons = maxPersons;
 
             await PostRoom(room);
             if (desks.Count > 0)

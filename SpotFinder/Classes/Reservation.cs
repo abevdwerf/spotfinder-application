@@ -7,11 +7,6 @@ namespace SpotFinder.Classes
 {
     public class Reservation
     {
-        public Reservation()
-        {
-
-        }
-
         public Reservation(DateTime reservationStart, DateTime reservationEnd, int roomId)
         {
             ReservationStart = reservationStart;

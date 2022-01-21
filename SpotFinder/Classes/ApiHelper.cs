@@ -25,13 +25,20 @@ namespace SpotFinder.Classes
 
         public static void InitializeClient()
         {
-            //HttpClientHandler clientHandler = new HttpClientHandler();
-            //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri("http://127.0.0.1:8000/");
-            Client.DefaultRequestHeaders.Accept.Clear();
-            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //Only Json
-            Client.DefaultRequestHeaders.Add("x-authorization", "0Uy8KjV79WbCG2UsThd4pZc3wpceUUpYGtpbeagn6fPN8xWdBzJSycq2iF8Qd0or");
+            try
+            {
+                //HttpClientHandler clientHandler = new HttpClientHandler();
+                //clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+                Client = new HttpClient();
+                Client.BaseAddress = new Uri("http://127.0.0.1:8000/");
+                Client.DefaultRequestHeaders.Accept.Clear();
+                Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //Only Json
+                Client.DefaultRequestHeaders.Add("x-authorization", "0Uy8KjV79WbCG2UsThd4pZc3wpceUUpYGtpbeagn6fPN8xWdBzJSycq2iF8Qd0o");
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         //create - Post

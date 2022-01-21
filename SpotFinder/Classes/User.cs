@@ -11,7 +11,6 @@ namespace SpotFinder.Classes
         {
 
         }
-
         public User(string name, string password)
         {
             Name = name;

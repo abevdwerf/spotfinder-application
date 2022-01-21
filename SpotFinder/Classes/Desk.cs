@@ -7,12 +7,7 @@ namespace SpotFinder.Classes
 {
     public class Desk
     {
-        public Desk()
-        {
-
-        }
-
-        public Desk(int availableSpaces, int sensorId, int roomId)
+        public Desk(int availableSpaces, int roomId)
         {
             AvailableSpaces = availableSpaces;
             RoomId = roomId;
