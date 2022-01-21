@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpotFinder"
         d:DesignHeight="1080" d:DesignWidth="1920"
         mc:Ignorable="d"
-        Title="MainWindow" WindowState="Maximized" MinWidth="996" MinHeight="650">
+        Title="Spotfinder" WindowState="Maximized" MinWidth="996" MinHeight="650">
     <Window.Resources>
         <ControlTemplate TargetType="{x:Type MenuItem}" x:Key="MenuItemTemplate">
             <Border x:Name="Border" VerticalAlignment="Center" >
