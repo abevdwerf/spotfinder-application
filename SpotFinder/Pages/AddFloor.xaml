@@ -79,12 +79,13 @@
 
                 </StackPanel>
             </StackPanel>
-            <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" Margin="0 15 0 15" Width="295" Click="btnSaveFloor_Click" Cursor="Hand" DockPanel.Dock="Bottom" VerticalAlignment="Bottom">Save Floor</Button>
+            <!--<Button Name="btnSaveFloor" Style="{StaticResource buttonstyle-3}" Margin="0 15 0 15" Width="295" Click="btnSaveFloor_Click" Cursor="Hand" DockPanel.Dock="Bottom" VerticalAlignment="Bottom">Save Floor</Button>-->
         </DockPanel>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="0">
-        <Canvas Name="MyCanvas"
-                    Background="#F0F0F0" SnapsToDevicePixels="True" PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove">
+        <Canvas Name="MyCanvas" Background="#F0F0F0" SnapsToDevicePixels="True" >
+                <!--PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove"-->
+                
         </Canvas>
         </Grid>
     </Grid>

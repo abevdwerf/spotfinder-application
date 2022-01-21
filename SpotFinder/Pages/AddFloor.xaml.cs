@@ -150,26 +150,26 @@ namespace SpotFinder.Pages
             tbFloorName.Text = ChosenFloor.FloorName;
         }
 
-        private void btnSaveFloor_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO opslaan
+        //private void btnSaveFloor_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //TODO opslaan
 
-            string json = JsonConvert.SerializeObject(lstButtons);
+        //    string json = JsonConvert.SerializeObject(lstButtons);
 
-            dynamic jsonObject = new JObject();
-            jsonObject.grid_location = json;
+        //    dynamic jsonObject = new JObject();
+        //    jsonObject.grid_location = json;
 
-            //txtbl.Text = jsonObject.ToString().Replace(@"\", "");
-            //MessageBox.Show(json);
+        //    //txtbl.Text = jsonObject.ToString().Replace(@"\", "");
+        //    //MessageBox.Show(json);
 
-            string testjson = JsonConvert.SerializeObject(jsonObject);
+        //    string testjson = JsonConvert.SerializeObject(jsonObject);
 
-            //await PutButtonGrid(testjson);
+        //    //await PutButtonGrid(testjson);
 
-            //var arrayOfObjects = JsonConvert.SerializeObject(
-            //    new[] { JsonConvert.DeserializeObject(json1), JsonConvert.DeserializeObject(json2) }
-            //)
-        }
+        //    //var arrayOfObjects = JsonConvert.SerializeObject(
+        //    //    new[] { JsonConvert.DeserializeObject(json1), JsonConvert.DeserializeObject(json2) }
+        //    //)
+        //}
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
@@ -184,40 +184,6 @@ namespace SpotFinder.Pages
             mw.Main.Navigate(new AddRoom(this));
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = sender as Button;
-
-            Button btn2 = new Button();
-            btn2.Click += Button_Click;
-            btn2.Background = Brushes.Red;
-
-            //MyCanvas.Children.Remove(10);
-            //MyCanvas.Children.Insert(10, button2);
-            //MessageBox.Show(lstButtons.Count.ToString());
-            if (btn.Background == Brushes.Purple)
-            {
-                btn.Background = Brushes.Transparent;
-
-                foreach (ButtonLocation btnLocation in lstButtons.ToArray())
-                {
-                    if (btnLocation.X == System.Windows.Controls.Canvas.GetLeft(btn) && btnLocation.Y == System.Windows.Controls.Canvas.GetTop(btn))
-                    {
-                        lstButtons.Remove(btnLocation);
-                    }
-                }
-            }
-            else
-            {
-                btn.Background = Brushes.Purple;
-
-                ButtonLocation btnLocation = new ButtonLocation();
-                btnLocation.Y = System.Windows.Controls.Canvas.GetTop(btn);
-                btnLocation.X = System.Windows.Controls.Canvas.GetLeft(btn);
-                lstButtons.Add(btnLocation);
-            }
-        }
-
         public void DrawButtons()
         {
             for (int j = 0; j < heightCanvas; j++)
@@ -230,7 +196,7 @@ namespace SpotFinder.Pages
                         Width = size,
                     };
 
-                    button.Click += Button_Click;
+                    //button.Click += Button_Click;
                     button.Background = null;
                     MyCanvas.Children.Add(button);
 
@@ -258,96 +224,97 @@ namespace SpotFinder.Pages
             //}
         }
 
-        private void EditedItems_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            startPoint = e.GetPosition((IInputElement)sender);
-        }
+        //private void EditedItems_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    startPoint = e.GetPosition((IInputElement)sender);
+        //}
 
         // '' <summary>
         // '' When mouse move, update the highlight of the selected items.
         // '' </summary>
-        private void EditedItems_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            if (startPoint == default(Point))
-            {
-                return;
-            }
-            pointWhereMouseIs = e.GetPosition((IInputElement)sender);
-            Rect SelectedRect = new Rect(startPoint, pointWhereMouseIs);
-            if ((SelectedRect.Width < 20)
-                        && (SelectedRect.Height < 20))
-            {
-                return;
-            }
+        //private void EditedItems_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        //{
+        //    if (startPoint == default(Point))
+        //    {
+        //        return;
+        //    }
+        //    pointWhereMouseIs = e.GetPosition((IInputElement)sender);
+        //    Rect SelectedRect = new Rect(startPoint, pointWhereMouseIs);
+        //    if ((SelectedRect.Width < 20)
+        //                && (SelectedRect.Height < 20))
+        //    {
+        //        return;
+        //    }
 
-            Rectangle selectionRectangle = new Rectangle();
+        //    Rectangle selectionRectangle = new Rectangle();
 
-            //  show the rectangle again
-            System.Windows.Controls.Canvas.SetLeft(selectionRectangle, Math.Min(startPoint.X, pointWhereMouseIs.X));
-            System.Windows.Controls.Canvas.SetTop(selectionRectangle, Math.Min(startPoint.Y, pointWhereMouseIs.Y));
-            selectionRectangle.Width = Math.Abs(pointWhereMouseIs.X - startPoint.X);
-            selectionRectangle.Height = Math.Abs(pointWhereMouseIs.Y - startPoint.Y);
-            foreach (Button btn in MyCanvas.Children)
-            {
-                Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
-                Vector vector = VisualTreeHelper.GetOffset(btn);
-                rectBounds.Offset(vector);
-                if (rectBounds.IntersectsWith(SelectedRect))
-                {
-                    btn.Background = Brushes.LightGreen;
+        //    //  show the rectangle again
+        //    System.Windows.Controls.Canvas.SetLeft(selectionRectangle, Math.Min(startPoint.X, pointWhereMouseIs.X));
+        //    System.Windows.Controls.Canvas.SetTop(selectionRectangle, Math.Min(startPoint.Y, pointWhereMouseIs.Y));
+        //    selectionRectangle.Width = Math.Abs(pointWhereMouseIs.X - startPoint.X);
+        //    selectionRectangle.Height = Math.Abs(pointWhereMouseIs.Y - startPoint.Y);
+        //    foreach (Button btn in MyCanvas.Children)
+        //    {
+        //        Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
+        //        Vector vector = VisualTreeHelper.GetOffset(btn);
+        //        rectBounds.Offset(vector);
+        //        if (rectBounds.IntersectsWith(SelectedRect))
+        //        {
+        //            btn.Background = Brushes.LightGreen;
 
-                    //double test1 = System.Windows.Controls.Canvas.GetTop(btn);
-                    //double test2 = System.Windows.Controls.Canvas.GetTop(btn);
-                    //lstTest.Add(test1);
-                }
-                else
-                {
-                    if (btn.Background != Brushes.Purple)
-                    {
-                        btn.Background = Brushes.Transparent;
-                    }
-                }
-            }
-        }
+        //            //double test1 = System.Windows.Controls.Canvas.GetTop(btn);
+        //            //double test2 = System.Windows.Controls.Canvas.GetTop(btn);
+        //            //lstTest.Add(test1);
+        //        }
+        //        else
+        //        {
+        //            if (btn.Background != Brushes.Purple)
+        //            {
+        //                btn.Background = Brushes.Transparent;
+        //            }
+        //        }
+        //    }
+        //}
 
         // '' <summary>
         // '' When Left Mouse button is released, change all CheckBoxes values. (Or do nothing if it is a small move -->
         // '' click will be handled in a standard way.)
         // '' </summary>
-        private void EditedItems_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            pointWhereMouseIs = e.GetPosition((IInputElement)sender);
-            Rect SelectedRect = new Rect(startPoint, pointWhereMouseIs);
-            startPoint = default(Point);
-            selectionRectangle.Opacity = 0;
-            //  hide the rectangle again
-            if (((SelectedRect.Width < 20)
-                        && (SelectedRect.Height < 20)))
-            {
-                return;
-            }
-            foreach (Button btn in MyCanvas.Children)
-            {
-                Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
-                Vector vector = VisualTreeHelper.GetOffset(btn);
-                rectBounds.Offset(vector);
-                if (rectBounds.IntersectsWith(SelectedRect))
-                {
-                    if (btn.Background == Brushes.Purple)
-                        btn.Background = null;
-                    else
-                    {
-                        btn.Background = Brushes.Purple;
+        //private void EditedItems_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        //{
+        //    pointWhereMouseIs = e.GetPosition((IInputElement)sender);
+        //    Rect SelectedRect = new Rect(startPoint, pointWhereMouseIs);
+        //    startPoint = default(Point);
+        //    selectionRectangle.Opacity = 0;
+        //    //  hide the rectangle again
+        //    if (((SelectedRect.Width < 20)
+        //                && (SelectedRect.Height < 20)))
+        //    {
+        //        return;
+        //    }
+        //    foreach (Button btn in MyCanvas.Children)
+        //    {
+        //        Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
+        //        Vector vector = VisualTreeHelper.GetOffset(btn);
+        //        rectBounds.Offset(vector);
+        //        if (rectBounds.IntersectsWith(SelectedRect))
+        //        {
+        //            if (btn.Background == Brushes.Purple)
+        //                btn.Background = null;
+        //            else
+        //            {
+        //                btn.Background = Brushes.Purple;
 
-                        ButtonLocation btnLocation = new ButtonLocation();
-                        btnLocation.Y = System.Windows.Controls.Canvas.GetTop(btn);
-                        btnLocation.X = System.Windows.Controls.Canvas.GetLeft(btn);
-                        lstButtons.Add(btnLocation);
-                    }
-                }
-                //btn.Background = Brushes.Transparent;
-            }
-        }
+        //                ButtonLocation btnLocation = new ButtonLocation();
+        //                btnLocation.Y = System.Windows.Controls.Canvas.GetTop(btn);
+        //                btnLocation.X = System.Windows.Controls.Canvas.GetLeft(btn);
+        //                lstButtons.Add(btnLocation);
+        //            }
+        //        }
+        //        //btn.Background = Brushes.Transparent;
+        //    }
+        //}
+
         public async Task<string> PutButtonGrid(string jsonObject)
         {
             StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
