@@ -117,8 +117,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="41*"/>
-                <RowDefinition Height="499*"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!-- Navigation -->
@@ -127,60 +127,60 @@
                 <TextBlock Style="{StaticResource nav__text}">Indeling</TextBlock>
                 <TextBlock Style="{StaticResource nav__text}">Reserveringen</TextBlock>
             </StackPanel>-->
-
+            <DockPanel Grid.Row="0" Grid.Column="0" Background="White">
+                <TextBlock Name="tbRoomName"  Style="{StaticResource title--style-1}" Margin="35 26 97 0">Add room</TextBlock>
+                <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10" Click="btnBack_Click" Cursor="Hand">Go Back</Button>
+            </DockPanel>
             <!-- Side bar -->
-            <StackPanel Background="White" Grid.Row="0" Width="365" Grid.RowSpan="2">
-                <DockPanel>
-                    <TextBlock Style="{StaticResource title--style-1}" Margin="35 26 97 0">Add room</TextBlock>
-                    <Button Name="btnBack" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 10" Click="btnBack_Click" Cursor="Hand">Go Back</Button>
-                </DockPanel>
+            <ScrollViewer VerticalScrollBarVisibility="auto" Grid.Row="1">
+                <StackPanel Background="White" Grid.Row="1" Width="365">
+                    <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Name</TextBlock>
+                    <TextBox Name="tbName" Style="{StaticResource textbox--style-1}" Width="295"/>
+                    <Button Margin="35, 10" Name="btnAddMap" Style="{StaticResource button--style-4}" Click="btnAddMap_Click">+ Add map</Button>
 
-                <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Name</TextBlock>
-                <TextBox Name="tbName" Style="{StaticResource textbox--style-1}" Width="295"/>
-                <Button Margin="35, 10" Name="btnAddMap" Style="{StaticResource button--style-4}" Click="btnAddMap_Click">+ Add map</Button>
+                    <Separator Style="{StaticResource separator--style-1}"/>
 
-                <Separator Style="{StaticResource separator--style-1}"/>
+                    <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Floor plan</TextBlock>
+                    <TextBlock Style="{StaticResource bodyText--style-1}" Margin="35 0 0 10">Please select tool and click on the grid to build out your room.</TextBlock>
 
-                <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Floor plan</TextBlock>
-                <TextBlock Style="{StaticResource bodyText--style-1}" Margin="35 0 0 10">Please select tool and click on the grid to build out your room.</TextBlock>
+                    <Button Style="{StaticResource button--style-2}">
+                        <StackPanel Orientation="Horizontal" Width="295">
+                            <Image Margin="0 0 25 0" Source="/Images/pen.png"/>
+                            <TextBlock Style="{StaticResource bodyText--style-2}">Add tile</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource button--style-2}" Click="Button_Click_1">
+                        <StackPanel Orientation="Horizontal" Width="295">
+                            <Image Margin="0 0 25 0" Source="/Images/erase.png"/>
+                            <TextBlock Style="{StaticResource bodyText--style-2}">Erase tile</TextBlock>
+                        </StackPanel>
+                    </Button>
 
-                <Button Style="{StaticResource button--style-2}">
-                    <StackPanel Orientation="Horizontal" Width="295">
-                        <Image Margin="0 0 25 0" Source="/Images/pen.png"/>
-                        <TextBlock Style="{StaticResource bodyText--style-2}">Add tile</TextBlock>
+                    <Separator Style="{StaticResource separator--style-1}"/>
+
+                    <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Add table</TextBlock>
+
+                    <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Capacity</TextBlock>
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
+                        <TextBox Name="tbPeople" Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
+                        <TextBlock VerticalAlignment="Center" Foreground="#7F7F7F" FontSize="14">People</TextBlock>
                     </StackPanel>
-                </Button>
-                <Button Style="{StaticResource button--style-2}" Click="Button_Click_1">
-                    <StackPanel Orientation="Horizontal" Width="295">
-                        <Image Margin="0 0 25 0" Source="/Images/erase.png"/>
-                        <TextBlock Style="{StaticResource bodyText--style-2}">Erase tile</TextBlock>
-                    </StackPanel>
-                </Button>
+                    <ComboBox x:Name="cbModules" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="ModuleName"></ComboBox>
+                    <Button Name="btnAddTable" Style="{StaticResource button--style-5}" Width="295" Click="btnAddTable_Click">Add Table</Button>
 
-                <Separator Style="{StaticResource separator--style-1}"/>
 
-                <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Add table</TextBlock>
+                    <Separator Style="{StaticResource separator--style-1}"/>
+                    <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Tables</TextBlock>
+                    <ListBox x:Name="lbTables" Height="75" Margin="35, 10" MouseDoubleClick="lbTables_MouseDoubleClick" SelectionChanged="lbTables_SelectionChanged"></ListBox>
+                    <Separator Style="{StaticResource separator--style-1}"/>
 
-                <TextBlock Style="{StaticResource title--style-2}" Margin="35 0 0 6">Capacity</TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0 0 0 16">
-                    <TextBox Name="tbPeople" Style="{StaticResource textbox--style-1}" Width="51" Margin="35 0 16 0"/>
-                    <TextBlock VerticalAlignment="Center" Foreground="#7F7F7F" FontSize="14">People</TextBlock>
+                    <ComboBox x:Name="cbRoomTypes" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="TypeName"></ComboBox>
+
+                    <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnSaveRoom_Click">Save Room</Button>
+                    <Button Name="btnUpdateRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnUpdateRoom_Click" Visibility="Collapsed">Update Room</Button>
+
                 </StackPanel>
-                <ComboBox x:Name="cbModules" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="ModuleName"></ComboBox>
-                <Button Name="btnAddTable" Style="{StaticResource button--style-5}" Width="295" Click="btnAddTable_Click">Add Table</Button>
-
-
-                <Separator Style="{StaticResource separator--style-1}"/>
-                <TextBlock Style="{StaticResource title--style-3}" Margin="35 0 0 10">Tables</TextBlock>
-                <ListBox x:Name="lbTables" Height="75" Margin="35, 10" MouseDoubleClick="lbTables_MouseDoubleClick" SelectionChanged="lbTables_SelectionChanged"></ListBox>
-                <Separator Style="{StaticResource separator--style-1}"/>
-
-                <ComboBox x:Name="cbRoomTypes" Style="{StaticResource combobox--style-1}" Width="295" Margin="35 0 0 16" SelectionChanged="cbRoomTypes_SelectionChanged" SelectedValuePath="Id" DisplayMemberPath="TypeName"></ComboBox>
-
-                <Button Name="btnSaveRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnSaveRoom_Click">Save Room</Button>
-                <Button Name="btnUpdateRoom" Style="{StaticResource button--style-3}" Width="295" Click="btnUpdateRoom_Click" Visibility="Collapsed">Update Room</Button>
-
-            </StackPanel>
+            </ScrollViewer>
             <Canvas Name="MyCanvas" Grid.Column="1"
                     Background="#F0F0F0" SnapsToDevicePixels="True" PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove" Grid.RowSpan="2">
             </Canvas>

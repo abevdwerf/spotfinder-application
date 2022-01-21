@@ -62,6 +62,7 @@ namespace SpotFinder.Pages
             LoadRoomTypes();
             //LoadModules();
             LoadTables();
+            tbRoomName.Text = currentRoom.RoomName;
             btnSaveRoom.Visibility = Visibility.Collapsed;
             btnUpdateRoom.Visibility = Visibility.Visible;
 
