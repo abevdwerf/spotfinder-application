@@ -148,7 +148,6 @@ namespace SpotFinder.Pages
                 }
             }
             tbName.Text = currentRoom.RoomName;
-            tbPeople.Text = currentRoom.MaxPersons.ToString();
         }
 
         private async void LoadModules()
@@ -179,7 +178,7 @@ namespace SpotFinder.Pages
             Desk desk = new Desk(int.Parse(tbPeople.Text), currentRoom.Id);
             desk.ModuleId = (Int32)cbModules.SelectedValue;
 
-            maxPersons = maxPersons + int.Parse(tbPeople.Text);
+            maxPersons += int.Parse(tbPeople.Text);
 
             desks.Add(desk);
             UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
@@ -193,7 +192,7 @@ namespace SpotFinder.Pages
             currentRoom.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
 
             currentRoom.GridLocation = JsonConvert.SerializeObject(lstButtons);
-            currentRoom.MaxPersons = int.Parse(tbPeople.Text);
+            currentRoom.MaxPersons = maxPersons;
 
             await UpdateRoom(currentRoom);
             if (desks.Count > 0)
@@ -250,7 +249,6 @@ namespace SpotFinder.Pages
 
         private async void btnSaveRoom_Click(object sender, RoutedEventArgs e)
         {
-            maxPersons = int.Parse(tbPeople.Text);
             Room room = new Room(currentFloor.Id, tbName.Text, maxPersons);
             room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
 
