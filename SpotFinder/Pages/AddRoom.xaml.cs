@@ -176,14 +176,28 @@ namespace SpotFinder.Pages
         #region ClickHandlers
         private void btnAddTable_Click(object sender, RoutedEventArgs e)
         {
-            Desk desk = new Desk(int.Parse(tbPeople.Text), currentRoom.Id);
-            desk.ModuleId = (Int32)cbModules.SelectedValue;
+            if (currentRoom == null)
+            {
+                Desk desk = new Desk(int.Parse(tbPeople.Text));
+                desk.ModuleId = (Int32)cbModules.SelectedValue;
 
-            maxPersons = maxPersons + int.Parse(tbPeople.Text);
+                maxPersons = maxPersons + int.Parse(tbPeople.Text);
 
-            desks.Add(desk);
-            UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
-            lbTables.Items.Add(ucTable);
+                desks.Add(desk);
+                UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
+                lbTables.Items.Add(ucTable);
+            }
+            else
+            {
+                Desk desk = new Desk(int.Parse(tbPeople.Text), currentRoom.Id);
+                desk.ModuleId = (Int32)cbModules.SelectedValue;
+
+                maxPersons = maxPersons + int.Parse(tbPeople.Text);
+
+                desks.Add(desk);
+                UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
+                lbTables.Items.Add(ucTable);
+            }
         }
 
 
@@ -306,13 +320,16 @@ namespace SpotFinder.Pages
         private async Task<string> DeleteDesk(Desk desk)
         {
             HttpResponseMessage response = await ApiHelper.Delete("api/desk/delete/" + desk.Id);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                MessageBox.Show("desks deleted");
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("desk deleted");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
             return response.ToString();
         }
@@ -322,14 +339,16 @@ namespace SpotFinder.Pages
             string json = JsonConvert.SerializeObject(currentRoom);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await ApiHelper.Put("api/room/update/" + currentRoom.Id, content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                tbRoomName.Text = currentRoom.RoomName;
-                MessageBox.Show("Room updated");
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Room updated");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
             return response.ToString();
         }
@@ -339,13 +358,16 @@ namespace SpotFinder.Pages
             string json = JsonConvert.SerializeObject(desks);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await ApiHelper.Post("api/desk/create", content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                MessageBox.Show("desks geup.lad");
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Desk(s) saved");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
             return response.ToString();
         }
@@ -355,13 +377,16 @@ namespace SpotFinder.Pages
             string json = JsonConvert.SerializeObject(desks);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await ApiHelper.Post("api/desk/create/" + currentRoom.Id, content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                MessageBox.Show("desks updated");
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("desk updated");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
             return response.ToString();
         }
@@ -371,25 +396,30 @@ namespace SpotFinder.Pages
             string json = JsonConvert.SerializeObject(room);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await ApiHelper.Post("api/room/create", content);
-            if (response.IsSuccessStatusCode)
+            try
             {
-                string test = await response.Content.ReadAsStringAsync();
-                dynamic data = JObject.Parse(test);
-                MessageBox.Show(data.last_insert_id.ToString());
-                roomId = data.last_insert_id;
-
-                foreach (Desk desk in desks)
+                if (response.IsSuccessStatusCode)
                 {
-                    desk.RoomId = data.last_insert_id;
-                }
+                    string test = await response.Content.ReadAsStringAsync();
+                    dynamic data = JObject.Parse(test);
+                    //MessageBox.Show(data.last_insert_id.ToString());
+                    roomId = data.last_insert_id;
 
-                tbRoomName.Text = room.RoomName;
-                btnSaveRoom.Visibility = Visibility.Collapsed;
-                btnUpdateRoom.Visibility = Visibility.Visible;
+                    foreach (Desk desk in desks)
+                    {
+                        desk.RoomId = data.last_insert_id;
+                    }
+
+                    tbRoomName.Text = room.RoomName;
+                    btnSaveRoom.Visibility = Visibility.Collapsed;
+                    btnUpdateRoom.Visibility = Visibility.Visible;
+
+                    MessageBox.Show("Room saved");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
             return response.ToString();
 
@@ -400,13 +430,17 @@ namespace SpotFinder.Pages
             List<RoomType> roomTypes = null;
             HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+
+                MessageBox.Show(e.Message);
             }
 
             return roomTypes;
@@ -417,13 +451,16 @@ namespace SpotFinder.Pages
             List<Desk> desks = null;
             HttpResponseMessage response = await ApiHelper.Get("api/desks");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                desks = await response.Content.ReadAsAsync<List<Desk>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    desks = await response.Content.ReadAsAsync<List<Desk>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return desks;
@@ -434,13 +471,16 @@ namespace SpotFinder.Pages
             List<Module> modules = null;
             HttpResponseMessage response = await ApiHelper.Get("api/modules");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                modules = await response.Content.ReadAsAsync<List<Module>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    modules = await response.Content.ReadAsAsync<List<Module>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return modules;

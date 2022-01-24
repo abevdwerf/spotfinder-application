@@ -7,10 +7,18 @@ namespace SpotFinder.Classes
 {
     public class Desk
     {
+        public Desk()
+        {
+
+        }
         public Desk(int availableSpaces, int roomId)
         {
             AvailableSpaces = availableSpaces;
             RoomId = roomId;
+        }
+        public Desk(int availableSpaces)
+        {
+            AvailableSpaces = availableSpaces;
         }
 
         [JsonProperty("id")]

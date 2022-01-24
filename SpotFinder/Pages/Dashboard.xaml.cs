@@ -40,13 +40,16 @@ namespace SpotFinder.Pages
             List<Reservation> reservations = null;
             HttpResponseMessage response = await ApiHelper.Get("api/reservations");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                reservations = await response.Content.ReadAsAsync<List<Reservation>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    reservations = await response.Content.ReadAsAsync<List<Reservation>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return reservations;
@@ -57,13 +60,16 @@ namespace SpotFinder.Pages
             List<Room> rooms = null;
             HttpResponseMessage response = await ApiHelper.Get("api/rooms");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                rooms = await response.Content.ReadAsAsync<List<Room>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    rooms = await response.Content.ReadAsAsync<List<Room>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return rooms;
@@ -74,13 +80,16 @@ namespace SpotFinder.Pages
             List<RoomType> roomTypes = null;
             HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    roomTypes = await response.Content.ReadAsAsync<List<RoomType>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return roomTypes;
@@ -91,13 +100,16 @@ namespace SpotFinder.Pages
             List<User> users = null;
             HttpResponseMessage response = await ApiHelper.Get("api/users");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                users = await response.Content.ReadAsAsync<List<User>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    users = await response.Content.ReadAsAsync<List<User>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return users;

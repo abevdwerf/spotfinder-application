@@ -37,40 +37,43 @@ namespace SpotFinder.Pages
 
             HttpResponseMessage response = await ApiHelper.Post("api/register", content);
 
-            if (((int)response.StatusCode) == 401)
+            try
             {
-                var result = await response.Content.ReadAsStringAsync();
-                var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
+                if (((int)response.StatusCode) == 401)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
 
-                string errorMessageName = string.Join(",", jsonData["error"]["name"] ?? "");
-                string errorMessageEmail = string.Join(",", jsonData["error"]["email"] ?? "");
-                string errorMessagePassword = string.Join(",", jsonData["error"]["password"] ?? "");
-                string errorMessagePasswordConfirmation = string.Join(",", jsonData["error"]["PasswordConfirmation"] ?? "");
+                    string errorMessageName = string.Join(",", jsonData["error"]["name"] ?? "");
+                    string errorMessageEmail = string.Join(",", jsonData["error"]["email"] ?? "");
+                    string errorMessagePassword = string.Join(",", jsonData["error"]["password"] ?? "");
+                    string errorMessagePasswordConfirmation = string.Join(",", jsonData["error"]["PasswordConfirmation"] ?? "");
 
-                tbErrorUsername.Text = errorMessageName;
-                tbErrorEmail.Text = errorMessageEmail;
-                tbErrorPassword.Text = errorMessagePassword;
-                tbErrorPasswordConfirmation.Text = errorMessagePasswordConfirmation;
+                    tbErrorUsername.Text = errorMessageName;
+                    tbErrorEmail.Text = errorMessageEmail;
+                    tbErrorPassword.Text = errorMessagePassword;
+                    tbErrorPasswordConfirmation.Text = errorMessagePasswordConfirmation;
+                }
+                else if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
+
+                    string token = jsonData["success"]["token"];
+
+                    ApiHelper.Token = token;
+
+                    MainWindow main = new MainWindow();
+                    main.Username = jsonData["success"]["name"];
+                    main.Show();
+
+                    //sluit de register form af
+                    Close();
+                }
             }
-            else if (response.IsSuccessStatusCode)
+            catch (Exception e)
             {
-                var result = await response.Content.ReadAsStringAsync();
-                var jsonData = JsonConvert.DeserializeObject<dynamic>(result);
-
-                string token = jsonData["success"]["token"];
-
-                ApiHelper.Token = token;
-
-                MainWindow main = new MainWindow();
-                main.Username = jsonData["success"]["name"];
-                main.Show();
-
-                //sluit de register form af
-                Close();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
         }
 

@@ -176,14 +176,18 @@ namespace SpotFinder.Pages
             string json = JsonConvert.SerializeObject(currentFloor);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await ApiHelper.Put("api/floor/update/" + currentFloor.Id, content);
-            if (response.IsSuccessStatusCode)
+
+            try
             {
-                tbFloorName.Text = currentFloor.FloorName;
-                MessageBox.Show("floor updated");
+                if (response.IsSuccessStatusCode)
+                {
+                    tbFloorName.Text = currentFloor.FloorName;
+                    MessageBox.Show("floor updated");
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
             return response.ToString();
         }
@@ -193,7 +197,19 @@ namespace SpotFinder.Pages
            StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
            HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
 
-           return response.ToString();
+            try
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("floor updated");
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return response.ToString();
         }
 
         public async Task<List<Room>> GetRooms()
@@ -201,13 +217,16 @@ namespace SpotFinder.Pages
             List<Room> rooms = null;
             HttpResponseMessage response = await ApiHelper.Get("api/rooms");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                rooms = await response.Content.ReadAsAsync<List<Room>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    rooms = await response.Content.ReadAsAsync<List<Room>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return rooms;
@@ -218,13 +237,16 @@ namespace SpotFinder.Pages
             List<RoomType> roomType = null;
             HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                roomType = await response.Content.ReadAsAsync<List<RoomType>>();
+                if (response.IsSuccessStatusCode)
+                {
+                    roomType = await response.Content.ReadAsAsync<List<RoomType>>();
+                }
             }
-            else
+            catch (Exception e)
             {
-                throw new Exception(response.ReasonPhrase);
+                MessageBox.Show(e.Message);
             }
 
             return roomType;

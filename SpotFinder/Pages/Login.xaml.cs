@@ -65,7 +65,6 @@ namespace SpotFinder.Pages
             }
             catch (Exception e)
             {
-
                 MessageBox.Show(e.Message);
             }
         }
