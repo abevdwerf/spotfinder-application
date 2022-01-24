@@ -47,65 +47,55 @@ namespace SpotFinder.Pages
             roomTypeList = await GetRoomTypes();
             foreach (Room room in await GetRooms())
             {
-                SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(255), (byte)rnd.Next(255), (byte)rnd.Next(255)));
-
-                List<ButtonLocation> root = null;
-                //var json = File.ReadAllText("json1.json");
-                if (room.GridLocation != null)
+                if (room.FloorId == currentFloor.Id)
                 {
-                    root = JsonConvert.DeserializeObject<List<ButtonLocation>>(room.GridLocation);
+                    SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(255), (byte)rnd.Next(255), (byte)rnd.Next(255)));
 
-                    foreach (Button btn in MyCanvas.Children)
+                    List<ButtonLocation> root = null;
+                    if (room.GridLocation != null && room.GridLocation != "[]")
                     {
-                        foreach (ButtonLocation btnLoc in root)
+                        root = JsonConvert.DeserializeObject<List<ButtonLocation>>(room.GridLocation);
+
+                        foreach (Button btn in MyCanvas.Children)
                         {
-                            Point pt1 = new Point();
-                            pt1.X = btnLoc.X;
-                            pt1.Y = btnLoc.Y;
-
-                            Point pt2 = new Point();
-                            pt2.X = btnLoc.X + size;
-                            pt2.Y = btnLoc.Y + size;
-                            Rect SelectedRect = new Rect(pt1, pt2);
-
-
-                            Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
-                            Vector vector = VisualTreeHelper.GetOffset(btn);
-                            rectBounds.Offset(vector);
-                            if (rectBounds.IntersectsWith(SelectedRect))
+                            foreach (ButtonLocation btnLoc in root)
                             {
-                                btn.Background = randomColor;
+                                Point pt1 = new Point();
+                                pt1.X = btnLoc.X;
+                                pt1.Y = btnLoc.Y;
+
+                                Point pt2 = new Point();
+                                pt2.X = btnLoc.X + size;
+                                pt2.Y = btnLoc.Y + size;
+                                Rect SelectedRect = new Rect(pt1, pt2);
+
+
+                                Rect rectBounds = VisualTreeHelper.GetDescendantBounds(btn);
+                                Vector vector = VisualTreeHelper.GetOffset(btn);
+                                rectBounds.Offset(vector);
+                                if (rectBounds.IntersectsWith(SelectedRect))
+                                {
+                                    btn.Background = randomColor;
+                                }
                             }
                         }
-                        //btn.Background = Brushes.Transparent;
                     }
-                }
-
-                //foreach (var p in root.hireSchedules)
-                //{
-                //    ///do something
-                //}
-                foreach (RoomType roomtype in roomTypeList)
-                {
-                    if (room.FloorId == currentFloor.Id)
+                    foreach (RoomType roomtype in roomTypeList)
                     {
                         if (room.RoomTypeId == roomtype.Id)
                         {
                             RoomUC roomUc = new RoomUC(currentFloor, room, roomtype) { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons, ClickedRoom = room };
 
-                            if(room.GridLocation != null)
+                            if(room.GridLocation != null && room.GridLocation != "[]")
                             {
                                 roomUc.Color = randomColor;
                             }
 
                             spRoomContent.Children.Add(roomUc);
-                        }
+                            break;
+                        } 
                     }
                 }
-                //if (room.FloorId == ChosenFloor.Id)
-                //{
-                //    ChosenFloor.Rooms.Add(room);
-                //}
             }
         }
 
@@ -178,17 +168,6 @@ namespace SpotFinder.Pages
             heightCanvas = MyCanvas.ActualHeight / size;
             widthCanvas = MyCanvas.ActualWidth / size;
             DrawButtons();
-            //txtbl.Text = MyCanvas.Width.ToString() + "  ActualHeight: " + MyCanvas.ActualHeight.ToString() + "  ActualWidth: " + MyCanvas.ActualWidth.ToString();
-            //change button size with windows size...
-
-            //if (ActualWidth < 400)
-            //{
-            //    heightCanvas = 100;
-            //    widthCanvas = 100;
-            //}
-            //else if (ActualWidth < 400)
-            //{
-            //}
         }
 
         //api requests

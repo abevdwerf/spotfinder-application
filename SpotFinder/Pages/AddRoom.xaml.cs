@@ -118,7 +118,7 @@ namespace SpotFinder.Pages
             MyCanvas.Arrange(new Rect(MyCanvas.RenderSize));
             //MyCanvas.Measure(MyCanvas.RenderSize);
             //var json = File.ReadAllText("json1.json");
-            if (currentRoom.GridLocation != null)
+            if (currentRoom.GridLocation != null || currentRoom.GridLocation != "[]")
             {
                 lstButtons = JsonConvert.DeserializeObject<List<ButtonLocation>>(currentRoom.GridLocation);
 
@@ -324,7 +324,8 @@ namespace SpotFinder.Pages
             HttpResponseMessage response = await ApiHelper.Put("api/room/update/" + currentRoom.Id, content);
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("desks geupdated");
+                tbRoomName.Text = currentRoom.RoomName;
+                MessageBox.Show("Room updated");
             }
             else
             {
@@ -356,7 +357,7 @@ namespace SpotFinder.Pages
             HttpResponseMessage response = await ApiHelper.Post("api/desk/create/" + currentRoom.Id, content);
             if (response.IsSuccessStatusCode)
             {
-                MessageBox.Show("desks geupdated");
+                MessageBox.Show("desks updated");
             }
             else
             {
@@ -375,13 +376,16 @@ namespace SpotFinder.Pages
                 string test = await response.Content.ReadAsStringAsync();
                 dynamic data = JObject.Parse(test);
                 MessageBox.Show(data.last_insert_id.ToString());
-                //room.Id = data.last_insert_id;
                 roomId = data.last_insert_id;
 
                 foreach (Desk desk in desks)
                 {
                     desk.RoomId = data.last_insert_id;
                 }
+
+                tbRoomName.Text = room.RoomName;
+                btnSaveRoom.Visibility = Visibility.Collapsed;
+                btnUpdateRoom.Visibility = Visibility.Visible;
             }
             else
             {
