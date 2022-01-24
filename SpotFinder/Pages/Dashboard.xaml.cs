@@ -176,7 +176,7 @@ namespace SpotFinder.Pages
             {
                 foreach (Floor floor in location.Floors)
                 {
-                    if (room.Id == floor.Id && floor.Id == location.Id)
+                    if (room.FloorId == floor.Id)
                     {
                         capacityCounter += room.MaxPersons;
                     }
