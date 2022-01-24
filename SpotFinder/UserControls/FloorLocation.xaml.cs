@@ -51,7 +51,7 @@ namespace SpotFinder.UserControls
         {
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             mw.ShowDropdown = Visibility.Collapsed;
-            mw.Main.Navigate(new AddFloor() { ChosenFloor = ClickedfFloor });
+            mw.Main.Navigate(new AddFloor(ClickedfFloor));
         }
     }
 }

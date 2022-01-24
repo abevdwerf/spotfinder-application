@@ -21,14 +21,17 @@ namespace SpotFinder.UserControls
     /// </summary>
     public partial class RoomUC : UserControl
     {
-        private AddFloor floor;
+        private Floor floor;
         private Room room;
+        private RoomType roomType;
 
-        public RoomUC(AddFloor floor, Room room)
+        public RoomUC(Floor floor, Room room, RoomType roomType)
         {
             InitializeComponent();
             this.floor = floor;
             this.room = room;
+            this.roomType = roomType;
+            LoadRoomIcon(this.roomType.TypeName);
         }
 
         public string RoomName
@@ -38,12 +41,17 @@ namespace SpotFinder.UserControls
 
         public string RoomType
         {
-            set { roomType.Text = value; }
+            set { tbroomType.Text = value;}
         }
 
         public int MaxPersons
         {
             set { maxPersons.Text = value.ToString(); }
+        }
+
+        public Brush Color
+        {
+            set { color.Fill = value; }
         }
 
         public Room ClickedRoom { get; set; }
@@ -52,6 +60,22 @@ namespace SpotFinder.UserControls
         {
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
             mw.Main.Navigate(new AddRoom(floor, room));
+        }
+
+        private void LoadRoomIcon(string name)
+        {
+            if (name == "Desk")
+            {
+                imgRoom.Source = new BitmapImage(new Uri("/Images/desk.png", UriKind.Relative));
+            }
+            else if (name == "Silent Room")
+            {
+                imgRoom.Source = new BitmapImage(new Uri("/Images/silentroom.png", UriKind.Relative));
+            }
+            else //meeting room
+            {
+                imgRoom.Source = new BitmapImage(new Uri("/Images/meetingroom.png", UriKind.Relative));
+            }
         }
     }
 }

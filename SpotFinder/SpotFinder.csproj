@@ -4,18 +4,25 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
 
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\desk.png" />
     <None Remove="Images\detective-illustration.png" />
     <None Remove="Images\graph.png" />
     <None Remove="Images\logo.png" />
+    <None Remove="Images\meetingroom.png" />
     <None Remove="Images\pen.png" />
     <None Remove="Images\person.png" />
-    <None Remove="Images\room.png" />
+    <None Remove="Images\silentroom.png" />
     <None Remove="Images\working-person-illustration.png" />
     <None Remove="Pages\working-person-illustration.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\desk.png" />
     <Resource Include="Images\detective-illustration.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -33,15 +41,14 @@
     <Resource Include="Images\logo.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\meetingroom.png" />
     <Resource Include="Images\pen.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\person.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\room.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Images\silentroom.png" />
     <Resource Include="Images\working-person-illustration.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

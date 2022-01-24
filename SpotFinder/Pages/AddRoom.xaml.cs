@@ -18,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace SpotFinder.Pages
 {
@@ -30,31 +31,28 @@ namespace SpotFinder.Pages
         private double widthCanvas;
         private Point startPoint;
         private Point pointWhereMouseIs;
-        // private Canvas startPoint;
         Rectangle selectionRectangle = new Rectangle();
         private const int size = 12;
-        //private const int space = 0;
         private List<ButtonLocation> lstButtons = new List<ButtonLocation>();
-        AddFloor currentFloor;
+        Floor currentFloor;
         private List<Desk> desks = new List<Desk>();
         int number = 0;
         int roomId;
         int maxPersons = 0;
         private Random rnd = new Random();
-
         private Room currentRoom;
-        public AddRoom(AddFloor currentFloor)
-        {
-            this.currentFloor = currentFloor;
-            InitializeComponent();
 
+        public AddRoom(Floor currentFloor)
+        {
+            InitializeComponent();
+            this.currentFloor = currentFloor;
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
             LoadRoomTypes();
             LoadModules();
         }
 
         //Update room constructor
-        public AddRoom(AddFloor currentFloor, Room currentRoom)
+        public AddRoom(Floor currentFloor, Room currentRoom)
         {
             InitializeComponent();
             this.currentFloor = currentFloor;
@@ -90,8 +88,6 @@ namespace SpotFinder.Pages
         private async void LoadTables()
         {
             List<Desk> allDesks = await GetDesks();
-            //desks = await GetDesks();
-
             List<Module> modules = await GetModules();
             cbModules.ItemsSource = modules;
 
@@ -197,8 +193,7 @@ namespace SpotFinder.Pages
             currentRoom.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
 
             currentRoom.GridLocation = JsonConvert.SerializeObject(lstButtons);
-
-            currentRoom.MaxPersons = maxPersons;
+            currentRoom.MaxPersons = int.Parse(tbPeople.Text);
 
             await UpdateRoom(currentRoom);
             if (desks.Count > 0)
@@ -255,7 +250,8 @@ namespace SpotFinder.Pages
 
         private async void btnSaveRoom_Click(object sender, RoutedEventArgs e)
         {
-            Room room = new Room(currentFloor.ChosenFloor.Id, tbName.Text, maxPersons);
+            maxPersons = int.Parse(tbPeople.Text);
+            Room room = new Room(currentFloor.Id, tbName.Text, maxPersons);
             room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
 
             room.GridLocation = JsonConvert.SerializeObject(lstButtons);
@@ -270,7 +266,7 @@ namespace SpotFinder.Pages
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mw.Main.Navigate(currentFloor);
+            mw.Main.Navigate(new AddFloor(currentFloor));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -584,6 +580,12 @@ namespace SpotFinder.Pages
                 LoadModules(desk.Desk);
                 tbPeople.Text = desk.Desk.AvailableSpaces.ToString();
             }
+        }
+
+        private void PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

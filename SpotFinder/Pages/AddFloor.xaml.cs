@@ -29,54 +29,22 @@ namespace SpotFinder.Pages
         private double widthCanvas;
         private const int size = 12;
         private Random rnd = new Random();
-        private Floor chosenFloor;
+        private Floor currentFloor;
+        private List<RoomType> roomTypeList;
 
-        public AddFloor()
+        public AddFloor(Floor currentFloor)
         {   
             InitializeComponent();
-            LoadRooms();
-
+            this.currentFloor = currentFloor;
             this.Height = System.Windows.SystemParameters.VirtualScreenHeight - 125;
+            LoadFloorNames();
+            LoadRooms();
         }
 
-        public Floor ChosenFloor { get { return chosenFloor; } set { chosenFloor = value; LoadFloorName(); } }
-
-        public async Task<List<Room>> GetRooms()
-        {
-            List<Room> rooms = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/rooms");
-
-            if (response.IsSuccessStatusCode)
-            {
-                rooms = await response.Content.ReadAsAsync<List<Room>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return rooms;
-        }
-
-        public async Task<List<RoomType>> GetRoomTypes()
-        {
-            List<RoomType> roomType = null;
-            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
-
-            if (response.IsSuccessStatusCode)
-            {
-                roomType = await response.Content.ReadAsAsync<List<RoomType>>();
-            }
-            else
-            {
-                throw new Exception(response.ReasonPhrase);
-            }
-
-            return roomType;
-        }
-
+        //methods
         private async void LoadRooms()
         {
+            roomTypeList = await GetRoomTypes();
             foreach (Room room in await GetRooms())
             {
                 SolidColorBrush randomColor = new SolidColorBrush(Color.FromRgb((byte)rnd.Next(255), (byte)rnd.Next(255), (byte)rnd.Next(255)));
@@ -117,13 +85,19 @@ namespace SpotFinder.Pages
                 //{
                 //    ///do something
                 //}
-                foreach (RoomType roomtype in await GetRoomTypes())
+                foreach (RoomType roomtype in roomTypeList)
                 {
-                    if (room.FloorId == ChosenFloor.Id)
+                    if (room.FloorId == currentFloor.Id)
                     {
                         if (room.RoomTypeId == roomtype.Id)
                         {
-                            RoomUC roomUc = new RoomUC(this, room) { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons, ClickedRoom = room };
+                            RoomUC roomUc = new RoomUC(currentFloor, room, roomtype) { RoomName = room.RoomName, RoomType = roomtype.TypeName, MaxPersons = room.MaxPersons, ClickedRoom = room };
+
+                            if(room.GridLocation != null)
+                            {
+                                roomUc.Color = randomColor;
+                            }
+
                             spRoomContent.Children.Add(roomUc);
                         }
                     }
@@ -135,24 +109,12 @@ namespace SpotFinder.Pages
             }
         }
 
-        private void LoadFloorName()
+        private void LoadFloorNames()
         {
-            tbFloorName.Text = ChosenFloor.FloorName;
+            tbFloorName.Text = currentFloor.FloorName;
+            tbName.Text = currentFloor.FloorName;
         }
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mw.ShowDropdown = Visibility.Visible;
-            mw.Main.Navigate(new Locations(mw.Location));
-        }
-
-        private void btnAddRoom_Click(object sender, RoutedEventArgs e)
-        {
-            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
-            mw.Main.Navigate(new AddRoom(this));
-        }
-
+        
         public void DrawButtons()
         {
             for (int j = 0; j < heightCanvas; j++)
@@ -175,6 +137,42 @@ namespace SpotFinder.Pages
             }
         }
 
+        //events
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.ShowDropdown = Visibility.Visible;
+            mw.Main.Navigate(new Locations(mw.Location));
+        }
+
+        private void btnAddRoom_Click(object sender, RoutedEventArgs e)
+        {
+            var mw = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mw.Main.Navigate(new AddRoom(this.currentFloor));
+        }
+
+        private void btnAddMap_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+
+            if (op.ShowDialog() == true)
+            {
+                ImageBrush ib = new ImageBrush();
+                ib.ImageSource = new BitmapImage(new Uri(op.FileName, UriKind.Absolute));
+                MyCanvas.Background = ib;
+            }
+        }
+        
+        private async void btnSaveFloor_Click(object sender, RoutedEventArgs e)
+        {
+            currentFloor.FloorName = tbName.Text;
+            await UpdateFloor(currentFloor);
+        }
+
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             heightCanvas = MyCanvas.ActualHeight / size;
@@ -193,28 +191,64 @@ namespace SpotFinder.Pages
             //}
         }
 
-        public async Task<string> PutButtonGrid(string jsonObject)
+        //api requests
+        private async Task<string> UpdateFloor(Floor currentFloor)
         {
-            StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
-
+            string json = JsonConvert.SerializeObject(currentFloor);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await ApiHelper.Put("api/floor/update/" + currentFloor.Id, content);
+            if (response.IsSuccessStatusCode)
+            {
+                tbFloorName.Text = currentFloor.FloorName;
+                MessageBox.Show("floor updated");
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
             return response.ToString();
         }
 
-        private void btnAddMap_Click(object sender, RoutedEventArgs e)
+        public async Task<string> PutButtonGrid(string jsonObject)
         {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
+           StringContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+           HttpResponseMessage response = await ApiHelper.Put("api/room/update/1", content);
 
-            if (op.ShowDialog() == true)
+           return response.ToString();
+        }
+
+        public async Task<List<Room>> GetRooms()
+        {
+            List<Room> rooms = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/rooms");
+
+            if (response.IsSuccessStatusCode)
             {
-                ImageBrush ib = new ImageBrush();
-                ib.ImageSource = new BitmapImage(new Uri(op.FileName, UriKind.Absolute));
-                MyCanvas.Background = ib;
+                rooms = await response.Content.ReadAsAsync<List<Room>>();
             }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return rooms;
+        }
+
+        public async Task<List<RoomType>> GetRoomTypes()
+        {
+            List<RoomType> roomType = null;
+            HttpResponseMessage response = await ApiHelper.Get("api/roomtypes");
+
+            if (response.IsSuccessStatusCode)
+            {
+                roomType = await response.Content.ReadAsAsync<List<RoomType>>();
+            }
+            else
+            {
+                throw new Exception(response.ReasonPhrase);
+            }
+
+            return roomType;
         }
     }
 }

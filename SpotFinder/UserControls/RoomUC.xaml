@@ -32,6 +32,7 @@
         <Button Name="btnRoom1" Style="{StaticResource button--style-5}" Cursor="Hand" Click="btnRoom1_Click">
             <Grid>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="275"/>
                     <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
@@ -40,13 +41,21 @@
                     <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="22" Margin="0 0 10 0" Source="/Images/room.png"/>
+                <Rectangle
+                    Name="color"
+                    Width="10"
+                    Height="10"
+                    Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                    VerticalAlignment="Center"
+                    RadiusX="2" RadiusY="2"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                    <Image Name="imgRoom" Width="22" Margin="0 0 10 0" Source="/Images/desk.png"/>
                     <TextBlock Name="roomName" Style="{StaticResource title--style-3}" LineHeight="20" VerticalAlignment="Center">Meeting room 0.19</TextBlock>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <TextBlock Name="roomType" Style="{StaticResource bodyText--style-2}" Margin="0 0 15 0">Silence Room</TextBlock>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Name="tbroomType" Style="{StaticResource bodyText--style-2}" Margin="0 0 15 0">Silence Room</TextBlock>
                     <StackPanel Orientation="Horizontal" Margin="0 0 15 0">
                         <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                     </StackPanel>
@@ -54,7 +63,7 @@
                     <TextBlock Name="maxPersons"  Style="{StaticResource bodyText--style-2}" Margin="7 0 0 0">100</TextBlock>
                 </StackPanel>
 
-                <Image Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
+                <Image Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Source="/Images/pen.png"/>
 
             </Grid>
         </Button>

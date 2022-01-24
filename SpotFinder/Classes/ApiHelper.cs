@@ -33,7 +33,7 @@ namespace SpotFinder.Classes
                 Client.BaseAddress = new Uri("http://127.0.0.1:8000/");
                 Client.DefaultRequestHeaders.Accept.Clear();
                 Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")); //Only Json
-                Client.DefaultRequestHeaders.Add("x-authorization", "0Uy8KjV79WbCG2UsThd4pZc3wpceUUpYGtpbeagn6fPN8xWdBzJSycq2iF8Qd0or");
+                Client.DefaultRequestHeaders.Add("x-authorization", "D5J6n7cVhQy76SHAmAvPYTwQX7usAHHgJiIjqZ2U634QEuI3DUnh8xkR5MJDgSYN");
             }
             catch (Exception e)
             {

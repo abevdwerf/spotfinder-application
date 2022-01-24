@@ -45,6 +45,19 @@
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
         </Style>
 
+        <Style x:Key="textbox--style-1" TargetType="TextBox">
+            <Setter Property="Background" Value="#F6F6F6"/>
+            <Setter Property="BorderBrush" Value="#E7E7E7"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="15 10 0 10"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="35 0 0 0"/>
+        </Style>
+
+        <Style x:Key="title--style-2" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#B1B1B1"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
     </Page.Resources>
 
         <!-- Page -->
@@ -54,36 +67,40 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="297"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="69"/>
         </Grid.RowDefinitions>
 
         <!-- Side bar -->
-        <Grid>
-        <DockPanel Background="White" Width="365" LastChildFill="True" VerticalAlignment="Stretch">
+        <DockPanel Background="White" LastChildFill="True" VerticalAlignment="Stretch" Grid.Row="0" Grid.Column="0">
             <StackPanel DockPanel.Dock="Top">
-
                 <DockPanel VerticalAlignment="Top">
-                    <TextBlock Name="tbFloorName" DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 97 0">First floor</TextBlock>
+                    <TextBlock Name="tbFloorName" DockPanel.Dock="Left" Style="{StaticResource title--style-1}" Margin="35 26 0 0">First floor</TextBlock>
                     <Button Name="btnBack" HorizontalAlignment="Right" DockPanel.Dock="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 15" Click="btnBack_Click" Cursor="Hand">Go Back</Button>
                 </DockPanel>
-
-                <Button Name="btnAddMap" Style="{StaticResource button--style-4}" Click="btnAddMap_Click">+ Add map</Button>
+                <TextBlock Style="{StaticResource title--style-2}" Margin="35 10 0 6">Name</TextBlock>
+                <TextBox Name="tbName" Style="{StaticResource textbox--style-1}" Width="295"/>
+                <Button  Margin="35, 10" Name="btnAddMap" Style="{StaticResource button--style-4}" Click="btnAddMap_Click" Cursor="Hand">+ Add map</Button>
 
                 <DockPanel>
                     <TextBlock Style="{StaticResource title--style-3}" Margin="35 26 97 0">Rooms</TextBlock>
                     <Button Name="btnAddRoom" HorizontalAlignment="Right" Style="{StaticResource button--style-1}" Margin="0 23 35 23" Cursor="Hand" Click="btnAddRoom_Click">Add room</Button>
                 </DockPanel>
-
-                <!--All rooms-->
-                <StackPanel Name="spRoomContent">
-
-                </StackPanel>
             </StackPanel>
-            <!--<Button Name="btnSaveFloor" Style="{StaticResource buttonstyle-3}" Margin="0 15 0 15" Width="295" Click="btnSaveFloor_Click" Cursor="Hand" DockPanel.Dock="Bottom" VerticalAlignment="Bottom">Save Floor</Button>-->
         </DockPanel>
+        <!--All rooms-->
+        <ScrollViewer VerticalScrollBarVisibility="auto" Grid.Row="1" Grid.Column="0">
+            <StackPanel Name="spRoomContent" Background="White">
+
+            </StackPanel>
+        </ScrollViewer>
+        
+        <Grid Grid.Row="2" Grid.Column="0" Background="White">
+            <Button Name="btnSaveFloor" Style="{StaticResource button--style-3}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="295" Height="45" Click="btnSaveFloor_Click" Cursor="Hand">Save Floor</Button>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="0">
-        <Canvas Name="MyCanvas" Background="#F0F0F0" SnapsToDevicePixels="True" >
+        <Grid Grid.Column="1" Grid.RowSpan="3">
+        <Canvas Name="MyCanvas" Background="#F0F0F0" SnapsToDevicePixels="True">
                 <!--PreviewMouseLeftButtonDown="EditedItems_PreviewMouseLeftButtonDown"  PreviewMouseLeftButtonUp="EditedItems_PreviewMouseLeftButtonUp" PreviewMouseMove="EditedItems_PreviewMouseMove"-->
                 
         </Canvas>
