@@ -191,7 +191,7 @@ namespace SpotFinder.Pages
                 Desk desk = new Desk(int.Parse(tbPeople.Text), currentRoom.Id);
                 desk.ModuleId = (Int32)cbModules.SelectedValue;
 
-            maxPersons = maxPersons + int.Parse(tbPeople.Text);
+                maxPersons = maxPersons + int.Parse(tbPeople.Text);
 
                 desks.Add(desk);
                 UserControl ucTable = new TableUC() { Capacity = desk.AvailableSpaces.ToString(), Desk = desk };
@@ -202,16 +202,23 @@ namespace SpotFinder.Pages
 
         private async void btnUpdateRoom_Click(object sender, RoutedEventArgs e)
         {
-            currentRoom.RoomName = tbName.Text;
-            currentRoom.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
-
-            currentRoom.GridLocation = JsonConvert.SerializeObject(lstButtons);
-            currentRoom.MaxPersons = maxPersons;
-
-            await UpdateRoom(currentRoom);
-            if (desks.Count > 0)
+            if (tbName.Text != "" && cbRoomTypes.SelectedValue != null)
             {
-                await PostDesksUpdate();
+                currentRoom.RoomName = tbName.Text;
+                currentRoom.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
+
+                currentRoom.GridLocation = JsonConvert.SerializeObject(lstButtons);
+                currentRoom.MaxPersons = maxPersons;
+
+                await UpdateRoom(currentRoom);
+                if (desks.Count > 0)
+                {
+                    await PostDesksUpdate();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Name is required");
             }
         }
 
@@ -263,15 +270,22 @@ namespace SpotFinder.Pages
 
         private async void btnSaveRoom_Click(object sender, RoutedEventArgs e)
         {
-            Room room = new Room(currentFloor.Id, tbName.Text, maxPersons);
-            room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
-
-            room.GridLocation = JsonConvert.SerializeObject(lstButtons);
-
-            await PostRoom(room);
-            if (desks.Count > 0)
+            if (tbName.Text != "" && cbRoomTypes.SelectedValue != null)
             {
-                await PostDesks();
+                Room room = new Room(currentFloor.Id, tbName.Text, maxPersons);
+                room.RoomTypeId = (Int32)cbRoomTypes.SelectedValue;
+
+                room.GridLocation = JsonConvert.SerializeObject(lstButtons);
+
+                await PostRoom(room);
+                if (desks.Count > 0)
+                {
+                    await PostDesks();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please make sure all fields are filled in correctly. (name and room type)");
             }
         }
 
@@ -341,6 +355,7 @@ namespace SpotFinder.Pages
             {
                 if (response.IsSuccessStatusCode)
                 {
+                    tbRoomName.Text = currentRoom.RoomName;
                     MessageBox.Show("Room updated");
                 }
             }
